@@ -1,0 +1,102 @@
+******************************************************************************
+LaTeX-Vorlagen für Publikationen mit dem 2010 erneuerten Corporate Design der
+Universität Zürich (UZH) [vgl. http://www.cd.uzh.ch]
+Jürgen Spitzmüller <spitzmueller@ds.uzh.ch> 2010-07-26
+******************************************************************************
+
+VORAUSSETZUNGEN:
+*****************
+
+1.) FONTS
+
+* URW Arial
+  - frei verfügbar auf http://www.ctan.org/tex-archive/fonts/urw/arial/
+  (siehe nächster Abschnitt für Installationshinweise)
+* MathPazo (Palatino)
+  - enthalten im PSNFSS-Bundle (Teil der Standarddistribution)
+ 
+2.) KLASSEN und STILE:
+
+* KOMA-Script (scrartcl.cls, scrpage2.sty):
+  - http://www.ctan.org/tex-archive/macros/latex/contrib/koma-script/
+* Geometry:
+  - http://www.ctan.org/tex-archive/macros/latex/contrib/geometry/
+* Tocloft:
+  - http://www.ctan.org/tex-archive/macros/latex/contrib/tocloft/
+* Footmisc:
+  - http://www.ctan.org/tex-archive/macros/latex/contrib/footmisc/
+* Enumitem:
+  - http://www.ctan.org/tex-archive/macros/latex/contrib/enumitem/
+
+
+INSTALLATION DER SCHRIFT ARIAL:
+********************************
+
+Die neue Hausschrift der UZH, Arial, ist aus Lizenzgründen bei den meisten
+LaTeX-Distributionen nicht vorinstalliert und muss daher manuell installiert
+werden. Hier ein paar Hinweise zu einer möglichst schnellen Installation:
+
+
+a.) MikTeX (Windows)
+
+* Installieren Sie über den MikTeX-Paketmanager das Paket "arial".
+
+
+b.) TeXLive (Mac, Linux)
+
+* Laden Sie das Skript getnonfreefonts von dieser Seite herunter:
+  http://tug.org/fonts/getnonfreefonts/
+
+* Installieren Sie das Skript (möglichst als Administrator), indem Sie
+  folgenden Befehl (im Verzeichnis, in dem Sie das Skript gespeichert
+  haben) ausführen: 
+
+        texlua install-getnonfreefonts
+
+* Mit dem Befehl
+
+        getnonfreefonts arial-urw
+
+  wird die Schrift anschliessend heruntergeladen und installiert.
+
+
+c.) Sonstige Distributionen / Manuell
+
+Falls die o.g. Hinweise nicht helfen, finden Sie hier eine detaillierte
+Installationsanleitung zur manuellen Installation der Arial:
+http://mirror.ctan.org/fonts/urw/arial/README.arial
+
+
+INSTALLATION DIESER VORLAGEN:
+*****************************
+
+1.) Inhalt des Ordners "tex" in ein geeignetes Verzeichnis im TeXMF-Baum
+    kopieren (bspw. ~/texmf/tex/latex/uzh/ unter Linux, 
+    ~/Library/texmf/tex/latex/uzh/ auf MacOSX,
+    C:\localtexmf\tex\latex\uzh auf Windows/MikTeX).
+
+2.) TeX-Dateinamen-Datenbank aktualisieren ("texthash" bzw. "mktexlsr")
+
+
+VERWENDUNG:
+*************
+
+* Variable \uzhunit (Institut bzw. Universitätseinheit) einmalig am Ende der
+  Datei uzhpub.cls anpassen
+  (kann für individuelle Dokumente auch in der Präambel geändert werden)
+
+* Klasse mit gewünschten Optionen laden \documentclass[<optionen>]{uzhpub}
+
+* Optionen:
+
+  - english: englische Version des CD
+  - titlepage: Titelseite verwenden
+  - twocolumn: für zweispaltiges Dokument
+  
+  Voreingestellt ist: deutsche Version (ngerman), keine Titelseite, einspaltig
+
+* Dokument schreiben wie in der KOMA-Dokumentation (scrguide.pdf)
+  beschrieben.
+
+(siehe auch beigefügte Beispiele)
+
