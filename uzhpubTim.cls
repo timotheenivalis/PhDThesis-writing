@@ -1,6 +1,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% uzhpub.cls
-%% Copyright 2010 J�rgen Spitzm�ller <spitzmueller@ds.uzh.ch>
+%% Copyright 2010 J?rgen Spitzm?ller <spitzmueller@ds.uzh.ch>
 %
 % This work may be distributed and/or modified under the
 % conditions of the LaTeX Project Public License, either version 1.3
@@ -12,7 +12,7 @@
 %
 % This work has the LPPL maintenance status "maintained".
 % 
-% The Current Maintainer of this work is J�rgen Spitzm�ller.
+% The Current Maintainer of this work is J?rgen Spitzm?ller.
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -32,10 +32,10 @@
 
 \def\filedate{2011/09/08}
 \def\fileversion{1.2}
-\def\filename{uzhpub.cls}
+\def\filename{uzhpubTim.cls}
 \NeedsTeXFormat{LaTeX2e}%[1997/06/01]
 
-\ProvidesClass{uzhpub}[\filedate\space v\fileversion\space UZH publication template (JSp)]
+\ProvidesClass{uzhpubTim}[\filedate\space v\fileversion\space UZH publication template (JSp)]
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -77,17 +77,7 @@
   \def\sprache{english}
   \uzh@englishtrue
 }
-\DeclareOption{german}{
-  \def\sprache{german}
-}
-\DeclareOption{ngerman}{
-  \def\sprache{ngerman}
-}
 
-\newif\ifbeamer\beamerfalse
-\def\beamer{\beamertrue}
-
-\DeclareOption{beamer}{\beamertrue}
 
 \DeclareOption{titlepage}{\KOMAoptions{titlepage=true}}
 
@@ -151,14 +141,6 @@
 \newcommand*\uzhunit{}
 \def\partsave{}
 
-%% REDEFINE \addpart
-\renewcommand*{\@addpart}{}
-\def\@addpart[#1]#2{%
-  \csname phantomsection\endcsname
-  \addcontentsline{toc}{part}{#1}\@spart{#2}%
-  \ifx\partmark\@gobble\else\@mkboth{#1}{}\fi
-  \def\partsave{#1}
-}
 
 %% HEADER (FIRST PAGE)
 \def\uzhhead{%
