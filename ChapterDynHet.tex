@@ -77,22 +77,16 @@ The simulation framework outlined above closely matches the structure of the \MM
 Simulations were carried out as previously described, except that ARS and survival probabilities depended on their previous state and not on fixed individual qualities. This matches the structure of the \NSM as proposed by \cite{Tuljapurkar2009} and is referred to as the ``full dynamic model'' in \cite{Plard2012}. Note that in this model, as shown in \cite{Plard2012}, the non-random transition probabilities of the Markovian process can be interpreted either as the result of fixed heterogeneity (if successful animals have a higher than average probability of remaining successful because of their individual properties, such as genetic quality) or of dynamic heterogeneity (if the persistence of success comes from the properties of reproductive stages rather than individuals, e.g. only individuals that have a territory can reproduce and these individuals are more likely than non-reproducers to have a territory next year). Indeed, for short lived species, a Markovian process produces among-individual variance because there are only a few observations per individual, and the first outcome of a Markov chain can have a big influence on the mean individual outcome. In long-lived species, on the other hand, mean individual performances will asymptotically approach the population mean. 
 
 In these simulations, the ARS of individual $i$ at time $t$, $\rho_{i,t}$, follows:
-
-\begin{subequations}\label{eq:MarkovR}
-\begin{align}
+\begin{align*}
 &\rho_{i,t} \sim \text{{\fontfamily{pzc}\selectfont P }}(\mu_{\rho}) \text{; for second year individuals,}\\ 
 &\rho_{i,t} \sim \text{{\fontfamily{pzc}\selectfont P }}(\mu_{\rho}+m(\rho_{i,t-1}-\mu_{\rho}))\text{; for older individuals,}
-\end{align}
-\end{subequations}
+\end{align*}
 where $\rho_{i,t-1}$ is the ARS of the focal individual the year before, $\mu_{\rho}$ is the mean ARS of the population and $m$ controls the strength of the  Markovian process, i.e. the degree to which current reproductive success depends on the previous reproductive success. Only positive values of $m$ were used in order to produce an individual persistence of ARS, which may mimic latent fitness (see below).\\
 Similarly, the survival outcome of individual $i$ at time $t$, $\phi_{i,t}$, follows:
-
-\begin{subequations}\label{eq:MarkovS}
-\begin{align}
+\begin{align*}
 &\phi_{i,t} \sim \text{{\fontfamily{pzc}\selectfont B }}(\mu_{\phi}+\beta_{j}) \text{; for juveniles}\\
 &\phi_{i,t} \sim \text{{\fontfamily{pzc}\selectfont B }}(\mathrm{logit}^{-1}(\mathrm{logit}(\mu_{\phi})+c(\rho_{i,t-1}-\mu_{\rho}) ))\text{; for adults,}
-\end{align}
-\end{subequations}
+\end{align*}
 where $\mu_{\phi}$ is the mean adult survival, $\beta_{j}$ is the difference between the mean survival of juveniles and adults, and $c$ controls the correlation between reproduction and survival. Survival probability at time $t$ depends on ARS at time $t-1$ rather than on previous survival, as the latter is always 1 for surviving individuals. Again, only positive values of $c$ were used to simulate persistence of the individual propensity to survive. The positive correlation between successive survival probabilities arises indirectly through the positive correlation between successive ARS, combined with the positive correlation between ARS and survival.
 
 In the presence of allocation trade-offs between different life-history traits, or between successive expressions of the same life-history trait, negative correlations (i.e. $m < 0$) and autocorrelations (i.e. $c < 0$) could be expected. However, phenotypic correlations between life-history traits are often positive \citep[][chapter 4]{Stearns1992}. This discrepancy is the result of the variance in resource acquisition, which is related to variance in latent fitness, being larger than the variance in resource allocation \citep{vanNoordwijk1986}. Based on this, positive values of $c$ and $m$ are in line with the presence of variation in latent fitness. Indeed, a positive correlation between survival and reproduction is observed in the snow vole data (correlation between observed variation in survival and reproduction: Pearson's correlation, 0.097, 95\%CI $[-0.007;0.198]$. For the correlation between the latent propensities to survive and to reproduce, see Appendix \ref{ap:cor}
@@ -335,7 +329,6 @@ We thank Arpat Ozgul, Yannis Michalakis, Benjamin M. Bolker, Gordon A. Fox and a
 
 \newpage
 \textbf{\LARGE{Supplementary information}}
-\headmark
 
 \section{Checking the properties of the data sets}\label{ap:chpro}
 The following Generalized Linear Models were fitted to the simulated data sets in order to test whether the data set properties matched the parameters used to generate them:
@@ -440,9 +433,8 @@ The following two tables (\ref{Phi_table} and \ref{Rho_table}) present all the e
 % latex table generated in R 3.1.2 by xtable 1.7-4 package
 % Wed Nov 12 18:14:03 2014
 \begin{table}[H]
-\caption{Estimates of coefficient of the mixed model for survival in the real snow vole data set} 
-\label{Phi_table}
 \begin{center}
+\caption{Estimates of coefficient of the mixed model for survival in the real snow vole data set}\label{Phi_table}
 \footnotesize
 \begin{tabular}{ccccc}
   \toprule
@@ -460,7 +452,7 @@ intercept & -1.754 & 0.830 & 0.035 & [-3.393;-0.111] \\
    \bottomrule
 \end{tabular}
 \end{center}
-{\scriptsize Note: $\sigma_{id}^2$ and $\sigma_{year}^2$ refer to the variance between individuals and between years, respectively. All estimates are shown on the latent scale. The $p$-values for the significance of the two random effects are computed through a one-sided LRT. No standard errors (SEs) are provided for random effects. Instead, confidence intervals are computed using 1000 parametric bootstraps. The significance of the fixed effects is computed through the default Gaussian approximation provided by the package \verb+lme4+.}
+{\scriptsize Note: $\sigma_{id}^2$ and $\sigma_{year}^2$ refer to the variance between individuals and between years, respectively. All estimates are shown on the latent scale. The $p$-values for the significance of the two random effects are computed through a one-sided LRT. No standard errors (SEs) are provided for random effects. Instead, confidence intervals are computed using 1000 parametric bootstraps. The significance of the fixed effects is computed through the default Gaussian approximation provided by the package \texttt{lme4}.}
 \end{table}
 
 \begin{table}[H]
