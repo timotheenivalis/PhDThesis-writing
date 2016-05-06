@@ -185,7 +185,7 @@
 
 %% SET UP HEADERS WITH SCRPAGE2
 \RequirePackage{scrpage2}
-\automark[section]{section}
+\automark[chapter]{chapter}
 \defpagestyle{uzhheadings}{%
   {\uzhffhead}%
   {\uzhffhead}%
