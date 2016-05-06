@@ -159,7 +159,7 @@
 %% HEADER (SUBSEQUENT PAGES)
 \def\uzhffhead{%
     \ifx\partsave\empty
-       \parbox{\textwidth}{\vspace*{12pt}Chapter \headmark\hfill}%\@title}%
+       \parbox{\textwidth}{\vspace*{12pt}\headmark\hfill}%\@title}%
     \else
         \parbox{\textwidth}{\vspace*{12pt}\partsave\hfill\@title\newline\headmark}%
     \fi
