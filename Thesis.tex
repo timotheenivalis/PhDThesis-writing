@@ -1,9 +1,20 @@
 \documentclass[]{uzhpubTim}
+%\documentclass[]{scrreprt}
+
+%bibliography
+\usepackage[backend=biber, doi=false, authordate]{biblatex-chicago}
+%\urlstyle{sf} % better deals with url breaks
+\newcommand{\citep}[1]{\parencite{#1}}% to keep the natbib syntax
+
+%\bibliographystyle{amnat}%Compile with amnat.bst style file
+\addbibresource{BiblioNeutralSimul.bib}
+\addbibresource{BiblioDecPopDyn.bib}
 
 %input
 \usepackage[T1]{fontenc}
+\usepackage[autostyle, english = american]{csquotes}
 
-\usepackage{hyperref} % Required for adding links	and customizing them
+%\usepackage{hyperref} % Required for adding links	and customizing them
 \usepackage[official]{eurosym}%for Euro symbol
 
 %Layout
@@ -12,8 +23,8 @@
 \usepackage{footmisc}
 \usepackage{enumitem}
 
-\usepackage{ulem}
-\usepackage[round]{natbib}%
+\usepackage[normalem]{ulem}%underlining _ normalem option necessary not to interact with biblatex
+%\usepackage[round]{natbib}%
 
 \usepackage[usenames,dvipsnames]{xcolor} % Required for specifying custom colors
 
@@ -38,12 +49,19 @@
 \usepackage{xspace}% to avoid annoyance with spaces when using macros
 \newcommand{\NSM}{NS\xspace}
 \newcommand{\MM}{MM\xspace}
+\newcommand{\Cov}{\mathrm{cov}}
+
+\newcommand{\sh}{$s_0h_-$\xspace}
+\newcommand{\sH}{$s_0h_+$\xspace}
+\newcommand{\Sh}{$s_+h_-$\xspace}
+\newcommand{\SH}{$s_+h_+$\xspace}
+\newcommand{\Range}[3]{$#1 \; [#2 ; #3 ]$}
 
 
 %%%%%%%%%%%%%%%%%%%
 
 \title{Individual-level causes and population-level\\consequences of variation in fitness in an alpine rodent}
-\subtitle{PhD dissertation}
+%\subtitle{PhD dissertation}
 \author{Timoth\'{e}e Bonnet}
 
 \date{August 2016}
@@ -53,11 +71,30 @@
 \setcounter{tocdepth}{0}
 \tableofcontents 
 
+\begin{refsection}
 \include{Generalintroduction}
+\end{refsection}
+
+\begin{refsection}
 \include{ChapterDynHet}
+\end{refsection}
+
+
+\begin{refsection}
 \include{DecompoPopDyn}
+\end{refsection}
+
+
+\begin{refsection}
 \include{Stasis}
+\end{refsection}
+
+
+\begin{refsection}
 \include{FluSel}
-\include{acknowledgments}
-\include{CV}
+\end{refsection}
+
+%\include{acknowledgments}
+%\include{CV}
+
 \end{document}
