@@ -1,6 +1,16 @@
 \documentclass[]{uzhpubTim}
 %\documentclass[]{scrreprt}
 
+% customize chapter format:
+\KOMAoption{headings}{twolinechapter}
+\renewcommand*\chapterformat{\thechapter\autodot}
+
+% customize dictum format:
+\setkomafont{dictumtext}{\itshape\small}
+\setkomafont{dictumauthor}{\normalfont}
+\renewcommand*\dictumwidth{\linewidth}
+\renewcommand*\dictumauthorformat[1]{--- #1}
+\renewcommand*\dictumrule{}
 
 %input
 \usepackage[latin1]{inputenc}
