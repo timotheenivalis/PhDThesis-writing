@@ -1,3 +1,12 @@
+
+\setchapterpreamble[ur][.6\textwidth]{%
+\dictum[Umberto Eco, \textit{The Name of the Rose} (1954)]{%
+``Then why do you want to know?''\\
+``Because learning does not consist only of knowing what we must or we can do, but also of knowing what we could do and perhaps should not do.''
+}\vskip1em
+} 
+
+
 \chapter[Evolution or plasticity?]{Disentangling evolutionary, plastic and demographic processes underlying trait dynamics: A review of four frameworks}
 
 Koen J. van Benthem*, Marjolein Bruijning*, \textbf{Timoth\'ee Bonnet}*, Eelke Jongejans$^\dagger$,
@@ -234,78 +243,78 @@ How do eco-evolutionary dynamics affect population dynamics? & $-$ & $+$ & $-$ &
 \end{center}
 \end{table}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%% FIGURES 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\newpage
-\begin{figure}
-\centering
-\includegraphics[width=0.85\textwidth]{FiguresDecPop/FigureOverview}
-\caption{Schematic overview of the differences and similarities between the four frameworks (middle column in grey: IPM = Integral Projection Model, APE = Age-structured Price equation, GM = `Geber' method , AM = Animal Model). The frameworks are connected to their data requirements (left) and the processes they are capable of quantifying (right). Note that in the interest of clarity, we have only depicted the more commonly used links. Solid lines represent obligatory links, whereas dashed lines are optional.}
-\label{overview}
-\end{figure}
-
-\newpage
-
-\begin{figure}
-\begin{tabular}{lll}
-\subfigure[]{
-\includegraphics[width=0.3\textwidth]{FiguresDecPop/pop_size}
-\label{simdata:1}
-}
-&
-\subfigure[]{
-\includegraphics[width=0.3\textwidth]{FiguresDecPop/body_size}
-\label{simdata:2}
-}
-&
-\subfigure[]{
-\includegraphics[width=0.3\textwidth]{FiguresDecPop/birth_size}
-\label{simdata:5}
-}
-\\
-\subfigure[]{
-\includegraphics[width=0.3\textwidth]{FiguresDecPop/genotypic_vals}
-\label{simdata:3}
-}
-&
-\subfigure[]{
-\includegraphics[width=0.3\textwidth]{FiguresDecPop/trait_fitness}
-\label{simdata:4}
-}
-&
-\subfigure[]{
-\includegraphics[width=0.3\textwidth]{FiguresDecPop/mean_age}
-\label{simdata:6}
-}
-\end{tabular}
-\caption{Summary of the observed population and trait dynamics of simulated datasets. \subref{simdata:1} Trends in population size, \subref{simdata:2} changes in mean body size, \subref{simdata:5} mean birth size, \subref{simdata:3} and genotypic values for body size, \subref{simdata:4} relations between body size and yearly individual fitness (sum of survival and litter size at $t+1$), and \subref{simdata:6} changes in mean age. Lines indicate the averages across 100 replicates. Polygons show one standard deviation above and below the average. Red lines indicate $s_0$ scenarios (no viability and fertility selection), blue lines indicate $s_+$scenarios (strong viability and fertility selection). Solid lines indicate $h_{-}$ scenarios (low heritability), dotted lines indicate $h_{+}$ scenarios (high heritability). In a-d and f, the white polygon indicates the first 10 years, which are excluded from further analysis. In e, lines are averaged predictions based on generalized additive models over all replicates.}
-\label{simdata}
-\end{figure}
-
-\newpage
-
-\begin{figure}
-\subfigure[]{
-\includegraphics[width=0.5\textwidth]{FiguresDecPop/AM_res}
-\label{frameworkresults:2}
-}
-\subfigure[]{
-\includegraphics[width=0.5\textwidth]{FiguresDecPop/GPE_res}
-\label{frameworkresults:3}
-}\\
-\subfigure[]{
-\includegraphics[width=0.5\textwidth]{FiguresDecPop/APE_res}
-\label{frameworkresults:1}
-}
-\subfigure[]{
-\includegraphics[width=0.5\textwidth]{FiguresDecPop/IPM_res}
-\label{frameworkresults:4}
-}
-
-\caption{Results of the different frameworks when applied to the simulated scenarios. \subref{frameworkresults:2} Animal model. \subref{frameworkresults:3} "Geber" method. \subref{frameworkresults:1} Age-structured Price equation and \subref{frameworkresults:4} Integral projection model. In \subref{frameworkresults:1} and \subref{frameworkresults:4}, demography includes changes in demographic structure due to mortality and natality, inheritance is the sum of offspring mother difference and offspring difference covariance. In a-d, red bars indicate $s_0$ scenarios, blue bars indicate $s_+$ scenarios. Solid bars indicate $h_{-}$ scenarios, and shaded bars indicate $h_{+}$ scenarios. Error bars represent the range in which 68\% (error bars until horizontal lines) and 95\% (entire error bars) of the contributions lie when applied to 100 replicates. Note the different scale on the y-axis in a, b versus c, d.}
-\label{frameworkresults}
-\end{figure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%% FIGURES 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\newpage
+%\begin{figure}
+%\centering
+%\includegraphics[width=0.85\textwidth]{FiguresDecPop/FigureOverview}
+%\caption{Schematic overview of the differences and similarities between the four frameworks (middle column in grey: IPM = Integral Projection Model, APE = Age-structured Price equation, GM = `Geber' method , AM = Animal Model). The frameworks are connected to their data requirements (left) and the processes they are capable of quantifying (right). Note that in the interest of clarity, we have only depicted the more commonly used links. Solid lines represent obligatory links, whereas dashed lines are optional.}
+%\label{overview}
+%\end{figure}
+%
+%\newpage
+%
+%\begin{figure}
+%\begin{tabular}{lll}
+%\subfigure[]{
+%\includegraphics[width=0.3\textwidth]{FiguresDecPop/pop_size}
+%\label{simdata:1}
+%}
+%&
+%\subfigure[]{
+%\includegraphics[width=0.3\textwidth]{FiguresDecPop/body_size}
+%\label{simdata:2}
+%}
+%&
+%\subfigure[]{
+%\includegraphics[width=0.3\textwidth]{FiguresDecPop/birth_size}
+%\label{simdata:5}
+%}
+%\\
+%\subfigure[]{
+%\includegraphics[width=0.3\textwidth]{FiguresDecPop/genotypic_vals}
+%\label{simdata:3}
+%}
+%&
+%\subfigure[]{
+%\includegraphics[width=0.3\textwidth]{FiguresDecPop/trait_fitness}
+%\label{simdata:4}
+%}
+%&
+%\subfigure[]{
+%\includegraphics[width=0.3\textwidth]{FiguresDecPop/mean_age}
+%\label{simdata:6}
+%}
+%\end{tabular}
+%\caption{Summary of the observed population and trait dynamics of simulated datasets. \subref{simdata:1} Trends in population size, \subref{simdata:2} changes in mean body size, \subref{simdata:5} mean birth size, \subref{simdata:3} and genotypic values for body size, \subref{simdata:4} relations between body size and yearly individual fitness (sum of survival and litter size at $t+1$), and \subref{simdata:6} changes in mean age. Lines indicate the averages across 100 replicates. Polygons show one standard deviation above and below the average. Red lines indicate $s_0$ scenarios (no viability and fertility selection), blue lines indicate $s_+$scenarios (strong viability and fertility selection). Solid lines indicate $h_{-}$ scenarios (low heritability), dotted lines indicate $h_{+}$ scenarios (high heritability). In a-d and f, the white polygon indicates the first 10 years, which are excluded from further analysis. In e, lines are averaged predictions based on generalized additive models over all replicates.}
+%\label{simdata}
+%\end{figure}
+%
+%\newpage
+%
+%\begin{figure}
+%\subfigure[]{
+%\includegraphics[width=0.5\textwidth]{FiguresDecPop/AM_res}
+%\label{frameworkresults:2}
+%}
+%\subfigure[]{
+%\includegraphics[width=0.5\textwidth]{FiguresDecPop/GPE_res}
+%\label{frameworkresults:3}
+%}\\
+%\subfigure[]{
+%\includegraphics[width=0.5\textwidth]{FiguresDecPop/APE_res}
+%\label{frameworkresults:1}
+%}
+%\subfigure[]{
+%\includegraphics[width=0.5\textwidth]{FiguresDecPop/IPM_res}
+%\label{frameworkresults:4}
+%}
+%
+%\caption{Results of the different frameworks when applied to the simulated scenarios. \subref{frameworkresults:2} Animal model. \subref{frameworkresults:3} "Geber" method. \subref{frameworkresults:1} Age-structured Price equation and \subref{frameworkresults:4} Integral projection model. In \subref{frameworkresults:1} and \subref{frameworkresults:4}, demography includes changes in demographic structure due to mortality and natality, inheritance is the sum of offspring mother difference and offspring difference covariance. In a-d, red bars indicate $s_0$ scenarios, blue bars indicate $s_+$ scenarios. Solid bars indicate $h_{-}$ scenarios, and shaded bars indicate $h_{+}$ scenarios. Error bars represent the range in which 68\% (error bars until horizontal lines) and 95\% (entire error bars) of the contributions lie when applied to 100 replicates. Note the different scale on the y-axis in a, b versus c, d.}
+%\label{frameworkresults}
+%\end{figure}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
