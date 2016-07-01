@@ -165,6 +165,7 @@
     \fi
 }
 
+
 %% SET UP HEADERS WITH SCRPAGE2
 \RequirePackage{scrpage2}
 \automark[chapter]{chapter}
@@ -173,14 +174,23 @@
   {\uzhffhead}%
   {\uzhffhead}%
 }%
-{{\textup\pagename~\thepage\hfill \uzh{}, \uzhunit{}\ifx\@date\@empty\else, \@date\fi}%
- {\textup\pagename~\thepage\hfill \uzh{}, \uzhunit{}\ifx\@date\@empty\else, \@date\fi}%
- {\textup\pagename~\thepage\hfill \uzh{}, \uzhunit{}\ifx\@date\@empty\else, \@date\fi}}
+{{\textup\pagename~\hspace{-0.8cm}\protect\voled{\thepage}\hfill \uzh{}, \uzhunit{}\ifx\@date\@empty\else, \@date\fi}%
+ {\textup\pagename~\hspace{-0.8cm}\protect\voled{\thepage}\hfill \uzh{}, \uzhunit{}\ifx\@date\@empty\else, \@date\fi}%
+ {\textup\pagename~\hspace{-0.8cm}\protect\voled{\thepage}\hfill \uzh{}, \uzhunit{}\ifx\@date\@empty\else, \@date\fi}}
+
+\defpagestyle{uzhheadingtitles}{%
+  {\uzhffhead}%
+  {\uzhffhead}%
+  {\uzhffhead}%
+}%
+{{\hfill \protect\voled{\thepage} \hfill}%
+ {\hfill \protect\voled{\thepage} \hfill}%
+ {\hfill \protect\voled{\thepage} \hfill}}
 
 \def\uzhtitlefoot{%
   \if@titlepage
   \else
-    \textup\pagename~\thepage\hfill
+    \textup\pagename~\protect\voled{\thepage}\hfill
   \fi
 }
 
@@ -190,8 +200,6 @@
 {{\uzhtitlefoot}{\uzhtitlefoot}{\uzhtitlefoot}}
 
 \pagestyle{uzhheadings}
-
-
 
 %% TITLING
 
@@ -413,22 +421,22 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % ADJUST SPACING FOR \SECTION
-\renewcommand\section{\@startsection{section}{1}{\z@}%
-  {-2\baselineskip \@plus -1ex \@minus -.2ex}%
-  {\baselineskip}%
-  {\ifnum \scr@compatibility>\@nameuse{scr@v@2.96}\relax
-    \setlength{\parfillskip}{\z@ plus 1fil}\fi
-    \raggedsection\normalfont\sectfont\nobreak\size@section}%
-}
+%\renewcommand\section{\@startsection{section}{1}{\z@}%
+ % {-2\baselineskip \@plus -1ex \@minus -.2ex}%
+ % {\baselineskip}%
+  %{\ifnum \scr@compatibility>\@nameuse{scr@v@2.96}\relax
+  %  \setlength{\parfillskip}{\z@ plus 1fil}\fi
+    %\raggedsection\normalfont\sectfont\nobreak\size@section}%
+%}
 % ADJUST SPACING FOR \SUBSECTION
-\renewcommand\subsection{\@startsection{subsection}{2}{\z@}%
-  {-2\baselineskip\@plus -1ex \@minus -.2ex}%
-  {\baselineskip}%
-  {\ifnum \scr@compatibility>\@nameuse{scr@v@2.96}\relax
-    \setlength{\parfillskip}{\z@ plus 1fil}\fi
-    \raggedsection\normalfont\sectfont\nobreak\size@subsection
-  }%
-}
+%\renewcommand\subsection{\@startsection{subsection}{2}{\z@}%
+ % {-2\baselineskip\@plus -1ex \@minus -.2ex}%
+  %{\baselineskip}%
+  %{\ifnum \scr@compatibility>\@nameuse{scr@v@2.96}\relax
+    %\setlength{\parfillskip}{\z@ plus 1fil}\fi
+    %\raggedsection\normalfont\sectfont\nobreak\size@subsection
+ % }%
+%}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
