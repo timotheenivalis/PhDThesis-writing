@@ -174,9 +174,9 @@
   {\uzhffhead}%
   {\uzhffhead}%
 }%
-{{\textup\pagename~\hspace{-0.8cm}\protect\voled{\thepage}\hfill \uzh{}, \uzhunit{}\ifx\@date\@empty\else, \@date\fi}%
- {\textup\pagename~\hspace{-0.8cm}\protect\voled{\thepage}\hfill \uzh{}, \uzhunit{}\ifx\@date\@empty\else, \@date\fi}%
- {\textup\pagename~\hspace{-0.8cm}\protect\voled{\thepage}\hfill \uzh{}, \uzhunit{}\ifx\@date\@empty\else, \@date\fi}}
+{{\textup\pagename~\hspace{-0.92cm}\protect\voled{\thepage}\hfill \uzh{}, \uzhunit{}\ifx\@date\@empty\else, \@date\fi}%
+ {\textup\pagename~\hspace{-0.92cm}\protect\voled{\thepage}\hfill \uzh{}, \uzhunit{}\ifx\@date\@empty\else, \@date\fi}%
+ {\textup\pagename~\hspace{-0.92cm}\protect\voled{\thepage}\hfill \uzh{}, \uzhunit{}\ifx\@date\@empty\else, \@date\fi}}
 
 \defpagestyle{uzhheadingtitles}{%
   {\uzhffhead}%
