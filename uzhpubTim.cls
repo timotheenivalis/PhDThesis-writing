@@ -219,7 +219,7 @@ bottom=24mm,
       \renewcommand*{\@makefnmark}{\rlap\@oldmakefnmark}%
       \ifx\@extratitle\@empty \else
         \noindent\@extratitle\next@tpage\cleardoubleemptypage
-%        \thispagestyle{empty}%
+        \thispagestyle{empty}%
       \fi
       \setparsizes{\z@}{\z@}{\z@\@plus 1fil}\par@updaterelative
       \ifx\@titlehead\@empty \else
@@ -368,7 +368,35 @@ bottom=24mm,
   \if@restonecol\twocolumn \else \newpage \fi
 }%
 
-
+\renewcommand\chapter{
+                        \clearpage\thispagestyle{empty}\cleardoublepage
+                    
+                    \thispagestyle{empty}%
+                    \global\@topnum\z@
+                    \@afterindentfalse
+                    \secdef\@chapter\@schapter}
+\def\@chapter[#1]#2{\ifnum \c@secnumdepth >\m@ne
+                       \if@mainmatter
+                         \refstepcounter{chapter}%
+                         \typeout{\@chapapp\space\thechapter.}%
+                         \addcontentsline{toc}{chapter}%
+                                   {\protect\numberline{\thechapter}#1}%
+                       \else
+                         \addcontentsline{toc}{chapter}{#1}%
+                       \fi
+                    \else
+                      \addcontentsline{toc}{chapter}{#1}%
+                    \fi
+                    \chaptermark{#1}%
+                    \addtocontents{lof}{\protect\addvspace{10\p@}}%
+                    \addtocontents{lot}{\protect\addvspace{10\p@}}%
+                    \addtocontents{lol}{\protect\addvspace{10\p@}}%
+                    \if@twocolumn
+                      \@topnewpage[\@makechapterhead{#2}]%
+                    \else
+                      \@makechapterhead{#2}%
+                      \@afterheading
+                    \fi}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % TOC
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
