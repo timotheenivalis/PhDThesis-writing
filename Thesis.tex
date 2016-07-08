@@ -34,6 +34,7 @@
 \usepackage{footmisc}
 \usepackage{enumitem}
 
+\usepackage{setspace}   %Allows double spacing with the \doublespacing command
 
 \usepackage[normalem]{ulem}%underlining _ normalem option necessary not to interact with biblatex
 %\usepackage[round]{natbib}%
@@ -89,7 +90,9 @@
 \date{August 2016}
 
 \begin{document}
-\maketitle
+%\maketitle
+\include{titlepage}
+
 \setcounter{tocdepth}{0}
 \tableofcontents 
 
@@ -100,26 +103,26 @@
 \begin{refsection}
 \include{ChapterDynHet}
 \end{refsection}
-
-\begin{refsection}
-\include{DecompoPopDyn}
-\end{refsection}
-
-
-\begin{refsection}
-\include{Stasis}
-\end{refsection}
-
-
-\begin{refsection}
-\include{FluSel}
-\end{refsection}
-
-\begin{refsection}
-\include{GeneralDiscussion}
-\end{refsection}
-
-\include{acknowledgments}
-\include{CV}
+%
+%\begin{refsection}
+%\include{DecompoPopDyn}
+%\end{refsection}
+%
+%
+%\begin{refsection}
+%\include{Stasis}
+%\end{refsection}
+%
+%
+%\begin{refsection}
+%\include{FluSel}
+%\end{refsection}
+%
+%\begin{refsection}
+%\include{GeneralDiscussion}
+%\end{refsection}
+%
+%\include{acknowledgments}
+%\include{CV}
 
 \end{document}

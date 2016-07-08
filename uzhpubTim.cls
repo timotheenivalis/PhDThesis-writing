@@ -51,7 +51,7 @@
 
 \RequirePackage{scrhack}
 %% BASE FONT SIZE (10pt/14pt)
-\KOMAoptions{fontsize=10pt}
+\KOMAoptions{fontsize=12pt, twoside}
 \renewcommand\normalsize{%
    \@setfontsize\normalsize\@xpt\@xivpt
    \abovedisplayskip 10\p@ \@plus2\p@ \@minus5\p@
@@ -95,10 +95,10 @@
 \RequirePackage{geometry}
 \geometry{%
   a4paper,
-  top=38mm,
+ top=38mm,
   left=35mm,
-  right=16mm,
-  bottom=24mm,
+%  right=16mm,
+bottom=24mm,
   headsep=26mm,
   footskip=15mm
 }
@@ -144,16 +144,17 @@
 
 %% HEADER (FIRST PAGE)
 \def\uzhhead{%
-    \hspace*{-1.95cm}\uzhlogo
-    \ifuzh@english
-    \put(-100,-52.5){\parbox[t][40mm][t]{\textwidth}{\raggedright
-      {\fontsize{12}{14pt}\selectfont\textup{\textbf{\uzhunit}}\\\vspace*{-1pt}\hrulefill}%
-      }}%
-    \else
-    \put(-86.5,-52.5){\parbox[t][40mm][t]{\textwidth}{\raggedright
-      {\fontsize{12}{14pt}\selectfont\textup{\textbf{\uzhunit}}\\\vspace*{-1pt}\hrulefill}%
-      }}%
-    \fi
+\thispagestyle{empty}
+    %\hspace*{-1.95cm}\uzhlogo
+    %\ifuzh@english
+    %\put(-100,-52.5){\parbox[t][40mm][t]{\textwidth}{\raggedright
+     % {\fontsize{12}{14pt}\selectfont\textup{\textbf{\uzhunit}}\\\vspace*{-1pt}\hrulefill}%
+     % }}%
+   % \else
+    %\put(-86.5,-52.5){\parbox[t][40mm][t]{\textwidth}{\raggedright
+     % {\fontsize{12}{14pt}\selectfont\textup{\textbf{\uzhunit}}\\\vspace*{-1pt}\hrulefill}%
+     % }}%
+    %\fi
 }
 
 %% HEADER (SUBSEQUENT PAGES)
@@ -330,17 +331,17 @@
     \noindent\@extratitle \next@tpage \if@twoside \null\next@tpage \fi
   \fi
   \setparsizes{\z@}{\z@}{\z@\@plus 1fil}\par@updaterelative
-  \ifx\@titlehead\@empty \else
-    \begin{minipage}[t]{\textwidth}
-      \@titlehead
-    \end{minipage}\par
-  \fi
-  \null
-  \vskip 1.25em%
-    \ifx\@subject\@empty \else
-      {\subject@font \@subject \par}
-      \vskip 1.5em%
-    \fi
+  %\ifx\@titlehead\@empty \else
+  %  \begin{minipage}[t]{\textwidth}
+  %   \@titlehead
+  % \end{minipage}\par
+  % \fi
+  %\null
+  %\vskip 1.25em%
+   % \ifx\@subject\@empty \else
+     % {\subject@font \@subject \par}
+     % \vskip 1.5em%
+    %\fi
     {\titlefont\huge \@title \par}%
     \vskip 2.5mm%
     {\ifx\@subtitle\@empty\else\usekomafont{subtitle}\@subtitle\par\fi}%
