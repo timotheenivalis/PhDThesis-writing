@@ -371,7 +371,7 @@ bottom=24mm,
 \renewcommand\chapter{
                         \clearpage\thispagestyle{empty}\cleardoublepage
                     
-                    \thispagestyle{empty}%
+                    \thispagestyle{uzhheadingtitles}%
                     \global\@topnum\z@
                     \@afterindentfalse
                     \secdef\@chapter\@schapter}
