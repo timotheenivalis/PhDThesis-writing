@@ -182,6 +182,7 @@
 \newenvironment{acknowledgements}{%
   \chapter*{Acknowledgements}}{}
 
+\renewcommand\addchaptertocentry[2]{\addtocentrydefault{chapter}{}{#2}} %for the TOC without numbers
 
 \endinput
 %%
