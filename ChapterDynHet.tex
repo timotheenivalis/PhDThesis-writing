@@ -20,7 +20,7 @@ To understand the causes of this discrepancy, we estimate the statistical power 
 \textbf{Online enhancements: }
 Online appendices. Data available from the Dryad Digital Repository: \url{http://dx.doi.org/10.5061/dryad.3cb61}.
 
-\section{Introduction}
+\section[Introduction]{Introduction}
 
 Within species, individual variation in lifetime reproductive success (LRS) is plentiful, with most individuals producing few or no offspring and a few individuals producing a large share of the next generation \parencite{Clutton1988,Stearns1992}. Given their skewed and heterogeneous nature, LRS distributions are unlikely to be solely shaped by unstructured environmental stochasticity. Instead, individuals seem to differ in their probability of surviving or reproducing \parencite{Kendall2011}.
 
@@ -337,9 +337,10 @@ We thank Arpat Ozgul, Yannis Michalakis, Benjamin M. Bolker, Gordon A. Fox and a
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newpage
-\textbf{\LARGE{Supplementary information}}
+%\textbf{\LARGE{Supplementary information}}
+\section{Supplementary information}
 
-\section{Checking the properties of the data sets}\label{ap:chpro}
+\subsection{Checking the properties of the data sets}\label{ap:chpro}
 The following Generalized Linear Models were fitted to the simulated data sets in order to test whether the data set properties matched the parameters used to generate them:
 
 \begin{subequations}\label{eq:check}
@@ -355,11 +356,11 @@ These were used to check that survival depended on age \eqref{eq:checkPA}, that 
 
 Instead, we argue here that the findings on which they base their claim reflects their use of reproductive stage-specific survival in their \NSM, and reproduction and survival being positively correlated in the source data \parencite{Cam2002}. Hence, it is not the random transitions themselves that are responsible for the positive association, but the positively associated stage-specific probabilities of survival and reproduction. The origin of the latter remains unexplained, but is consistent with variation in latent fitness among individuals.
 
-\section{Optimal number of neutral simulations per data set.}\label{ap:opnum}
+\subsection{Optimal number of neutral simulations per data set.}\label{ap:opnum}
 The neutral simulation approach (\NSM) is computationally intensive: as the focal population consists of 10 cohorts of 100 individuals, performing 1000 neutral simulations (i.e. simulating 1000 hypothetical populations), requires 1,000,000 individual trajectories to be simulated for every simulated data set (and 75,000,000,000 individual trajectories for the complete study). To minimize computational time, we determined the number of neutral simulations per simulated data set beyond which statistical power did not change. Out of the six tests mentioned above, only $\chi^2$ tests on LRS distributions are sensitive to the number of neutral simulations; while $\chi^2$ tests based on 1000 neutral simulations differ from those based on 100 neutral simulations ($\Delta \mathrm{power}_{1000-100}$=-0.067, se=0.033), the tests based on 100,000 neutral simulations do not have more statistical power than those based on 1000 neutral simulations ($\Delta \mathrm{power}_{100,000-1000}$=-0.031, se=0.033), and the correlation of the statistical power across scenarios is high ($R^2=0.92$).
 Accordingly, each simulated data set was analyzed using 1000 neutral simulations. Note that the fact that in this case statistical power plateaus already above 1000 neutral simulations is the result of the relatively short lifespan of the simulated animals, which allows for a quick exploration of all the possible individual trajectories. 
 
-\section{Selection for latent quality}\label{ap:sel}
+\subsection{Selection for latent quality}\label{ap:sel}
 
 As outlined in the main document, we simulated fixed heterogeneity by attributing to each individual $i$ a fixed quality for annual reproductive success ($q_{\rho, i}$) and a fixed quality as survivor ($q_{\phi,i}$). These two kind of individual qualities are normally distributed, with mean zero and variance $\sigma_{\rho}^2$ and $\sigma_{\phi}^2$, respectively. The selection acting on, or due to, this variation in latent individual qualities for reproduction and for survival was measured as the individual-level covariance between the qualities and a proxy for fitness ($\omega$): relative lifetime reproductive success \parencite{Robertson1966}.
 
@@ -383,7 +384,7 @@ The selection coefficients increase with increasing variance in individual laten
 	\label{figure:qua}
 \end{figure}
 
-\section{Simulating fixed heterogeneity on the original scale}\label{app:orsc}
+\subsection{Simulating fixed heterogeneity on the original scale}\label{app:orsc}
 It could be argued that the superior statistical power of the  $\mathrm{LRT}_{\rho}$ is the result of the simulation process used to introduce fixed heterogeneity has the same structure as the \MM estimating it. To address this, additional simulations were performed in which individual reproductive success and survival probability depended on their qualities on the original scale rather than on a transformed scale. Otherwise simulations were similar to those where fixed heterogeneity was introduced on the transformed scale. To this end, the reproductive success and survival of an individual $i$, at time $t$, are drawn from
 
 \begin{subequations}\label{eq:varout}
@@ -424,7 +425,7 @@ Furthermore, it should be noted that although the $\sigma_{\rho}^2$ parameter va
 	\label{figure:VarOut}
 \end{figure}
 
-\section{The snow vole population}\label{ap:snv}
+\subsection{The snow vole population}\label{ap:snv}
 \setcounter{table}{0}
 \setcounter{equation}{0}
 \setcounter{figure}{0}
@@ -436,7 +437,7 @@ Parentage was assigned to all juveniles and all first-time captured adults by si
 Apparent year-to-year survival could be obtained without mark-recapture modeling as the recapture probability on a given year was virtually 1: no animal was not captured in a year but captured later, and no animal was ever found to be a parent of a juvenile in a year when it had not been captured. This is not surprising since mark-recapture modeling within years estimated a between-occasion recapture probability of 0.924 (SE 0.012) for adults and of 0.814 (SE 0.030) for juveniles.
 
 
-\section{Univariate models of survival and reproduction in the snow vole population}\label{ap:Uni}
+\subsection{Univariate models of survival and reproduction in the snow vole population}\label{ap:Uni}
 
 The following two tables (\ref{Phi_table} and \ref{Rho_table}) present all the estimates from the univariate models used to estimate the individual-level variance in survival and reproductive propensities for the snow vole population.
 % latex table generated in R 3.1.2 by xtable 1.7-4 package
@@ -490,7 +491,7 @@ intercept & 0.724 & 0.131 & 0.000 & [ -0.254 ; 0.266 ] \\
 \clearpage
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Estimation of the latent correlation between survival and reproduction}\label{ap:cor}
+\subsection{Estimation of the latent correlation between survival and reproduction}\label{ap:cor}
 Here we provide additional details on the bivariate models to test for the latent correlation between the propensity to reproduce and the propensity to survive. See main text for more details on the univariate analyses.
 
 In univariate models for reproduction fitted using \verb+lme4+, neither the sex by age interaction, nor the dummy random effect controlling for overdispersion was significant. With \verb+MCMCglmm+, the non-significance was confirmed by bivariate models using the deviance information criterion (DIC) and Bayesian credibility intervals for these two parameters. Moreover, by default \verb+MCMCglmm+ takes into account any overdispersion in a distribution assumed to be Poisson. Therefore we did not include these two explanatory variables in the final model. Posterior predictive checks revealed that the bivariate model correctly predicted the number of zeros for ARS (observed 820, predicted 807 $\pm$ 23). Moreover, the year-level covariance between survival and reproduction was estimated close to zero, and fixing it to zero improved DIC, so it was fixed to zero in the final model. Finally, the package \verb+MCMCglmm+ always includes a residual variance component for binary variables, although this variance is not estimable. We fixed this residual variance to 1, as suggested in the package course notes (\url{http://www.cran.r-project.org/web/packages/MCMCglmm/vignettes/CourseNotes.pdf}).

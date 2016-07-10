@@ -88,41 +88,56 @@
   \uzh@englishtrue
 }
 
+
+%% customize chapter format:
+\KOMAoption{headings}{twolinechapter}
+\renewcommand*\chapterformat{Chapter \thechapter\autodot}
+
+\KOMAoptions{open=right} % or left
+
 %\DeclareOption{titlepage}{\KOMAoptions{titlepage=true}}
 
 \ProcessOptions
-
-
 
 %% PAGE LAYOUT AND DIMENSIONS
 \RequirePackage{geometry}
 \geometry{%
   a4paper,
  top=38mm,
-%  left=35mm,
-%  right=16mm,
-bottom=24mm,
-  headsep=26mm,
+ left=30mm,
+ right=21mm,
+ bottom=24mm,
+  headsep=16mm,
   footskip=15mm
 }
 
 %\setlength{\columnsep}{5mm}
+\setlength{\footheight}{42.5pt}
 
 
 %% FOOTNOTES
-\RequirePackage[ragged,bottom,hang,norule]{footmisc}
-\renewcommand\footnotelayout{\fontsize{7.5}{9pt}\selectfont}
-\renewcommand\footnotemargin{.8em}
-\setlength{\footnotesep}{12pt}
+%\RequirePackage[ragged,bottom,hang,norule]{footmisc}
+%\renewcommand\footnotelayout{\fontsize{7.5}{9pt}\selectfont}
+%\renewcommand\footnotemargin{.8em}
+%\setlength{\footnotesep}{12pt}
+
+
+\usepackage[usenames,dvipsnames]{xcolor} % Required for specifying custom colors
+\usepackage{tikz} %always after xcolor!
+\usetikzlibrary{calc}
+\newcommand*\voled[1]{\tikz[baseline]{\node[] (pic) {\includegraphics[width=0.12\textwidth]{SnowvoleshadowDark}};
+\node[inner sep=0pt] (char) at ($(pic)+(0.2,0.05)$) {\textcolor{white}{#1}};
+}}
+
 
 %% LISTS
-\def\labelitemi{\normalfont{--}}
-\def\labelitemii{\normalfont{--}}
-\def\labelitemiii{\normalfont{--}}
-\def\labelitemiv{\normalfont{--}}
-\RequirePackage{enumitem}
-\setlist{leftmargin=*,nolistsep}
-\setitemize{labelwidth=2.7mm}
+%\def\labelitemi{\normalfont{--}}
+%\def\labelitemii{\normalfont{--}}
+%\def\labelitemiii{\normalfont{--}}
+%\def\labelitemiv{\normalfont{--}}
+%\RequirePackage{enumitem}
+%\setlist{leftmargin=*,nolistsep}
+%\setitemize{labelwidth=2.7mm}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -130,85 +145,43 @@ bottom=24mm,
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %% MACROS
-\newcommand*\uzh{}
-\newcommand*\uzhunit{}
+\newcommand*\uzh{University of Zurich}
+\newcommand*\uzhunit{IEU}
 \def\partsave{}
 
-
-
 %% HEADER (SUBSEQUENT PAGES)
-\def\uzhffhead{%
-    \ifx\partsave\empty
-       \parbox{\textwidth}{\vspace*{12pt}\headmark\hfill}%\@title}%
-    \else
-        \parbox{\textwidth}{\vspace*{12pt}\partsave\hfill\@title\newline\headmark}%
-    \fi
-}
-
-%% SET UP HEADERS WITH SCRPAGE2
-\RequirePackage{scrpage2}
-\automark[chapter]{chapter}
-\defpagestyle{uzhheadings}{%
-  {\uzhffhead}%
-  {\uzhffhead}%
-  {\uzhffhead}%
-}%
-{{\textup\pagename~\hspace{-0.92cm}\protect\voled{\thepage}\hfill \uzh{}, \uzhunit{}\ifx\@date\@empty\else, \@date\fi}%
- {\textup\uzh{}, \uzhunit{}\ifx\@date\@empty\else, \@date\fi \hfill \pagename~ \hspace{-0.92cm}\protect\voled{\thepage}}%
- {\textup\pagename~\hspace{-0.92cm}\protect{\thepage}\hfill \uzh{}, \uzhunit{}\ifx\@date\@empty\else, \@date\fi}}
-
-\defpagestyle{uzhheadingtitles}{%
-  {\uzhffhead}%
-  {\uzhffhead}%
-  {\uzhffhead}%
-}%
-{{\hfill \protect\voled{\thepage} \hfill}%
- {\hfill \protect\voled{\thepage} \hfill}%
- {\hfill \protect\voled{\thepage} \hfill}}
-
-\def\uzhtitlefoot{%
-  \if@titlepage
-  \else
-    \textup\pagename~\protect\voled{\thepage}\hfill
-  \fi
-}
-
-\defpagestyle{uzhtitlepage}{%
-  {\uzhhead}{\uzhhead}{\uzhhead}%
-}%
-{{\uzhtitlefoot}{\uzhtitlefoot}{\uzhtitlefoot}}
-
-\pagestyle{uzhheadings}
+%\def\uzhffhead{%
+%    \ifx\partsave\empty
+  %     \parbox{\textwidth}{\vspace*{12pt}\headmark\hfill}%\@title}%
+    %\else
+       % \parbox{\textwidth}{\vspace*{12pt}\partsave\hfill\@title\newline\headmark}%
+    %\fi
+%}
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% MISC
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% SET UP HEADERS WITH scrlayer-scrpage
+\RequirePackage{scrlayer-scrpage}
+
+\clearscrheadfoot
+\pagestyle{scrheadings}
+\ohead*{\headmark}
+\ofoot*{\voled{\thepage}}
+
+\renewcommand{\sectionmarkformat}{} %in order not to have numbers of sections in the heading
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-\newenvironment{abstract}{%
-  \chapter*{Abstract}}{}
+\newenvironment{summary}{%
+  \chapter*{Summary}}
+  {}
 
 \newenvironment{zusammenfassung}{%
   \chapter*{Zusammenfassung}}{}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% VARIABLES (ADJUST TO YOUR NEEDS!)
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newenvironment{acknowledgements}{%
+  \chapter*{Acknowledgements}}{}
 
-%% UNIVERSITY
-\ifuzh@english
-    \renewcommand*\uzh{University of Zurich}
-\else
-    \renewcommand*\uzh{Universit\"at Z\"urich}
-\fi
-
-%% UNIT (e.g. Institute)
-\ifuzh@english
-    \renewcommand*\uzhunit{IEU}
-\else
-    \renewcommand*\uzhunit{Universit\"atseinheit}
-\fi
 
 \endinput
 %%
