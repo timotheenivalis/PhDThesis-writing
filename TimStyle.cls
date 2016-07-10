@@ -70,14 +70,6 @@
 \RequirePackage{scrhack}
 %% BASE FONT SIZE (10pt/14pt)
 \KOMAoptions{fontsize=12pt, twoside}
-\renewcommand\normalsize{%
-   \@setfontsize\normalsize\@xpt\@xivpt
-   \abovedisplayskip 10\p@ \@plus2\p@ \@minus5\p@
-   \abovedisplayshortskip \z@ \@plus3\p@
-   \belowdisplayshortskip 6\p@ \@plus3\p@ \@minus3\p@
-   \belowdisplayskip \abovedisplayskip
-   \let\@listi\@listI}
-
 
 %% OPTIONS
 \DeclareOption{10pt}{\KOMAoptions{fontsize=10pt}}
@@ -162,8 +154,8 @@ bottom=24mm,
   {\uzhffhead}%
 }%
 {{\textup\pagename~\hspace{-0.92cm}\protect\voled{\thepage}\hfill \uzh{}, \uzhunit{}\ifx\@date\@empty\else, \@date\fi}%
- {\textup\pagename~\hspace{-0.92cm}\protect\voled{\thepage}\hfill \uzh{}, \uzhunit{}\ifx\@date\@empty\else, \@date\fi}%
- {\textup\pagename~\hspace{-0.92cm}\protect\voled{\thepage}\hfill \uzh{}, \uzhunit{}\ifx\@date\@empty\else, \@date\fi}}
+ {\textup\uzh{}, \uzhunit{}\ifx\@date\@empty\else, \@date\fi \hfill \pagename~ \hspace{-0.92cm}\protect\voled{\thepage}}%
+ {\textup\pagename~\hspace{-0.92cm}\protect{\thepage}\hfill \uzh{}, \uzhunit{}\ifx\@date\@empty\else, \@date\fi}}
 
 \defpagestyle{uzhheadingtitles}{%
   {\uzhffhead}%

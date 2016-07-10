@@ -152,7 +152,7 @@ A snow vole population, located in the Swiss Alps near Churwalden, at 2000m abov
 For \MM, starting from the models for ARS and survival used for the simulated data sets, we added sex and the sex by age interaction as additional fixed factors, as well as a random effect accounting for variation among years and an observation-level random effect. The latter accounts for overdispersion \parencite[see e.g.][]{Atkins2013} and quantifies the overdispersion due to sources of heterogeneity not included in the model.
 In a second step, models also including ARS in the previous year were fitted in order to test for the presence of fixed heterogeneity after accounting for variation introduced by Markovian processes. Confidence intervals for all parameters were computed through 1000 parametric bootstraps, using the \verb+confint+ function in \verb+lme4+. In a final step, the correlation between the propensity to survive and to reproduce was estimated using a bivariate GLMM in \verb+MCMCglmm+ (version 2.21) \parencite{Hadfield2010}. This model is detailed in Appendix \ref{ap:cor}.
 
-\begin{figure}[H]
+\begin{figure}[ht]
 	\includegraphics[width= \textwidth]{FiguresDynHet/Figure1}
 		\caption{\footnotesize Illustration of the simulation and testing process. (A) Data simulation: The simulation model is parametrized using the life cycle and vital rates of a snow vole population, along with additional, unknown, parameters introducing fixed heterogeneity ($\sigma_{\phi}^2$ and $\sigma_{\rho}^2$) and dynamic heterogeneity ($m$ and $c$). Different combinations of these simulation parameters define 249 scenarios. For each scenario, 1000 data sets are simulated. (B) Tests for fixed heterogeneity: Each simulated data set is tested for the presence of fixed heterogeneity with both mixed models (\MM) using likelihood ratio tests (LRT) on survival ($\phi$) and reproduction ($\rho$), and neutral simulations (\NSM), using six different tests (see main text). Because $\sigma_{\phi}^2$ and $\sigma_{\rho}^2$ are known for each simulated data set, we can estimate the type I and type II error rates under each scenario. (C) Analysis of the snow vole data: Both \MM and \NSM are applied to the real snow vole data set, and the outcome is interpreted in the light of the estimated error rates of each test.}
 	\label{figure:flow}
@@ -165,7 +165,7 @@ Mean ARS had no effect on the error rates of any test, so we merged together the
 
 \subsection{Type I error rates}
 In the absence of simulated individual fixed heterogeneity and non-random transition probabilities between successive stages, all tests have a low rate of null-hypothesis rejection (table \ref{table:t1error}). This means that any discrepancy between \NSM and \MM must come from a difference in type II rather than type I error rates.
-\begin{table}[H]
+\begin{table}[ht]
 \caption{Type I error of tests used in the \MM and \NSM approaches, when applied to data sets without underlying fixed heterogeneity and with fully random transition probabilities}
 \begin{center}\scriptsize
 \begin{tabular}{c c c c c c c c c c}
@@ -198,7 +198,7 @@ In contrast to \NSM, the power of the likelihood ratio test for ARS ($LRT_{\rho}
 
 The $LRT_\phi$ is never significant, even for $\sigma_{\phi}^2=2$. Moreover the estimation of $\sigma_{\phi}^2$ is always close to zero (average of the median values 0.029) and does not increase with increasing $\sigma_{\phi}^2$ (slope and SE: $-0.0016 \pm 0.0006$). The failure of this model illustrates the intrinsic difficulty in estimating random effects for binary traits, especially when there are few repeated measurements per individual \parencite[e.g.][chapter 9]{Albert1984,Hosmer2013}, as is the case in our short-lived simulated animals.
 
-\begin{figure}[H]
+\begin{figure}[ht]
 	\includegraphics[width=\textwidth]{FiguresDynHet/Figure2}
 		\caption{ \footnotesize Null-hypothesis rejection rates for various methods testing for the presence of fixed heterogeneity, as a function of the variance in reproductive propensity, $\sigma_{\rho}^2$, and survival propensity, $\sigma_{\phi}^2$, when these variances are introduced on the transformed scales. The methods are: (A) a $\chi^2$ test comparing the LRS distribution in a focal data set to the distribution of LRS distributions obtained through the neutral simulation approach (\NSM); tests based on proportion of values obtained by \NSM greater or equal to the value in the focal data set for (B) the variance in LRS, (C) the entropy of the transition matrix between successive annual reproductive success and (D) the persistence of this matrix; (E) a LRT for the significance of the individual random intercept in reproductive success. When $\sigma_{\rho}^2 = \sigma_{\phi}^2 = 0$, the null-hypothesis rejection rates are equal to the type I error rates, which is expected to be 0.05 (light gray line). When $\sigma_{\rho}^2 \neq 0$ or $\sigma_{\phi}^2 \neq 0$, the null-hypothesis rejection rates give (1-type II error rate), i.e. statistical power. The dark gray line indicates the 0.8 threshold. (A)-(D) are related to \NSM, (E) is related to \MM.}
 	\label{figure:VarIn}
@@ -215,7 +215,7 @@ The tests based on the variance in LRS, entropy and persistence follow a similar
 Based on these findings, it could be argued that both \MM and Plard's version of \NSM \parencite{Plard2012} have a very high type I error rate when the transitions between stages are structured. We examine this interpretation in more detail in the discussion. 
 However, the rejection rate of the LRT$_\rho$ for fixed heterogeneity in ARS is drastically reduced by the inclusion of the past ARS ($\rho_{i,t-1}$) in the two mixed models that are being compared, i.e. with and without the individual random effect (compare figure \ref{figure:Markov}(E) and figure \ref{figure:Markov}(F)). The type I error rate is greater than the alpha threshold of 5\% only when both $m > 0.8$ and $c > 0$ (figure \ref{figure:Markov}(F)). Moreover, the estimates of the variance in reproductive propensity are reduced by the inclusion of $\rho_{i,t-1}$ in the models: over all the scenarios, the mean is $\hat{\sigma_{\rho}^2}=0.004$, SE=0.002, with a maximal estimate of 0.144, whereas without including $\rho_{i,t-1}$, the mean is 0.050, SE=0.008, and the maximum 0.459. The former estimate is closer to zero, i.e. the individual-level variance that is explicitly simulated.
 
-\begin{figure}[H]
+\begin{figure}[ht]
 	\includegraphics[width=\textwidth]{FiguresDynHet/Figure3}
 	\caption{ \footnotesize Null-hypothesis rejection rates for various methods testing for the presence of fixed heterogeneity, when none is explicitly simulated, depending on the parameter $m$, controlling the structure of transitions between successive annual reproductive successes, and on the parameter $c$, controlling the dependency between survival probability and reproductive success (see the method section ``Simulations of a Markovian process'' for details). The methods are: (A) a $\chi^2$ test comparing the LRS distribution in a focal data set to the distribution of LRS distributions obtained through \NSM; tests based on proportion of values obtained by \NSM greater or equal to the value in the focal data set for (B) the variance in LRS, (C) the entropy of the transition matrix between successive annual reproductive success and (D) the persistence of this matrix; (E) a LRT for the significance of the individual random intercept in reproductive success, using models that do not account for a Markovian process, or (F) that do account for a Markovian process; (G) a LRT for the significance of the individual random intercept in survival. For survival we did not try to account for the Markovian process. Assuming that the simulated Markovian process cannot be related to fixed heterogeneity, the null-hypothesis rejection rates represent type I error rates for all values of the $c$ and the $m$ parameters. (A)-(D) are related to the \NSM framework. (E)-(G) are related to the \MM framework}
 	\label{figure:Markov}
@@ -365,7 +365,7 @@ As outlined in the main document, we simulated fixed heterogeneity by attributin
 
 The selection coefficients increase with increasing variance in individual latent qualities, both for reproduction (figure \ref{ap:sel}\ref{figure:qua:rho}) and for survival (figure \ref{ap:sel}\ref{figure:qua:phi}). This confirms that the heterogeneity simulated is non-neutral. 
 
-\begin{figure}[H]
+\begin{figure}[ht]
 
 %	\subfigure[Reproduction quality]
 		{
@@ -397,7 +397,7 @@ It could be argued that the superior statistical power of the  $\mathrm{LRT}_{\r
 Although when the variance in quality for reproduction is included on the original, non-transformed, scale, mean reproductive success ($\overline{\mathrm{ARS}}$) has a dramatic negative influence on the power of the different tests, the hierarchy in the performance of the different tests does not change across the values of mean reproductive success. Therefore, we chose to present the results with pooled $\overline{\mathrm{ARS}}$ only (figure \ref{figure:VarOut})
 Furthermore, it should be noted that although the $\sigma_{\rho}^2$ parameter values are the same in this section as in the previous one (0,0.1,0.5,1 and 2), they correspond to much smaller realized variances, as the variance is introduced on the original scale and not on a log-scale as previously. For correspondence between the variances on the two scales, see table \ref{table:Vlink}. 
 
-\begin{table}[h]
+\begin{table}[ht]
 \caption{Realized variance on the log scale as a function of variance introduced on the original scale ($\sigma_{\rho}^2$) and  mean reproductive success ($\overline{\rho}$)}
 \begin{center}
 \footnotesize
@@ -418,7 +418,7 @@ Furthermore, it should be noted that although the $\sigma_{\rho}^2$ parameter va
 {\scriptsize Note: Each realized variance was estimated from the variance of the log of 1,000,000 draws from a normal distribution of mean $\overline{\rho}$ and variance $\sigma_{\rho}^2$.}
 \end{table}
 
-\begin{figure}[H]
+\begin{figure}[ht]
 		\includegraphics[width=\textwidth]{FiguresDynHet/Figure6}
 	\caption{Appendix D \footnotesize Null-hypothesis rejection rates for various methods testing for the presence of fixed heterogeneity, depending on the variance in reproductive propensity, $\sigma_{\rho}^2$, and on the variance in survival propensity, $\sigma_{\phi}^2$, when these variances are introduced on the original scales. The methods are: (A) a $\chi^2$ test comparing the Lifetime Reproductive Success (LRS) distribution in a focal data set to the distribution of LRS distributions obtained through the neutral simulation approach (\NSM); tests based on proportion of values obtained by \NSM greater or equal to the value in the focal data set for (B) the variance in LRS, (C) the entropy of the transition matrix between successive annual reproductive success and (D) the persistence of this matrix; (E) a Likelihood Ratio Test for the significance of the individual random intercept in reproductive success. When $\sigma_{\rho}^2 = \sigma_{\phi}^2 = 0$, the null-hypothesis rejection rates are equal to the type I error rates, which is expected to be 0.05 (light gray line). When $\sigma_{\rho}^2 \neq 0$ or $\sigma_{\phi}^2 \neq 0$, the null-hypothesis rejection rates give (1-type II error rate), i.e. statistical power, which should be above 0.8 (dark gray line). (A)-(D) are related to \NSM, (E) is related to \MM.}	
 	\label{figure:VarOut}
@@ -441,7 +441,7 @@ Apparent year-to-year survival could be obtained without mark-recapture modeling
 The following two tables (\ref{Phi_table} and \ref{Rho_table}) present all the estimates from the univariate models used to estimate the individual-level variance in survival and reproductive propensities for the snow vole population.
 % latex table generated in R 3.1.2 by xtable 1.7-4 package
 % Wed Nov 12 18:14:03 2014
-\begin{table}[H]
+\begin{table}[ht]
 \begin{center}
 \caption{Estimates of coefficient of the mixed model for survival in the real snow vole data set}\label{Phi_table}
 \footnotesize
@@ -464,7 +464,7 @@ intercept & -1.754 & 0.830 & 0.035 & [-3.393;-0.111] \\
 {\scriptsize Note: $\sigma_{id}^2$ and $\sigma_{year}^2$ refer to the variance between individuals and between years, respectively. All estimates are shown on the latent scale. The $p$-values for the significance of the two random effects are computed through a one-sided LRT. No standard errors (SEs) are provided for random effects. Instead, confidence intervals are computed using 1000 parametric bootstraps. The significance of the fixed effects is computed through the default Gaussian approximation provided by the package \texttt{lme4}.}
 \end{table}
 
-\begin{table}[H]
+\begin{table}[ht]
 \caption{Estimates of coefficients of the mixed model for annual reproductive success in the real snow vole data set} 
 \label{Rho_table}
 \begin{center}
