@@ -1,4 +1,5 @@
-\documentclass[]{uzhpubTim}
+\documentclass[uzh-en]{TimStyle}
+%\documentclass[]{uzhpubTim}
 %\documentclass[]{scrreprt}
 
 % customize chapter format:
@@ -22,7 +23,7 @@
 
 %bibliography
 \usepackage[backend=biber, doi=false, authordate, noibid,bibencoding=utf8]{biblatex-chicago}
-%\urlstyle{sf} % better deals with url breaks
+\urlstyle{sf} % better deals with url breaks
 
 \addbibresource{BiblioNeutralSimul.bib}
 \addbibresource{BiblioDecPopDyn.bib}
@@ -93,6 +94,9 @@
 \begin{document}
 %\maketitle
 \include{titlepage}
+
+\include{abstract}
+\include{zusammenfassung}
 
 \setcounter{tocdepth}{0}
 \tableofcontents 
