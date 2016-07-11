@@ -169,6 +169,16 @@
 
 \renewcommand{\sectionmarkformat}{} %in order not to have numbers of sections in the heading
 
+
+%%% TOC
+
+\renewcommand{\contentsname}{Table of Contents}
+
+\renewcommand\addchaptertocentry[2]{\addtocentrydefault{chapter}{}{#2}} %for the TOC without numbers
+%\RequirePackage{tocstyle}
+%\usetocstyle{KOMAlike}
+%\settocfeature {} {}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
@@ -182,7 +192,6 @@
 \newenvironment{acknowledgements}{%
   \chapter*{Acknowledgements}}{}
 
-\renewcommand\addchaptertocentry[2]{\addtocentrydefault{chapter}{}{#2}} %for the TOC without numbers
 
 \endinput
 %%
