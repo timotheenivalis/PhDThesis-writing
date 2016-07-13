@@ -176,7 +176,7 @@
 
 \renewcommand\addchaptertocentry[2]{\addtocentrydefault{chapter}{}{#2}} %for the TOC without numbers
 \RequirePackage{tocstyle}
-\usetocstyle{standart}
+\usetocstyle{standard}
 %\usetocstyle{KOMAlike}
 %\settocfeature {} {}
 
