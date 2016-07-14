@@ -175,8 +175,8 @@
 \renewcommand{\contentsname}{Table of Contents}
 
 \renewcommand\addchaptertocentry[2]{\addtocentrydefault{chapter}{}{#2}} %for the TOC without numbers
-\RequirePackage{tocstyle}
-\usetocstyle{standard}
+%\RequirePackage{tocstyle} % gives a scary warning
+%\usetocstyle{standard}
 %\usetocstyle{KOMAlike}
 %\settocfeature {} {}
 
