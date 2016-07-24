@@ -43,7 +43,6 @@ Thus, some aspects of the definitions of fitness are:
 \end{enumerate}
 
 
-
 We will not solve the question of the definition of fitness here, but we will try to make clear how we used the word in this thesis. 
 In this thesis, what we mean by \emph{fitness} is ...
 I will not consider X) and X)
@@ -64,16 +63,20 @@ Studying the causes of variation in fitness implies studying natural selection \
 \section{Genetic variation}
 
 How to measure and make sense of genetic variation?
-For over a century, there have been two main approaches. 
-These can be summarized as ``bottom-up'' and ``top-down''.
-The Mendelians and the biometricians
+For over a century, there have been two main approaches, that can be grossly traced back to the scientific controversy opposing the Mendelians and the biometricians.
+summarized as ``bottom-up'' and ``top-down''.
+Bottom-up approaches start from molecular data to infer the phenotypic effects of individual genetic loci. 
+
+
+Top-down approaches, encompassed within quantitative genetics, attempt to decompose phenotypic variation into genetic variation and other sources. 
+
 
 Some pros and cons of both approaches are nicely illustrated by the confrontation of the quantitative genetics of mass with the genotyping of a candidate gene for mass. The latter is a side project of this Ph.D. that does not appear in the other chapters, and we take the opportunity to present it below.
 
 \subsection{A candidate gene for body mass: insights and limits}
 
-We used a candidate gene approach to uncover the molecular mechanisms 
-To date, only the candidate gene fully analysed is an intronic region of the gene \emph{lepr}, which codes for the leptin receptor. This hormone is known to regulate fat metabolism, energy expenditure and food intake, including in rodents \parencite{Houseknecht1998}.
+We used a candidate gene approach to uncover the molecular mechanisms underlying variation in body mass. 
+To date, the only candidate gene we fully analysed is an intronic region of the gene \emph{lepr}, which codes for the receptor to leptin. Leptin is a hormone known to regulate fat metabolism, energy expenditure and food intake, including in rodents \parencite{Houseknecht1998}.
 
 We found a recessive allele (let call the recessive allele \emph{a}, and the dominant allele \emph{A}) associated with lighter individuals (Fig. \ref{fig:leprpheno}\textbf{A}). Homozygotes \emph{aa} were -2.9 g lighter (95\% credibility interval $[0.6;5.1]$), that is, 8\% lighter than the mean. On average, during their lifetime, these \emph{aa} individuals produced one third less offspring than the \emph{AA} individuals (Fig. \ref{fig:leprpheno}\textbf{B}). This strong difference in fitness is however not statistically significant, meaning that it could very well be the result of chance alone. These results suggests links between the physiology of the organism, its environment and the causes of natural selection that could not be sensed from the estimation of genetic variances and covariances. 
 Genetic variances and covariances are however necessary to 
@@ -88,17 +91,21 @@ Based such a strong phenotypic effect, \emph{lepr} could be called a major locus
 	\label{fig:leprpheno}
 \end{figure}
 
-Knowing the effect of the three genotypes and the allele frequencies one can compute analytically the additive genetic variances associated with a bi-allelic locus \parencite[][p77]{Fisher1941average,Lynch1998}. Thus, the additive genetic variances associated with \emph{lepr} are $0.052$  for body mass and $0.006$ for LRS. For both traits, \emph{lepr} explains about 1\% of the additive genetic variation as estimated from an animal model. This is a relatively large proportion for a single locus given that quantitative traits loci typically explain a fraction of a percent to a few percents of V$_\text{A}$, when they have a large enough sample size to mitigate Beavis effect \parencite{Flint2009,Jensen2014}.  Still, 1\% of V$_\text{A}$ is not sufficient to infer the evolutionary potential of the trait.
+Knowing the effect of the three genotypes and the allele frequencies one can compute analytically the additive genetic variances associated with a bi-allelic locus \parencite[][p77]{Fisher1941average,Lynch1998}. Thus, the additive genetic variances associated with \emph{lepr} are $0.052$  for body mass and $0.006$ for LRS. For both traits, \emph{lepr} explains about 1\% of the additive genetic variation as estimated from an animal model. This is a relatively large proportion for a single locus given that quantitative traits loci typically explain a fraction of a percent to a few percents of additive genetic variance (V$_\text{A}$), when they have a large enough sample size to mitigate Beavis effect \parencite{Flint2009,Jensen2014}.  Still, 1\% of V$_\text{A}$ is not sufficient to infer the evolutionary potential of the trait.
 
 Could we not use high-throughput sequencing techniques to explain a larger proportion of genetic variation, and at the same time identify the genes associated with phenoytpic variation and selection? 
-In theory we could, but in practice this avenue is a laborious and expensive one. The outcome is also uncertain: 
+In theory we could, but in practice this avenue is still a rather laborious and expensive one \parencite{Goodwin2016}. The outcome is also uncertain: 
 The first objective, estimating genetic variances often requires huge sample sizes and number of markers and in general only a small fraction of V$_\text{A}$ is recovered \parencite{Bloom2013}. For instance, even in the most abundant and best known model organism, humans (\textit{Homo sapiens}, Linnaeus 1758), 
 sample sizes of over XXX were necessary to explain 
 XX\% of variation in body mass. 
 Such progresses were accomplished by increasing sample sizes by several order of magnitude and developing 
 Neither can be achieved in small populations of non-model organisms.
 
-The second objective, identifying the genetic mechanisms of variation and selection , in small populations the number of genetic loci that can be identified with statistical significance can be limited by the problem of multiple comparisons, although solutions are emerging . 
+The second objective, identifying the genetic mechanisms of variation and selection, in small populations the number of genetic loci that can be identified with statistical significance can be limited by the problem of multiple comparisons, although solutions are emerging. Moreover, the genotype/phenotype map can hardly be understood from a fully bottom-up approach because of pervasive interactions among genes and with their environment \parencite{Pigliucci2009}. 
+
+To conclude, bottom-up approaches teach us molecular mechanisms, 
+
+On the other hand, quantitative genetics short-cut all a series of problem emerging from the interactions, and provides a simple and direct measure of genetic parameters. Importantly, quantitative genetics work directly on the phenotype, which is the causal target of selection. This thesis is concerned with the genetics and evolution at the level of organisms, and accordingly, most of my work relies on quantitative genetics.
 
 %The uncertainty in the estimation of the effect of \emph{lepr} on mass translates into a p-value of $0.01$. Using the widespread arbitrary threshold of $0.05$, If other genetic loci were analysed, using quantitative trait loci mapping or genome wide association
 
