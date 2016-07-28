@@ -30,31 +30,31 @@ Our understanding of the causes of variation within species and populations has 
 Additional questions relate to the consequences of within-species variation. As already mentioned, a consequence of genetic variation within species is the possibility of Darwinian evolution, and in particular of genetic adaptation. The study of adaptation is very topical because of unprecedented rates of environmental changes induced by human activities \parencite{parmesan2006}. These changes provide the opportunity of natural experiments to evolutionary biologists \parencite{Altermatt2016, Brookfield2016}, but also come with societal concerns and an ever increasing urge to better understand and predict how living things respond to changes \parencite{McCarty2001, Shaw2013}. This regain of focus has highlighted the gaps in the understanding of adaptation in natural populations: it is still very challenging to predict, or even understand the mechanisms of, how natural populations respond to environmental change \parencite{Merila2001, Tafani2013, Shaw2013, Brookfield2016}
 Furthermore, within-population variation is relevant to the demographic response to environmental changes, either through the direct effect of phenotypic variation (including genetic variation) \parencite{Kendall2011, vindenes2015, Plard2016}, or indirectly, following genetic changes \parencite{Chevin2010a, Turcotte2011, Schiffers2013a}. Once more, many questions remain open, which is not surprising given that this focus took off only in the last decade. Theory is being developed to describe the joined evolutionary and demographic dynamics in response to environmental change \parencite{Chevin2010a, Childs2016}, but there is still very little confrontation to empirical data \parencite{Chevin2012, Gonzalez2013a} and many points remain unclear \parencite{Charmantier2014climate, Gonzalez2013a}. 
 
-At the intersection between the causes and consequences of variation is the central concept of fitness, that we  shall now introduce. 
+At the intersection between the causes and consequences of variation, is the central concept of fitness, that we  shall now introduce. 
 
 %fitness
 \subsection{Variation in the definition of fitness and variation in fitness}
 
-There has been a great deal written about the concept of fitness, including multiple conflicting definitions, which ``\emph{is hardly surprising as every important scientific concept is difficult to understand from first principles, as for instance the notions of space and time, or energy and force}'' \parencite[p. 1358][]{Wagner2010}. Definitions vary depending on whether fitness is defined at the level of the genetic lineage \parencite[e.g.][]{Akc2016}, of the individual \parencite[e.g.][]{Cam2000}, of the genotype \parencite[e.g.][]{Steiner2012}, of the population\dots
-Thus, some aspects of the definitions of fitness are:
+There has been a great deal written about the concept of fitness, including multiple conflicting definitions, which ``\emph{is hardly surprising as every important scientific concept is difficult to understand from first principles, as for instance the notions of space and time, or energy and force}'' \parencite[p. 1358][]{Wagner2010}.
+Thus, some conflicting aspects of the definitions of fitness are:
 \begin{enumerate}
-	\item an expected value defined at the individual level that cannot be measured directly \parencite{Brandon1984,Price1996,Krimbas2004}
-	\item Amount of information about the environment that populations accumulate by selection \parencite{Frank2012V}
+	\item \label{list:prop} Whether fitness is a realized value or a propensity.
+	\item \label{list:level} Definitions vary depending on whether fitness is defined at the level of the genetic lineage \parencite[e.g.][]{Akc2016}, of the individual \parencite[e.g.][]{Cam2000}, of the genotype \parencite[e.g.][]{Steiner2012}, of the population\dots
+	\item On what time frame should fitness be measured. It is the asymptotic number of descendants or the contribution to the next generation?
+	\item What is being maximized by natural selection \parencite{Birch}
+	\item 
+	\item \label{list:info} Amount of information about the environment that populations accumulate by selection \parencite{Frank2012V}
 \end{enumerate}
-
-
 We will not solve the question of the definition of fitness here, but we will try to make clear how we used the word in this thesis. 
-In this thesis, what we mean by \emph{fitness} is ...
-I will not consider X) and X)
-I retain points X) X) and X)
-
+On the point \ref{list:prop}, it is now rather consensual that the concept of fitness is more useful when it is defined as a propensity, that is, as an expected value that cannot be measured directly because of stochasticity \parencite{Brandon1984,Price1996,Krimbas2004}. A propensity definition makes easier to consider fitness at the level of individuals (point \ref{list:level}), as will be further developed in chapter \ref{chap:dynhet}.
+We will consider fitness as the contribution to the next generation only. Asymptotic definitions are difficult to apply in changing environments or in the presence of density dependence. 
+ 
 most adapted to the study framework.
-I see great conceptual promises in the point X) about defining fitness in term of information, and it might enlighten some of the work carried out, but it did not influence the work directly and is not necessary to understand it.
-
-with the difficulty that...  
+I see great conceptual promises in the point \ref{list:info}, about defining fitness in term of information, and it might enlighten some of the work carried out, but it did not influence the work directly and is not necessary to understand it.
 
 In this thesis, we will not really deal with the fundamental question of appearance and maintenance of variation in fitness (e.g. lek paradox, see XX), but rather with its proximal sources.
 
+Whatever the definition endorsed, it is in general very difficult to measure fitness directly. 
 Fitness proxy because we cannot directly observe fitness. First must isolate what is fitness in these measures. 
 
 Studying the causes of variation in fitness implies studying natural selection \footnote{In this thesis, unless mentioned otherwise, we consider \emph{sexual selection} as part of \emph{natural selection} and of \emph{selection}. Measuring sexual and natural selection separately, would certainly provide a finer understanding of the mechanisms of selection in the study population, but this was beyond the scope of this thesis. Nevertheless, the question was partly explored by \cite{Garcia-Navas2016} and \cite{Garcia-Navas2015a}.}
@@ -63,13 +63,11 @@ Studying the causes of variation in fitness implies studying natural selection \
 \section{Genetic variation}
 
 How to measure and make sense of genetic variation?
-For over a century, there have been two main approaches \parencite{Liedvogel2011}, that can be grossly traced back to the scientific controversy opposing the Mendelians and the biometricians.
+For over a century, there have been two main approaches \parencite{Liedvogel2012}, that can grossly be traced back to the scientific controversy opposing the Mendelians to the biometricians.
 summarized as ``bottom-up'' and ``top-down''.
-Bottom-up approaches start from molecular data to infer the phenotypic effects of individual genetic loci. 
-
+Bottom-up approaches, championned by candidate gene and genome wide association studies, start from molecular data to infer the phenotypic effects of individual genetic loci. 
 
 Top-down approaches, encompassed within quantitative genetics, attempt to decompose phenotypic variation into genetic variation and other sources. 
-
 
 Some pros and cons of both approaches are nicely illustrated by the confrontation of the quantitative genetics of mass with the genotyping of a candidate gene for mass. The latter is a side project of this Ph.D. that does not appear in the other chapters, and we take the opportunity to present it below.
 
@@ -89,7 +87,10 @@ Based such a strong phenotypic effect, \emph{lepr} could be called a major locus
 	\label{fig:leprpheno}
 \end{figure}
 
-Knowing the effect of the three genotypes and the allele frequencies one can compute analytically the additive genetic variances associated with a bi-allelic locus \parencite[][p77]{Fisher1941average,Lynch1998}. Thus, the additive genetic variances associated with \emph{lepr} are $0.052$  for body mass and $0.006$ for LRS. For both traits, \emph{lepr} explains about 1\% of the additive genetic variation as estimated from an animal model. This is a relatively large proportion for a single locus given that quantitative traits loci typically explain a fraction of a percent to a few percents of additive genetic variance (V$_\text{A}$), when they have a large enough sample size to mitigate Beavis effect \parencite{Flint2009,Jensen2014}.  Still, 1\% of V$_\text{A}$ is not sufficient to infer the evolutionary potential of the trait. Finally, genotyping many more markers, for instance using high-throughput sequencing \parencite{Goodwin2016}, is unlikely to improve this situation in the snow vole population. Generally, very large sample sizes and high-quality genomic resources are necessary to explain a biologically proportion of genetic variances \parencite{Bloom2013, Jensen2014}. For instance 3,925 individuals and 294,831 markers were necessary to explain 45\% of the genetic variation in human height \parencite{Yang2010}. 
+Knowing the effect of the three genotypes and the allele frequencies one can compute analytically the additive genetic variances associated with a bi-allelic locus \parencite[][p77]{Fisher1941average,Lynch1998}. Thus, the additive genetic variances associated with \emph{lepr} are $0.052$  for body mass and $0.006$ for LRS. For both traits, \emph{lepr} explains about 1\% of the additive genetic variation as estimated from an animal model. This is a relatively large proportion for a single locus given that quantitative traits loci typically explain a fraction of a percent to a few percents of additive genetic variance (V$_\text{A}$), when they have a large enough sample size to mitigate Beavis effect \parencite{Flint2009,Jensen2014}.  Still, 1\% of V$_\text{A}$ is not sufficient to infer the evolutionary potential of the trait. Finally, genotyping many more markers, for instance using high-throughput sequencing \parencite{Goodwin2016}, is unlikely to improve this situation in the snow vole population. Generally, very large sample sizes and high-quality genomic resources are necessary to explain a biologically proportion of genetic variances \parencite{Bloom2013, Jensen2014}. For instance
+XX only 10\% height h2 from 180 QTL.
+High-throughput sequencing can also been used in a top-down way, that does not identify causal genetic variants, but instead quantifies the phenotypic variation jointly explained by all the genotyped markers. Thus, 3,925 individuals and 294,831 markers were able to explain 45\% of the genetic variation in human height \parencite{Yang2010}. This is sufficient genetic variation to start 
+however, given knowledge on the relatedness between individuals, quantitative genetics can estimate all the genetic variation in a phenotype, without any genotyping effort.
 
 %Could we not use high-throughput sequencing techniques to explain a larger proportion of genetic variation, and at the same time identify the genes associated with phenoytpic variation and selection? 
 %In theory we could, but in practice this avenue is still a rather laborious and expensive one \parencite{Goodwin2016}. The outcome is also uncertain: 
@@ -155,5 +156,14 @@ In addition, all newly-captured snow voles were individually marked and genotype
 
 \subsection{Thesis outline}
 
+Fitness is generally measured using individual 
+
+Chapter \ref{chap:dynhet} 
+
+Chapter \ref{chap:decpop}
+
+Chapter
+
+Chapter 
 \printbibliography[heading=subbibliography]
 
