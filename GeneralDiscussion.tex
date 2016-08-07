@@ -44,31 +44,36 @@ Population structure.
 
 \subsection{Measuring selection in the wild}
 For over 150 years, natural selection has been known to cause the match between organisms and their environment, and biologists have attempted to understand its causes and mechanisms. The principle of natural selection is very simple: in a given environment, individuals with a phenotype that favours survival and fertility contribute more to the next generation. Therefore, it can be surprising to see how slowly the understanding of natural selection has developed, and how difficult its study remains. 
-For most of the 20th century, the main brake to progresses was the lack of an unified framework to quantify selection in natural populations \parencite{Wade2006}. Such a framework progressively emerged, starting with the appearance of covariance-based methods \parencite{Robertson1966, Price1970} which efficiently measure the total effect of selection. The most influential breakdown was the popularization of regression-based methods \parencite{Lande1979,Lande1983} which measures the proportional effect of selection per unit of phenotypic variation, and allows to decompose selection into the direct and indirect effects of selection on multiple traits.
+For most of the 20th century, the main brake to progresses was the lack of an unified framework to quantify selection in natural populations \parencite{Wade2006}. Such a framework progressively emerged, starting with the appearance of covariance-based methods \parencite{Robertson1966, Price1970} which efficiently measure the total effect of selection. The most influential breakdown was the popularization of regression-based methods \parencite{Lande1979,Lande1983} which measures the proportional effect of selection per unit of phenotypic variation, and allows to decompose selection into the direct and indirect effects of selection on multiple traits \parencite{Broodie1995}.
 Since then, these methods have provided thousands of estimates of selection in natural populations \parencite{Kingsolver2001,Stinchcombe2008,Kingsolver2012}, showing several general patterns. For instance, directional selection is stronger and more common than suggested by early evolutionists, whereas stabilizing selection appears to be rare, while fertility selection is generally stronger than viability selection \parencite{Kingsolver2012}.
-The abundance of estimates of selection should not be mistaken for a good understanding of natural selection, however. The estimation of selection through regression-methods faces at least three challenges that might severely hamper their significance. 
+The abundance of estimates of selection should not be mistaken for a good understanding of natural selection, however. The estimation of selection through regression-methods faces at least three challenges that might severely hamper their significance and explain the general absence of response to selection \parencite{Merila2001, Brookfield2016}.
 
-But warnings
-1)Fitness proxies
-For the empirical part of this thesis (chapter \ref{chap:stasis} and \ref{chap:flusel}), I used fitness proxies that attempted to include all fitness components. 
+First, to obtain an unbiased measure of selection, fitness should be regressed on the trait of interest. Fitness is rarely observable directly, and fitness proxies must be used instead. Many estimates of selection are computed on fitness components, for instance fertility and survival \parencite{Kingsolver2012}. In this case, the estimation of selection can be biased in the presence of a trade-off between fitness components \parencite{Thompson2011, Kingsolver2012}. Fortunately, this bias appears to be minor in general, with the exception of body mass \parencite{Kingsolver2011}.
+For the empirical part of this thesis (chapter \ref{chap:stasis} and \ref{chap:flusel}), I used fitness proxies that attempted to include all fitness components in order to avoid such biases. Thus, I used lifetime reproductive success when measuring selection within a generation, and annual reproductive success plus twice survival when measuring selection within a year. These fitness proxies are imperfect since we do not capture all juveniles and a trade-off between early juvenile survival and reproduction could bias the selection estimation. Still, the estimation of evolution using Price equation (that is, selection on the genotype) and that using the trend in BLUPs for breeding values (that is, not using any information about selection nor fitness) agree qualitatively (chapter \ref{chap:stasis}), suggesting that my fitness proxy is adequate. 
 
 2)Correlated traits
+Second, 
+\parencite{Brookfield2016}
 
+My work did not address this problem
 
 3)Environmental covariation
-
+Third, 
 Body mass, the main trait analysed in this thesis, is likely to be very sensitive to this source of bias, because a favourable environment is likely to lead to the a larger mass
 Accordingly, phenotypic estimates of natural selection on mass and size are overwhelmingly positive \parencite{Blanckenhorn2000, Kingsolver2012}. 
 
-The alternative to correlative measurements of selection is the experimental manipulation of the trait of interest. This can break the link between phenotype and individual quality and reveals the causal action of phenotype on fitness components \parencite[e.g.][]{Tinbergen2004, Tschirren2006}. Still, experimental manipulation is no without its own limitations.
-Thus, manipulations are work intensive and time consuming.
+A solution to the problem is the experimental manipulation of the trait of interest. This can break the link between phenotype and individual quality and reveals the causal action of phenotype on fitness components \parencite[e.g.][]{Tinbergen2004, Tschirren2006}. Still, experimental manipulation is no without its own limitations.
+Thus, manipulations are work intensive, time consuming and must be thought carefully in order to manipulate the trait of interest without affecting any other trait. 
 Moreover, manipulations cannot easily be applied to all traits. The approach has been widely used to study selection on brood size, but it is not clear to me how one could manipulate body mass in a controlled way (that is, without accidentally affecting other traits).
 
 My approach to the challenge of environmental covariation has been to use quantitative genetics to identify the target of natural selection (chapter \ref{chap:stasis}). After having shown on-going adaptive evolution, I decomposed phenotypic selection into an additive genetic and an environmental component, for various fitness components. I found that only juvenile viability selection showed an additive genetic component, and according to the Robertson-Price identity, was the source of adaptive evolution. Understanding the mechanism of this selection and measuring its strength was then a matter of hypothesis testing.
-This approach could be used on other systems provided the presence of adaptive evolution. Nonetheless, it requires sufficient phenotypic and relatedness data to fit bivariate animal models. In addition, in the snow vole a single fitness drove evolution, but multiple fitness components could be involved, thus complicating the analysis. Finally, identifying the right fitness component(s) does not guarantee that the phenotypic mechanism of selection can be identified. A good understanding of the biological system will be necessary to formulate a reasonable hypothesis for the cause of selection. The testability of this hypothesis will also depend on data availability and quality, and will be subject to the limits of hypothesis testing approaches (in particular, correlation does not prove causation).
+This approach could be used on other systems provided the presence of adaptive evolution. Nonetheless, it requires sufficient phenotypic and relatedness data to fit bivariate animal models. In addition, in the snow vole a single fitness drove evolution, but multiple fitness components could be involved, thus complicating the analysis. Finally, identifying the right fitness component(s) does not guarantee that the phenotypic mechanism of selection can be identified. A good understanding of the biological system will be necessary to formulate a reasonable hypothesis for the cause of selection. The testability of this hypothesis will also depend on data availability and quality, and will be subject to the limits of hypothesis testing approaches: the rate of false positive is equal to the significance level chosen, and a correlation does not prove causation.
 
 \subsection{Genetic response to environmental change}
 %response to selection
+Predictions based on phenotypic estimates of selection
+(chapter \ref{chap:dynhet})
+(chapter \ref{chap:decpop})
 
 \subsection{Demographic response to environmental change}
 % demographic response and evo rescue.
