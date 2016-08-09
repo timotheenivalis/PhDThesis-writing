@@ -71,6 +71,23 @@
 
 \usepackage{hyperref} % Required for adding links	and customizing them
 % Always must be last package!!
+\usepackage{xcolor}
+\hypersetup{
+    colorlinks,
+    linkcolor={red!20!black},
+    citecolor={blue!50!black},
+    urlcolor={blue!80!black},
+		linkbordercolor=red,% hyperlink border will be red
+		citebordercolor=blue,% 
+		urlbordercolor=blue 
+}
+\makeatletter
+\Hy@AtBeginDocument{%
+  \def\@pdfborder{0 0 1}% Overrides border definition set with colorlinks=true
+  \def\@pdfborderstyle{/S/U/W 1}% Overrides border style set with colorlinks=true
+                                % Hyperlink border style will be underline of width 1pt
+}
+\makeatother
 %%%%%%%%%%%%%%%%%%%
 
 \title{Individual-level causes and population-level\\consequences of variation in fitness in an alpine rodent}
