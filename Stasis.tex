@@ -29,17 +29,18 @@ Finally, even in the absence of selection on correlated traits, it is challengin
 
 While these difficulties have been discussed previously, and studies regularly note that the mismatch between the observed and predicted response may be attributable to any of them, they rarely account for them in an explicit, quantitative manner. Therefore, we here apply a comprehensive analytical framework to long-term individual-based body mass data for a wild rodent population, which shows an apparent mismatch between observed rates of phenotypic change and predicted rates of genetic change. We use information on within-population relatedness and individual-level trait measurements \parencite{Henderson1950,Lynch1998} to obtain a statistically robust estimate of the direction and rate of genetic change \parencite{Postma2006,Hadfield2010b,Morrissey2012sts}. Subsequently we disentangle the role of genes and the environment in shaping the covariance between body mass and fitness, and identify the target of selection. This allows us to directly compare the observed genetic change to a range of evolutionary predictions, and to thereby resolve the stasis paradox and provide a deeper understanding of selection and evolution in this biological system. 
 
-\section*{Results and discussion}
+\section{Results and discussion}
 Based on ten years of data on an alpine population of snow voles \parencite{Garcia-Navas2015,Bonnet2016} (\textit{Chionomys nivalis}, Martin 1842), we find that relatively heavy individuals both survive better ($p=0.04$) and produce more offspring per year ($p=0.003$). Assuming causality, this generates a strong phenotypic estimate of selection favouring heavier individuals (selection differential $S=0.86$ g, $p< 10^{-5}$). In line with other morphological traits \parencite{Mousseau1987,Postma2014}, variation in body mass has a significant additive genetic component ($V_A$=4.34 g$^2$, 95\%CI [2.40;7.36]), which corresponds to a heritability ($h^2$) of 0.21 (95\%CI [0.11;0.29]). Similarly, we find significant additive genetic variance in fitness ($V_A$=0.10; 95\%CI [0.06;0.19], $h^2=0.06$ 95\%CI [0.04;0.12]), measured as relative lifetime reproductive success (rLRS).
 
 \begin{figure}[ht]
 \begin{center}
-\includegraphics[width=0.7\textwidth]{FiguresStasis/PhenoTrends-1}\\
+\includegraphics[width=0.6\textwidth]{FiguresStasis/PhenoTrends-1}\\
 
-\includegraphics[width=0.7\textwidth]{FiguresStasis/BlupsTrendMass-1}\\
+\includegraphics[width=0.6\textwidth]{FiguresStasis/BlupsTrendMass-1}\\
 \end{center}
+
+\caption{\textbf{Figure 1 Temporal variation in mass and estimated breeding values for mass.} (\textbf{A}): Year-specific mean mass corrected for age, sex and date of measurement, with 95\%CI. (\textbf{B}): Cohort-specific mean estimated breeding value for mass with their 95\%CI and the trend in breeding value with 95\%CI. Note the different of scale on the y-axes.}
 \label{fig:trends}
-\textsf{\textbf{Figure 1 Temporal variation in mass and estimated breeding values for mass.} (\textbf{A}): Year-specific mean mass corrected for age, sex and date of measurement, with 95\%CI. (\textbf{B}): Cohort-specific mean estimated breeding value for mass with their 95\%CI and the trend in breeding value with 95\%CI. Note the different of scale on the y-axes.}
 \end{figure}
 
 
@@ -49,12 +50,11 @@ To test whether the predicted positive genetic trend, i.e. an increase in breedi
 
 \begin{figure}[ht]
 {\centering
-\includegraphics[width=0.7\textwidth]{FiguresStasis/AllChangeMass-1}\\
+\includegraphics[width=0.6\textwidth]{FiguresStasis/AllChangeMass-1}\\
 
-\includegraphics[width=0.7\textwidth]{FiguresStasis/SelectionS-1}\\
+\includegraphics[width=0.6\textwidth]{FiguresStasis/SelectionS-1}\\
 }
-
-\textsf{\textbf{Figure 2 Predicted and observed rates of evolutionary change.} (\textbf{A}): Rates of evolutionary change predicted by (from left to right) the breeder's equation in its multivariate form (MBE), the multivariate breeder's equation while constraining the genetic correlations to zero (MBE$_{\rho=0}$), and the univariate breeder's equation (UBE), followed by the phenotypic trend (PT), the trend in predicted breeding values (TPBV) and the genetic change estimated by the Price equation (GCPE). (\textbf{B}): Phenotypic, genetic and environmental selection differential for total selection (LRS), fertility selection in males (ARS$_{\male}$) and females (ARS$_{\female}$), viability selection in juveniles ($\phi_\mathrm{Juv}$) and in adults ($\phi_\mathrm{A}$). Both panels show posterior modes, with vertical lines indicating 95\%CI.}
+\caption{\textbf{Predicted and observed rates of evolutionary change.} (\textbf{A}): Rates of evolutionary change predicted by (from left to right) the breeder's equation in its multivariate form (MBE), the multivariate breeder's equation while constraining the genetic correlations to zero (MBE$_{\rho=0}$), and the univariate breeder's equation (UBE), followed by the phenotypic trend (PT), the trend in predicted breeding values (TPBV) and the genetic change estimated by the Price equation (GCPE). (\textbf{B}): Phenotypic, genetic and environmental selection differential for total selection (LRS), fertility selection in males (ARS$_{\male}$) and females (ARS$_{\female}$), viability selection in juveniles ($\phi_\mathrm{Juv}$) and in adults ($\phi_\mathrm{A}$). Both panels show posterior modes, with vertical lines indicating 95\%CI.}
 \label{fig:gch}
 \end{figure}
 
@@ -74,9 +74,10 @@ The (co)variance decompositions presented above have the advantage that they do 
 To obtain an estimate of viability selection that is unbiased by growth and non-random missing data due to mass-dependent mortality occurring after the first capture \parencite{Hadfield2008}, we used a Bayesian model to simultaneously infer birth dates and growth curves for all juveniles observed at least once, irrespective of when and how often they have been captured. Although we cannot account for viability selection acting before the first capture, this model enabled us to quantify viability selection on age-corrected juvenile mass\textemdash i.e. asymptotic or predicted adult mass\textemdash, and thereby compare all individuals at the same developmental stage, irrespective of their fate. 
 
 \begin{figure}[ht]
-\includegraphics[width=\textwidth]{FiguresStasis/Fig3}
-\textsf{\textbf{Figure 3 Schematic representation of why adaptive evolution goes opposite to apparent selection.} 
+\includegraphics[width=0.9\textwidth]{FiguresStasis/Fig3}
+\caption{\textbf{Figure 3 Schematic representation of why adaptive evolution goes opposite to apparent selection.} 
 (\textbf{A}) Both genetic variation (orange) and environmental variation (green) contribute to phenotypic variation in mass (purple) in an additive and equivalent way: large voles are the result of genes for being large and of a favourable environment. Therefore, mass isolines form an angle of $45^\circ$ with both axes. However, the effect the fitness effect of the environmental component of mass variation is not the same as the fitness effect of the genetic component of mass variation: Fitness increases (the redder the fitter) with increasing environmental effects on mass, but decreases with increasing genetic effects on mass, as illustrated by fitness isolines (white). This pattern leads to (\textbf{B}) a phenotypic selection for heavier voles, along with (\textbf{C}) a ``genetic selection'' for lighter genotypes, thus leading to (\textbf{D}) an evolution towards lighter voles. Panel (\textbf{A}) should not be mistaken for a genotype-by-environment interaction: genetic and environmental effects are additive both for mass and for fitness. The additive effects on mass do not map on the additive effects on fitness, however.}
+\label{fig:HypA}
 \end{figure}
 
 Inferred birth dates revealed that snow fallen during the preceding winter is a major ecological factor constraining the onset of reproduction in spring, with reproduction starting on average 40 days after the snow has melted (SE 4.5, $p=4\times 10^{-5}$) (Fig. 4A). As a consequence, juveniles only have a limited amount of time to grow and reach their adult mass before the return of winter. As growth rate and predicted adult mass are slightly negatively correlated (correlation -0.077; 95\%CI [-0.150; -0.002]), juveniles with a smaller adult mass on average require less time to complete development. If individuals that have not completed development before the arrival of winter pay a survival cost, for example due to trade-offs between growth and vital physiological processes \parencite{Stearns1986,Owens1999}, this generates selection for small size, especially for juveniles born toward the end of the season (Fig. 4D and Fig. S4). 
@@ -90,14 +91,15 @@ Our model estimates that in 2006 and 2007, when the snow-free period was long (F
 \includegraphics[width=0.5\textwidth]{FiguresStasis/Climatic_trend-1}
 \includegraphics[width=1\textwidth]{FiguresStasis/Fig3b}
 
-\textsf{\textbf{Figure 4 Snow-free season, timing of reproduction and selection for asymptotic mass.} (\textbf{A}): Births (black dots) only occur during the snow free season (snow depth in blue), (\textbf{B}): which in 2008-2014 has been shorter than in the preceding 8 year. Therefore, (\textbf{C}) despite a positive phenotypic selection on body mass (blue), asymptotic mass was selectively neutral in 2006-2007 (brown), and was negatively selected in 2008-2014 (red), as a result of (\textbf{D}) the selective disappearance of heavy individuals that were born too close to the onset of winter (blue vertical line) during 2008-2014.}
+\caption{\textbf{Figure 4 Snow-free season, timing of reproduction and selection for asymptotic mass.} (\textbf{A}): Births (black dots) only occur during the snow free season (snow depth in blue), (\textbf{B}): which in 2008-2014 has been shorter than in the preceding 8 year. Therefore, (\textbf{C}) despite a positive phenotypic selection on body mass (blue), asymptotic mass was selectively neutral in 2006-2007 (brown), and was negatively selected in 2008-2014 (red), as a result of (\textbf{D}) the selective disappearance of heavy individuals that were born too close to the onset of winter (blue vertical line) during 2008-2014.}
+\label{fig:ResA}
 \end{figure}
 
-\section*{Conclusion}
+\section{Conclusion}
 
 We have exploited a case of apparent evolutionary stasis to gain a deeper insight into the evolutionary dynamics of natural populations, and the selective pressures that shape them. Whereas estimates of selection and evolution based on phenotypic data alone can easily mislead our understanding of the selective and evolutionary processes in natural populations, a quantitative genetic framework applied to individual-based long-term data allows us to unravel evolutionary and environmental changes over time, and to obtain unbiased estimates of selection. This has resolved a case of apparent evolutionary stasis, and provided a comprehensive empirical demonstration of contemporary adaptive evolution in response to a climatic fluctuation. 
 
-\section*{Methods}
+\section{Methods}
 
 % Pay attention to past and present tense
 
@@ -203,5 +205,35 @@ The \verb+JAGS+ code for this model can be found at https://github.com/timotheen
 \section*{Acknowledgements}
 Thanks to Lauren Richardson, Tim Coulson, Alastair Wilson and two anonymous reviewers for constructive comments. Thanks to Wolf U. Blanckenhorn, Jarrod D. Hadfield, Lukas F. Keller, Marc K\'{e}ry, Hanna Kokko, Chelsea J. Little, Pirmin Nietlisbach, Barbara Tschirren and Ashley E. Latimer for comments and discussions on earlier versions of this work. Thanks also to the many field helpers. Weather data were provided by MeteoSwiss. The snow vole monitoring was authorised by the \textit{Amt f\"{u}r Lebensmittelsicherheit und Tiergesundheit}, Chur. Switzerland. T.B. is funded by a Swiss National Science Foundation project grant (\verb|31003A_141110|) awarded to EP. 
 
-
 \printbibliography[heading=subbibliography]
+
+\section{Supplementary information}
+
+\begin{figure}[ht]
+\includegraphics[width=\textwidth]{FiguresStasis/PopulationTrend-1}
+
+\label{fig:pop}
+\caption{\textbf{Figure S1 Temporal variation in population size and age-structure.} Number of individual adults and of juveniles captured in each year.}
+\end{figure}
+
+\begin{figure}[ht]
+\includegraphics[width=\textwidth]{FiguresStasis/Drift-1}
+
+\caption{\textbf{Figure S2 Estimation of the rate of genetic change and rate of change expected under drift.} The posterior distributions of the realized rate of genetic change, estimated by the Price equation, exceeds that expected under genetic drift $p=0.009$.}
+\label{fig:gch}
+\end{figure}
+
+
+\begin{figure}[ht]
+\includegraphics[width=\textwidth]{FiguresStasis/DriftComp-1}
+
+\caption{\textbf{Figure S3 Estimation of the time-trajectory of genetic change and evolutionary trajectories simulated with drift only.} Evolution of breeding values for mass are shown relative to the year 2006. The yellow lines show the mode and 95\% credibility interval of the rate of evolution estimated by the Price equation within an animal model. The gray lines show 1,000 simulations of genetic drift, based on the real population pedigree and on the posterior distribution of genetic variance for mass estimated by the animal model. The probability that the observed rate of evolution happened due to drift is only 0.009, less than could be understood from the overlap between the two distribution. It is, however important to notice that the two distributions are not independent, but that small (/large) values of change due to drift are simulated for small (/large, respectively) posterior samples of estimate rate of evolution.}
+\label{fig:gch2}
+\end{figure} 
+
+
+\begin{figure}[ht]
+\includegraphics[width=\textwidth]{FiguresStasis/schemeSelectionAM}
+
+\caption{\textbf{Figure S4 Conceptual illustration of the selection for asymptotic mass despite apparent selection for mass.} Black lines represent simulated individual growth trajectories, and they are prolonged by grey dashed lines after an individual death. The probability of surviving between the time of measurement and the next year increases with age. Because mass increases with age, there is apparent selection favouring heavier individuals. However, it is still possible for viability selection at a given developmental stage, such as asymptotic mass, to be negative. Because genetic variation is related to asymtotic mass, but not to age, the expected genetic change will be toward lower masses.}
+\end{figure}
