@@ -1,13 +1,11 @@
-\graphicspath{{./Appendices/}}
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{The application of the `Geber' method}
 \label{app:gpe2}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-In this section, we provide more information on the applied genotype-phenotype-environment equation \citep{Ellner2011,Hairston2005}, this is the variant of the `Geber' method that \citet{Ellner2011} developed and forms the basis of our analysis. First, we describe the method in more detail. This framework was applied to each simulated dataset.
+In this section, we provide more information on the applied genotype-phenotype-environment equation \parencite{Ellner2011,Hairston2005}, this is the variant of the `Geber' method that \cite{Ellner2011} developed and forms the basis of our analysis. First, we describe the method in more detail. This framework was applied to each simulated dataset.
 
 \subsection{The method} \label{app:gpe2:eq}
-In our analysis, we have followed the example described in \citet{Ellner2011} on great tits to quantify the contribution of the three processes in influencing average body size $\overline z$ in the population. This version depends on two steps. 
+In our analysis, we have followed the example described in \cite{Ellner2011} on great tits to quantify the contribution of the three processes in influencing average body size $\overline z$ in the population. This version depends on two steps. 
 
 First, we fitted a linear model to estimate the effects of average breeding value ($\overline a$), average plasticity at birth ($\overline p$) and average consumed food ($\overline k$) on the average trait value ($\overline z$). 
 
@@ -16,14 +14,8 @@ We then used separate regressions of each of the three factors on time to predic
 \subsection{Using genotypic values from the simulation}\label{app:elln:bvs}
 When genotypic values from the simulations were used instead of breeding value estimates by the AM, we obtain the result shown in Figure \ref{fig:gpeGV}. We see that now the bias in the evolutionary components has disappeared and that the plasticity component is in line with the expectation as outlined in the main text (i.e. small but negative, due to a slight decrease in average maternal body size weighted by litter size over time.).
 \begin{figure}[b]
-\includegraphics[width=0.65\textwidth]{GPE_res_bvs}
-\caption{Results of the GM when based on the actual (simulated) genotypic values instead of on the estimated breeding values.}
+\centering
+\includegraphics[width=0.65\textwidth]{Appendices/FigS4}
+\caption{\footnotesize Results of the GM when based on the actual (simulated) genotypic values instead of on the estimated breeding values.}
 \label{fig:gpeGV}
 \end{figure}
-
-% For the four scenarios:
-%         [,1]     [,2]
-%[1,] 15.28600 14.77459
-%[2,] 16.52209 15.54996
-%[3,] 15.05882 14.51764
-%[4,] 16.45706 16.01203

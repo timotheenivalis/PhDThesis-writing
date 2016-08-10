@@ -1,6 +1,6 @@
 
 \section{The application of the integral projection model} \label{app:ipm}
-In this section we will give details on the application of the integral projection model (IPM) framework in order to decompose changes in mean body size into underlying processes \citep{Coulson2010}, using the simulated data. First, we give details on the constructed IPM, and second, all functions which were fitted to the data are shown.
+In this section we will give details on the application of the integral projection model (IPM) framework in order to decompose changes in mean body size into underlying processes \parencite{Coulson2010}, using the simulated data. First, we give details on the constructed IPM, and second, all functions which were fitted to the data are shown.
 
 \subsection{Construction of the IPM}
 \label{app:ipm:construction}
@@ -13,7 +13,7 @@ n(t+1,\alpha',z') = \begin{cases}
 \end{cases}
 \end{equation}
 
-The IPM was discretized into a 3100$\times$3100 matrix (i.e. 100 size classes per age class) and we followed methods described by \citet{Coulson2010} to perform the decomposition. More details on the construction of IPMs can be found in e.g. \citet{Ellner2006} and \citet{merow2014}.
+The IPM was discretized into a 3100$\times$3100 matrix (i.e. 100 size classes per age class) and we followed methods described by \cite{Coulson2010} to perform the decomposition. More details on the construction of IPMs can be found in e.g. \cite{Ellner2006} and \cite{merow2014}.
 
 \subsection{Fitted vital rate functions}
 \label{app:ipm:vitalrates}
@@ -57,7 +57,7 @@ The standard deviation of the residual error term $\epsilon_{res5}$ was used to 
 D(z'|\alpha,z) = \mathcal{N}(z'|d(\alpha,z),\sigma_{res5})
 \end{equation}
 
-Using the fitted relations shown above, we parametrized an IPM for a median year. To do so, for each vital rate, we calculated the linear part of the model, using the estimated fixed effects. To avoid bias due to Jensen's inequality \citep[e.g.][]{Fox2002}, we sampled 10,000 times from a normal distribution with $\mu$=0 and a standard deviation equal to the estimated random effect ($\epsilon_{year}$), and added this to the fixed part. We subsequently applied the appropriate link function and averaged the outcomes. Vital rates were combined into the IPM according to Eq. E.1.
+Using the fitted relations shown above, we parametrized an IPM for a median year. To do so, for each vital rate, we calculated the linear part of the model, using the estimated fixed effects. To avoid bias due to Jensen's inequality \parencite[e.g.][]{Fox2002}, we sampled 10,000 times from a normal distribution with $\mu$=0 and a standard deviation equal to the estimated random effect ($\epsilon_{year}$), and added this to the fixed part. We subsequently applied the appropriate link function and averaged the outcomes. Vital rates were combined into the IPM according to Eq. E.1.
 
 
 

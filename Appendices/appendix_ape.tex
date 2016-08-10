@@ -3,7 +3,7 @@
 \newcommand{\ages}{\sum_{a=1}^{\Omega}}
 \section{The application of the age-structured Price equation}
 \label{app:ape}
-Here we give the full age-structured Price equation as proposed by \citet{Coulson2008}. We have applied this equation to decompose changes in $z$ in the simulated datasets into underlying processes including demography, selection and plasticity. Subsequently, we explain how the demographic terms and the inheritance terms are interpreted. Finally, we demonstrate how the choice of age classes influences the calculated contribution of selection and demography, illustrated by a simple example. Throughout this SI we use the convention that juveniles are born into age class $1$ and not in age class $0$. This was done to stay closer to the original notation.
+Here we give the full age-structured Price equation as proposed by \cite{Coulson2008}. We have applied this equation to decompose changes in $z$ in the simulated datasets into underlying processes including demography, selection and plasticity. Subsequently, we explain how the demographic terms and the inheritance terms are interpreted. Finally, we demonstrate how the choice of age classes influences the calculated contribution of selection and demography, illustrated by a simple example. Throughout this SI we use the convention that juveniles are born into age class $1$ and not in age class $0$. This was done to stay closer to the original notation.
 
 \subsection{Full equation}
 \label{app:ape:eq}
@@ -18,7 +18,8 @@ The age-structured Price equation can be written as:
 \overline{r}(\alpha,t)
 \overline{z}(\alpha,t)}_{\text{Demo R}} \\ & 
 + \sum_{\alpha=1}^{\Omega} \frac{c(\alpha,t)}{\overline{W}(t)} \left(\underbrace{cov(z,s)(\alpha,t)}_{\text{VS}}+
-\underbrace{cov(z,r)(\alpha,t)}_{\text{FS}}\right) + \sum_{\alpha=1}^\Omega \frac{c(\alpha,t)}{\overline{W}(t)} \left(\underbrace{\overline{r}(\alpha,t)\overline{d}(\alpha,t)}_{\text{OMD}} + \underbrace{\mathrm{cov}(d,r)(\alpha,t)}_{\text{ODC}} +
+\underbrace{cov(z,r)(\alpha,t)}_{\text{FS}}\right) \\ & 
+ + \sum_{\alpha=1}^\Omega \frac{c(\alpha,t)}{\overline{W}(t)} \left(\underbrace{\overline{r}(\alpha,t)\overline{d}(\alpha,t)}_{\text{OMD}} + \underbrace{\mathrm{cov}(d,r)(\alpha,t)}_{\text{ODC}} +
 \underbrace{\overline{sg}(\alpha,t)}_{\text{Growth}}\right) 
 \end{aligned}
 \label{keq1}
@@ -113,7 +114,11 @@ E(b(\alpha,t)) = \frac{1}{\Omega}\sum_{\alpha=1}^\omega b(\alpha,t)
 \end{equation}
 We know, however, that $E(\Delta f(\alpha,t)) = 0$; if the differential contribution of one age class increases, the differential contribution of another has to decrease, which becomes more clear when we write the terms out again:
 \begin{equation}
-E(\Delta f(\alpha,t)) = \frac{1}{\Omega} \sum_{\alpha=1}^\Omega (c(\alpha+1,t+1) + c_\alpha(1,t+1) - c(\alpha,t)) = \frac{1}{\Omega} \sum_{\alpha=1}^\Omega (c(\alpha+1,t+1) + c_\alpha(1,t+1)) - \sum_{\alpha=1}^\Omega c(\alpha,t) = 1 - 1 = 0
+\begin{aligned}
+E(\Delta f(\alpha,t)) &= \frac{1}{\Omega} \sum_{\alpha=1}^\Omega (c(\alpha+1,t+1) + c_\alpha(1,t+1) - c(\alpha,t)) \\ &
+= \frac{1}{\Omega} \sum_{\alpha=1}^\Omega (c(\alpha+1,t+1) + c_\alpha(1,t+1)) - \sum_{\alpha=1}^\Omega c(\alpha,t) \\ &
+= 1 - 1 = 0
+\end{aligned}
 \end{equation}
 Feeding this into equation \ref{galapagos}, we find:
 \begin{equation}
@@ -125,26 +130,6 @@ D_{tot} = \Omega \cdot \Cov(\Delta f(\alpha,t),\overline{z}(\alpha,t))(t)
 \end{equation}
 Here, the covariance is taken to be the covariance over age classes. This equation provides us with an interpretation of the demographic terms: they measure how much the average body size of a cohort covaries with its differential contribution to the next time step. This term is thus some sort of `between age class selection'. Furthermore, it scales linearly with the number of age classes.
 
-%\begin{equation}
-%D_{tot} = \sum_{a=1}^{\Omega} \left( c(a+1,t+1) + c_a(0,t+1) \right) \overline{z}(a,t) - \overline{z}(t)
-%\end{equation}
-%\begin{equation}
-%D_{tot} = \Omega E( \left( c(a+1,t+1) + c_a(0,t+1) \right) \overline{z}(a,t))(t) - E(c(a,t) z(a,t))(t)
-%\end{equation}
-%and since
-%\begin{equation}
-%E( c(a+1,t+1) + c_a(0,t+1))(t) = \frac{1}{\Omega}
-%\end{equation}
-%we find:
-%\begin{equation}
-%D_{tot} = \Omega E( \left( c(a+1,t+1) + c_a(0,t+1) \right) \overline{z}(a,t))(t) - \Omega E( c(a+1,t+1) + c_a(0,t+1))(t E(c(a,t) z(a,t))(t)
-%\end{equation}
-%And thus:
-%%%% THE FOLLOWING IS NOT TRUE!!
-%\begin{equation}
-%D_{tot} = \Omega \Cov( c(a+1,t+1) + c_a(0,t+1), \overline{z}(a) )
-%\end{equation}
-%Hence, $D_{tot}$ scales with the number of age classes and with covariance between the per age class fitness and the per age class body size.
 \subsection{Combining the OMD and ODC terms}\label{app:ape:inh}
 We have combined the OMD and the ODC term, into one 'inheritance' term. The sum of these terms can be written as:
 \begin{equation}
@@ -172,7 +157,7 @@ we find an expression for the total inheritance
 This term simply contains all effects due to offspring being smaller than their mothers and we therefore call it inheritance.
 
 \subsubsection{Interpretation of the inheritance term}\label{app:ape:inh:intp}
-As shown the inheritance term is the sum of the OMD and the ODC term. The OMD term consists of a complex interaction between demography (if the average number of offspring increases, the mean age of the population decreases), plasticity (changes in offspring body size due to maternal effects and other environmentally-induced effects) and inheritance (affecting the average mother offspring difference). The ODC term takes into account how litter size co-varies with the differences between the offspring's and the mother's body size. Such a covariance may arise either directly (newborns being smaller in bigger litters \citep[e.g.\;][]{speakman2008}), or indirectly (for example through body size, if heavier mothers have bigger litters, as well as a larger, more negative, mother offspring difference). Our simulation contains no explicit trade-off between litter size and mother offspring difference and the observed covariance is thus an indirect covariance. The inheritance term thus combines demography, maternal effects, ontogenetic development and stochasticity. Thereby they include different plastic processes, including both between-individual and within-individual plasticity.
+As shown the inheritance term is the sum of the OMD and the ODC term. The OMD term consists of a complex interaction between demography (if the average number of offspring increases, the mean age of the population decreases), plasticity (changes in offspring body size due to maternal effects and other environmentally-induced effects) and inheritance (affecting the average mother offspring difference). The ODC term takes into account how litter size co-varies with the differences between the offspring's and the mother's body size. Such a covariance may arise either directly (newborns being smaller in bigger litters \parencite[e.g.\;][]{speakman2008}), or indirectly (for example through body size, if heavier mothers have bigger litters, as well as a larger, more negative, mother offspring difference). Our simulation contains no explicit trade-off between litter size and mother offspring difference and the observed covariance is thus an indirect covariance. The inheritance term thus combines demography, maternal effects, ontogenetic development and stochasticity. Thereby they include different plastic processes, including both between-individual and within-individual plasticity.
 \subsection{Demographic contribution and choice of time steps}\label{app:ape:step}
 In this section, we demonstrate how the choice of age classes directly influences the estimated contribution of selection and of demography, illustrated by a simple example using made up data.
 
@@ -189,6 +174,7 @@ For this example, we only consider survival ($s_i$) and a trait value (say body 
 \end{equation}
 
 We consider a population of 10 individuals, each born in a different month. Measurement of the population takes place on the first day of each month. The column birth indicates in which month the individual was first seen, the column death indicates in which month the individual was found dead. \\
+\begin{center}
 \begin{tabular}{rrrr}
   \hline
 ID & birth & death & mass \\ 
@@ -204,14 +190,16 @@ ID & birth & death & mass \\
   9 &  11 &  23 & 7.90 \\ 
   10 &  12 &  25 & 7.50 \\ 
    \hline
-\end{tabular} \\
+\end{tabular}
+\end{center}
 The question we ask is how the average body mass changes from month $13$ (that is january of the second year) to month $25$ (january of the next year). In month $13$ all individuals except number $1$ and $2$ are still alive. In month $25$ only individual $8$ is still alive. Over this timespan we note that:
 \begin{equation}
 \Delta \overline{z} = \overline{z}(25) - \overline{z}(13) = 6.1 - 6.6625 = - 0.5625
 \end{equation}
 
 \subsubsection{Using a 1 year timestep}
-On a one year basis, all individuals are in the same age group. On this basis we call month $13$ the start of the year $t=1$ and month $25$ the start of the year $t=25$. Hence, we see that ($s$ indicating survival to the next year):\\
+On a one year basis, all individuals are in the same age group. On this basis we call month $13$ the start of the year $t=1$ and month $25$ the start of the year $t=25$. Hence, we see that ($s$ indicating survival to the next year):
+\begin{center}
 \begin{tabular}{rrrr}
   \hline
  & mass & age & s \\ 
@@ -225,7 +213,8 @@ On a one year basis, all individuals are in the same age group. On this basis we
   9 & 7.90 &   1 &   0 \\ 
   10 & 7.50 &   1 &   0 \\ 
    \hline
-\end{tabular} \\
+\end{tabular}
+\end{center}
 We set $\Omega=2$ (in years) since it is the maximum age that individuals can reach over this time step. Now the age structured price equation further reduces to:
 
 \begin{equation}
@@ -248,4 +237,4 @@ Plugging these numbers into the age structured price equation it is easy to see 
 We can thus conclude that the change in trait value between month $13$ and month $25$ is completely caused by survival selection.
 
 \subsubsection{Using a 1 month timestep}
-When using a timestep with a length of 1 month, every single individual will have a unique age. Because of this, $\Cov(z,s)(\alpha,t)$ has to be $0$ for every single age class. All the changes in $\Delta z$ just have to arise because of the other terms in the equation and we can thus - also - conclude that the change in body mass between month $13$ and month $25$ is entirely due to demography.
+When using a timestep with a length of 1 month, every single individual will have a unique age. Because of this, $\Cov(z,s)(\alpha,t)$ has to be $0$ for every single age class. All the changes in $\Delta z$ just have to arise because of the other terms in the equation and we can thus\textemdash also\textemdash conclude that the change in body mass between month $13$ and month $25$ is entirely due to demography.
