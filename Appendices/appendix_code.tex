@@ -1,0 +1,499 @@
+\label{app:code}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{R code to simulate the data}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{knitrout}\small
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{options}\hlstd{(}\hlkwc{width}\hlstd{=}\hlnum{100}\hlstd{)}
+
+\hlcom{########################%}
+\hlcom{####### Type of program}
+\hlcom{## Written in R}
+\hlcom{## Object Oriented}
+\hlcom{#######################%}
+
+\hlcom{#######################%}
+\hlcom{# Main object "Leprechaun": an individual of our species of interest, the Irish Leprechaun, small in size, but with great powers. To make it more French for Timothee, we assume that their favourite food is camembert. Leprechaun is not very choosy, and mates completely random.}
+\hlcom{##########################################%}
+
+\hlcom{# The object contains the following values}
+
+\hlcom{# Static [these numbers do not change after initialisation]}
+\hlcom{#  V ID (unique identifier number) [integer]}
+\hlcom{#  V pID (two numbers referring to the parents of the Leprechaun, if none: NA) [vector of two integers]}
+\hlcom{#  V Year of birth (timestep at which the individual was born)	[integer]}
+\hlcom{#  (- Genome (?) (two vectors of length N coding for both chromosomes of N loci in the genome.) [two vectors of N integers]}
+\hlcom{#  - Heritable phenotypic trait value of interest (z) (e.g. birth weight) (changes/constant through life depending on trait)}
+\hlcom{#  - (Possibly: breeding value A))}
+\hlcom{#  - Rather simulate physically independent loci, otherwise we need to simulate recombination on the chromosomes. Over short time periods, 100 recombinations fragments (ie independent loci) sounds realistic.}
+\hlcom{#  - Explicit coding of traits by many independent diploid loci. The simplest model: z = mean + sum_loci(a1_locus + a2_locus) + environment. One can add explicit dominance and epistasis, as well as interactions with environment. }
+\hlcom{#  - A possibility is to draw the a of the different alleles from a N(0,V). Each locus can have a different V, and thus a different importance. }
+\hlcom{#  - A large number of loci (>20) will give easily patterns expected from quantitative genetics. We can draw randomly the number of loci per trait. }
+\hlcom{#  - My main concern at the moment is the initialisation of the genetic diversity: it will be hard to avoid a fast decline of diversity at the beginning. One possibility is using neutral expectations of diversity (n-coalescent or Ewens distribution)}
+\hlcom{#  - We probably do not need mutations if we consider a population over no more than some tens of generations.}
+\hlcom{#  V Sex (M/F). Could be genetically determined by on locus, thus allowing random fluctuations of sex ratio and thus population structure.}
+
+\hlcom{# Dynamic [these numbers do change after initialisation]}
+\hlcom{#  V alive (boolean, true/false) [boolean]}
+\hlcom{#  V age (a) (timesteps since birth) [integer]}
+\hlcom{#  - stage (possibly instead of/in addition to age) (juvenile, adult, etc)}
+\hlcom{#  V size (x)}
+
+\hlcom{####################%}
+\hlcom{###### Relations that need to be defined between size (x), age (a), trait (z) and vital rates}
+\hlcom{# (- Possibly include population density d in functions)}
+\hlcom{# V Survival(a,x,z,d) (logistic function) }
+\hlcom{# - Growth (a,x,z,d) (either transition probability to next stage or absolute growth)}
+\hlcom{# - Reproduction probability: p_repr(a,x,z,d) (logistic function)}
+\hlcom{# - Number of offspring: n_offspring(a,x,z,d) (poisson distribution)}
+\hlcom{# - Offspring size x distribution: x_offspring(x_mother,z_mother,x_father,z_father) (not required if working with stages) (prability density function)}
+\hlcom{# - Offspring trait z distribution: z_offspring(x_mother,z_mother,x_father,z_father,A_mother,A_father) + rnorm(0,V_E) (prability density function)}
+\hlcom{# - For survival and reproduction, we can consider functions of the form W=exp(-((z-Optimum)^2)/(2*width)), that is, gaussian stabilizing selection. We could then let the Optimum shift. }
+
+\hlcom{####################}
+\hlcom{####### Environmental aspects}
+\hlcom{# - Extra variation in z due to unexplained factors (i.e. V_E)) (assumed constant over time and constant accross all individuals)}
+\hlcom{# - Changes in the environment affecting survival(x,z), growth(x,z), p_repr(x,z), n_offspring(x,z), f_offspring(x_mother,z_mother) (i.e. changing selection)}
+
+\hlcom{########################}
+\hlcom{########## 'Settings' of ancestral population from which simulation can start:}
+\hlcom{# - n start individuals}
+\hlcom{# - Start trait z distribution}
+\hlcom{# - Start age (/stage) distribution}
+\hlcom{# - Assign sexes to individuals}
+\hlcom{# - (Possibly: start a values)}
+
+\hlcom{########## Perform in each time step the following actions over all alive individuals at t=0}
+\hlcom{## In following order:}
+\hlcom{# survival(x,z)}
+\hlcom{### For those who survive:}
+\hlcom{# growth(x,z)}
+\hlcom{# p_repr(x,z)}
+\hlcom{### For those who reproduce:}
+\hlcom{# Random mating between all reproductive males and females}
+\hlcom{# n_offspring(x,z)}
+\hlcom{# x_offspring(x_mother,z_mother,x_father,z_father)}
+\hlcom{# z_offspring(x_mother,z_mother,x_father,z_father,a_mother,a_father,m) + rnorm(0,V_E)}
+\hlcom{# Random sex assigned to offspring}
+\hlcom{# Offspring added to population}
+\hlcom{### End of timestep}
+
+\hlcom{####################################################%}
+\hlcom{################ GLOBAL VARIABLES AND COUNTERS #####}
+\hlcom{####################################################%}
+
+\hlcom{################ Random seed #######################}
+\hlkwd{set.seed}\hlstd{(}\hlnum{12}\hlstd{)}
+
+\hlstd{FunctionGvalues}\hlkwb{<-}\hlkwa{function}\hlstd{(}\hlkwc{nbLoci}\hlstd{=}\hlnum{10}\hlstd{,}\hlkwc{nbAlleles}\hlstd{=}\hlnum{10}\hlstd{,}\hlkwc{dominance}\hlstd{=}\hlnum{0.5}\hlstd{,}\hlkwc{overdominance}\hlstd{=}\hlnum{0}\hlstd{,}\hlkwc{SDeffects}\hlstd{=}\hlnum{1}\hlstd{,}\hlkwc{SDalleles}\hlstd{=}\hlnum{1}\hlstd{)}
+\hlstd{\{}
+  \hlstd{gvalues}\hlkwb{<-}\hlkwd{array}\hlstd{(}\hlkwc{data}\hlstd{=}\hlnum{NA}\hlstd{,}\hlkwc{dim}\hlstd{=}\hlkwd{c}\hlstd{(nbAlleles,nbAlleles,nbLoci),}\hlkwc{dimnames}\hlstd{=}\hlkwd{list}\hlstd{(}\hlkwd{paste}\hlstd{(}\hlstr{"A"}\hlstd{,}\hlnum{1}\hlopt{:} \hlstd{nbAlleles,}\hlkwc{sep}\hlstd{=}\hlstr{""}\hlstd{),}\hlkwd{paste}\hlstd{(}\hlstr{"A"}\hlstd{,}\hlnum{1}\hlopt{:} \hlstd{nbAlleles,}\hlkwc{sep}\hlstd{=}\hlstr{""}\hlstd{),}\hlkwd{paste}\hlstd{(}\hlstr{"L"}\hlstd{,}\hlnum{1}\hlopt{:}\hlstd{nbLoci,}\hlkwc{sep}\hlstd{=}\hlstr{""}\hlstd{)))} \hlcom{# Initialising a matrix that will contain the genotypic effects on the/a trait}
+  \hlkwa{for}\hlstd{(L} \hlkwa{in} \hlnum{1}\hlopt{:}\hlstd{nbLoci)}
+  \hlstd{\{}
+    \hlcom{# Setting the effects for the homozygotes [all loci]}
+    \hlstd{effect}\hlkwb{<-}\hlkwd{abs}\hlstd{(}\hlkwd{rnorm}\hlstd{(}\hlkwc{n}\hlstd{=}\hlnum{1}\hlstd{,}\hlkwc{mean}\hlstd{=}\hlnum{0}\hlstd{,}\hlkwc{sd}\hlstd{=SDeffects))}\hlcom{# alter the locus importance in a realistic way (many small-effect loci, few major loci)}
+    \hlkwd{diag}\hlstd{(gvalues[,,L])}\hlkwb{<-}\hlnum{2}\hlopt{*}\hlkwd{rnorm}\hlstd{(}\hlkwc{n}\hlstd{=}\hlkwd{dim}\hlstd{(gvalues)[}\hlnum{1}\hlstd{],}\hlkwc{mean}\hlstd{=}\hlnum{0}\hlstd{,}\hlkwc{sd}\hlstd{=effect}\hlopt{*}\hlstd{SDalleles)}
+    \hlcom{# Setting the effects for the heterozygotes}
+    \hlkwa{for}\hlstd{(A} \hlkwa{in} \hlnum{1}\hlopt{:}\hlstd{(nbAlleles}\hlopt{-}\hlnum{1}\hlstd{))}\hlcom{# loop for off-diagonal = heterozygotes (additive and dominance effects)}
+    \hlstd{\{}
+      \hlkwa{for} \hlstd{(D} \hlkwa{in} \hlstd{(A}\hlopt{+}\hlnum{1}\hlstd{)}\hlopt{:}\hlstd{nbAlleles)}
+      \hlstd{\{}
+        \hlstd{d}\hlkwb{<-}\hlstd{dominance}\hlopt{*}\hlkwd{runif}\hlstd{(}\hlkwc{n}\hlstd{=}\hlnum{1}\hlstd{,}\hlkwc{min}\hlstd{=}\hlopt{-}\hlnum{0.5}\hlopt{-}\hlstd{overdominance,}\hlkwc{max}\hlstd{=}\hlnum{0.5}\hlopt{+}\hlstd{overdominance)}
+        \hlstd{gvalues[A,D,L]}\hlkwb{<-}\hlstd{(}\hlnum{0.5}\hlopt{-}\hlstd{d)}\hlopt{*}\hlstd{gvalues[A,A,L]}\hlopt{+}\hlstd{(}\hlnum{0.5}\hlopt{+}\hlstd{d)}\hlopt{*}\hlstd{gvalues[D,D,L]} \hlcom{# mean of additive effects + dominance, over diagonal}
+        \hlstd{gvalues[D,A,L]}\hlkwb{<-}\hlstd{(}\hlnum{0.5}\hlopt{-}\hlstd{d)}\hlopt{*}\hlstd{gvalues[A,A,L]}\hlopt{+}\hlstd{(}\hlnum{0.5}\hlopt{+}\hlstd{d)}\hlopt{*}\hlstd{gvalues[D,D,L]} \hlcom{# the same below diagonal    }
+      \hlstd{\}}
+    \hlstd{\}}
+  \hlstd{\}}
+  \hlkwd{return}\hlstd{(gvalues)}
+\hlstd{\}}
+
+\hlcom{# ############### Genetic determinisms  ##############%}
+\hlcom{# dominance<-1 # for additive effects only, must be 0}
+\hlcom{# overdominance<-0 # non-null values generate overdominance}
+\hlcom{# }
+\hlcom{# nbLoci<-10 #number of loci controling the trait phenotype}
+\hlcom{# nbAlleles<-10 #number of existing alleles per loci}
+\hlcom{# }
+\hlcom{# SDZ<-1#standard deviation of locus effect on size}
+\hlcom{# SDR<-2#standard deviation of locus effect on reproductive success}
+
+\hlcom{############### Genetic determinism Z}
+\hlstd{gvaluesZ}\hlkwb{<-}\hlkwd{FunctionGvalues}\hlstd{(}\hlkwc{nbLoci} \hlstd{=} \hlnum{10}\hlstd{,}\hlkwc{nbAlleles} \hlstd{=} \hlnum{10}\hlstd{,}\hlkwc{dominance} \hlstd{=} \hlnum{1}\hlstd{,}\hlkwc{overdominance} \hlstd{=} \hlnum{0}\hlstd{,}\hlkwc{SDeffects} \hlstd{=}\hlnum{1}\hlstd{,}\hlkwc{SDalleles} \hlstd{=} \hlnum{1}\hlstd{)}
+\hlcom{############### Genetic determinism H }
+\hlstd{gvaluesR}\hlkwb{<-}\hlkwd{FunctionGvalues}\hlstd{(}\hlkwc{nbLoci} \hlstd{=} \hlnum{10}\hlstd{,}\hlkwc{nbAlleles} \hlstd{=} \hlnum{10}\hlstd{,}\hlkwc{dominance} \hlstd{=} \hlnum{1}\hlstd{,}\hlkwc{overdominance} \hlstd{=} \hlnum{0}\hlstd{,}\hlkwc{SDeffects} \hlstd{=} \hlnum{1}\hlstd{,}\hlkwc{SDalleles} \hlstd{=} \hlnum{2}\hlstd{)}
+\hlkwd{mean}\hlstd{(}\hlkwd{apply}\hlstd{(gvaluesZ,}\hlnum{1}\hlstd{,}\hlkwc{FUN} \hlstd{=} \hlkwa{function}\hlstd{(}\hlkwc{x}\hlstd{)\{}\hlkwd{apply}\hlstd{(}\hlkwc{X} \hlstd{= x,}\hlkwc{MARGIN} \hlstd{=} \hlnum{1}\hlstd{,}\hlkwc{FUN} \hlstd{= var)\}))}
+\hlkwd{mean}\hlstd{(}\hlkwd{apply}\hlstd{(gvaluesR,}\hlnum{1}\hlstd{,}\hlkwc{FUN} \hlstd{=} \hlkwa{function}\hlstd{(}\hlkwc{x}\hlstd{)\{}\hlkwd{apply}\hlstd{(}\hlkwc{X} \hlstd{= x,}\hlkwc{MARGIN} \hlstd{=} \hlnum{1}\hlstd{,}\hlkwc{FUN} \hlstd{= var)\}))}
+\hlkwd{save}\hlstd{(}\hlkwc{gvaluesZ}\hlstd{=gvaluesZ,}\hlkwc{gvaluesR}\hlstd{=gvaluesR,}\hlkwc{file} \hlstd{=} \hlstr{"GeneticMatrices"}\hlstd{)}
+
+\hlcom{#################################################################################################################}
+\hlcom{################# Just to define parameters when playing with the elements of the main function #################}
+\hlcom{#################################################################################################################}
+\hlcom{# DIR= "Data/Simple"}
+\hlcom{# SurvivalSelection1=0.1#linear coefficient on a logit scale for Survival ~ ... + size +size^2}
+\hlcom{# SurvivalSelection2=0#quadratic coefficient on a logit scale for Survival ~ ... + size + size^2; negative value=balancing selection}
+\hlcom{# fertilitySelection1=0.1#linear coefficient on a log scale for reproduction ~ ... + size + size^2}
+\hlcom{# fertilitySelection2=0#quadratic coefficient on a log scale for reproduction ~ ... + size + size^2; negative value=balancing selection}
+\hlcom{# camembertSelection=0.1#increases the number of offspring, multiplied by Number Of Camemberts at the power 1/3 (because its a volume, uhuh)}
+\hlcom{# SurvivalPenaltyForRepro=0.2 #trade-off repro survival}
+\hlcom{# MeanCamembert=20000 # expected number of camemberts available per year}
+\hlcom{# SDCamembert=10 # standard deviation of the annual camembert availability per year}
+\hlcom{# CamembertTrend=-200 # change per year in expected number of camembert after the year 10}
+\hlcom{# MeanBirthSize=10 # hmmm... guess what, this is the mean size at birth}
+\hlcom{# PlasticityBirthSize=1 # }
+\hlcom{# MeanGrowth=1.245 # expected growth factor at birth (this decreases with age to converge to 1. Also, there is some variance around this expectation, that can make individuals shrink)}
+\hlcom{# SexualMaturity=1 # age a which reproduction becomes possible}
+\hlcom{# PlasticityReproduction=0 # plasticity in individual fixed quality for reproduction. At the moment there is none, the trait is alreay plastic enough and we are not really interested in it}
+\hlcom{# MaternalEffect=0.1 # proportion of the mother size inherited (plastically) to the offspring size}
+\hlcom{# MeanRepro=0.1 # mean annual reproductive success}
+\hlcom{# StudyLength=50 # total number of years in the study. The first years are likely weird as we start from a single juvenile cohort, the 10 first years could be discarded}
+\hlcom{# InitialPopSize=200 # guess}
+\hlcom{# sizeSurvivalInflection=0 # hmmm, no idea, I guess we will delete that}
+\hlcom{# CamembertthresholdGrowth=20 # minimum number of camemberts necessary for growth??? TO CLARIFY}
+\hlcom{# GeneticMatrices="GeneticMatrices" # file where genetic matrices are stored}
+
+\hlcom{#################################################################################}
+\hlcom{#################################################################################}
+
+\hlstd{LeprechaunSimul}\hlkwb{<-}\hlkwa{function}\hlstd{(}\hlkwc{DIR}\hlstd{=} \hlstr{"Data/Simple"}\hlstd{,}\hlkwc{SurvivalSelection1}\hlstd{=}\hlnum{0.1}\hlstd{,}\hlkwc{SurvivalSelection2}\hlstd{=}\hlnum{0}\hlstd{,}\hlkwc{fertilitySelection1}\hlstd{=}\hlnum{0.1}\hlstd{,}\hlkwc{fertilitySelection2}\hlstd{=}\hlnum{0}\hlstd{,}
+                          \hlkwc{camembertSelection}\hlstd{=}\hlnum{0.1}\hlstd{,}\hlkwc{SurvivalPenaltyForRepro}\hlstd{=}\hlnum{0.2}\hlstd{,}\hlkwc{MeanCamembert}\hlstd{=}\hlnum{20000}\hlstd{,}\hlkwc{SDCamembert}\hlstd{=}\hlnum{10}\hlstd{,}\hlkwc{CamembertTrend}\hlstd{=}\hlnum{200}\hlstd{,}
+                          \hlkwc{MeanBirthSize}\hlstd{=}\hlnum{10}\hlstd{,}\hlkwc{MeanGrowth}\hlstd{=}\hlnum{1.245}\hlstd{,}\hlkwc{SexualMaturity}\hlstd{=}\hlnum{1}\hlstd{,}
+                          \hlkwc{PlasticityBirthSize}\hlstd{=}\hlnum{1}\hlstd{,}\hlkwc{PlasticityReproduction}\hlstd{=}\hlnum{0}\hlstd{,}\hlkwc{MaternalEffect}\hlstd{=}\hlnum{0.1}\hlstd{,}\hlkwc{MeanRepro}\hlstd{=}\hlnum{0.1}\hlstd{,}
+                          \hlkwc{StudyLength}\hlstd{=}\hlnum{30}\hlstd{,}\hlkwc{InitialPopSize}\hlstd{=}\hlnum{200}\hlstd{,}\hlkwc{sizeSurvivalInflection}\hlstd{=}\hlnum{0}\hlstd{,}\hlkwc{CamembertthresholdGrowth}\hlstd{=}\hlnum{40}\hlstd{,}\hlkwc{GeneticMatrices}\hlstd{=}\hlstr{"GeneticMatrices"}\hlstd{)\{}
+  \hlkwd{load}\hlstd{(}\hlkwc{file} \hlstd{= GeneticMatrices)}
+  \hlstd{nbLociZ}\hlkwb{<-}\hlkwd{dim}\hlstd{(gvaluesZ)[}\hlnum{3}\hlstd{]}\hlcom{#number of loci targeting Z}
+  \hlstd{nbAllelesZ}\hlkwb{<-}\hlkwd{dim}\hlstd{(gvaluesZ)[}\hlnum{2}\hlstd{]}\hlcom{#number of existing alleles per locus targeting Z}
+  \hlstd{nbLociR}\hlkwb{<-}\hlkwd{dim}\hlstd{(gvaluesR)[}\hlnum{3}\hlstd{]}\hlcom{#number of loci targeting Reproduction (through unobserved traits)}
+  \hlstd{nbAllelesR}\hlkwb{<-}\hlkwd{dim}\hlstd{(gvaluesR)[}\hlnum{2}\hlstd{]}\hlcom{#number of existing alleles per locus targeting Reproduction}
+
+
+  \hlcom{#folder<-"Simple"}
+  \hlstd{converter}\hlkwb{<-}\hlkwd{paste}\hlstd{(DIR,}\hlstr{"/conv.csv"}\hlstd{,}\hlkwc{sep}\hlstd{=}\hlstr{""}\hlstd{)}
+  \hlcom{#dir.create(file.path("Data", folder))}
+  \hlkwd{cat}\hlstd{(}\hlstr{"filename\textbackslash{}tSS1\textbackslash{}tSS2\textbackslash{}tFS1\textbackslash{}tFS2\textbackslash{}tCAMSEL\textbackslash{}tSDCAM"}\hlstd{,}\hlkwc{file}\hlstd{=converter,}\hlkwc{append}\hlstd{=}\hlnum{FALSE}\hlstd{)}
+
+
+
+
+\hlstd{filename}\hlkwb{<-}\hlkwd{paste}\hlstd{(DIR,}\hlstr{"/pop_SS1_"}\hlstd{,SurvivalSelection1}\hlopt{*}\hlnum{10}\hlstd{,}\hlstr{"_SS2_"}\hlstd{,SurvivalSelection2}\hlopt{*}\hlnum{100}\hlstd{,}\hlstr{"_FS1_"}\hlstd{,fertilitySelection1}\hlopt{*}\hlnum{10}\hlstd{,}
+                \hlstr{"_FS2_"}\hlstd{,fertilitySelection2}\hlopt{*}\hlnum{100}\hlstd{,}\hlstr{"_CAMSEL_"}\hlstd{,camembertSelection}\hlopt{*}\hlnum{10}\hlstd{,}\hlstr{"_SDCAM_"}\hlstd{,SDCamembert,}\hlstr{".csv"}\hlstd{,}\hlkwc{sep}\hlstd{=}\hlstr{""}\hlstd{)}
+\hlkwd{cat}\hlstd{(}\hlstr{"\textbackslash{}n"}\hlstd{,filename,}\hlstr{"\textbackslash{}t"}\hlstd{,SurvivalSelection1,}\hlstr{"\textbackslash{}t"}\hlstd{,SurvivalSelection2,}\hlstr{"\textbackslash{}t"}\hlstd{,fertilitySelection1,}\hlstr{"\textbackslash{}t"}\hlstd{,fertilitySelection2,}\hlstr{"\textbackslash{}t"}\hlstd{,camembertSelection,}\hlstr{"\textbackslash{}t"}\hlstd{,SDCamembert,}\hlkwc{file}\hlstd{=converter,}\hlkwc{append}\hlstd{=}\hlnum{TRUE}\hlstd{)}
+
+
+
+\hlcom{################ Counter for the IDs ###############%}
+\hlstd{CID}\hlkwb{<-}\hlkwd{as.integer}\hlstd{(}\hlnum{1}\hlstd{)}
+\hlcom{################ Counter for the current year ######%}
+\hlstd{YR}\hlkwb{<-}\hlnum{0}
+\hlcom{################ Base population parameters ########}
+
+
+\hlcom{####################################################%}
+\hlcom{############### Definition of the class ############}
+\hlcom{####################################################%}
+
+\hlkwd{setClass}\hlstd{(}
+        \hlkwc{Class}\hlstd{=}\hlstr{"Leprechaun"}\hlstd{,}
+        \hlkwc{representation}\hlstd{=}\hlkwd{representation}\hlstd{(}
+                \hlkwc{ID} \hlstd{=} \hlstr{"integer"}\hlstd{,}
+                \hlkwc{pID} \hlstd{=} \hlstr{"integer"}\hlstd{,}
+                \hlkwc{age} \hlstd{=} \hlstr{"integer"}\hlstd{,}
+                \hlkwc{Birth} \hlstd{=} \hlstr{"integer"}\hlstd{,}
+                \hlkwc{alive} \hlstd{=} \hlstr{"logical"}\hlstd{,}
+                \hlkwc{size} \hlstd{=} \hlstr{"numeric"}\hlstd{,}
+    \hlkwc{FixRepro} \hlstd{=} \hlstr{"numeric"}\hlstd{,}
+    \hlkwc{camemberts} \hlstd{=} \hlstr{"integer"}\hlstd{,}
+                \hlkwc{sex} \hlstd{=} \hlstr{"character"}\hlstd{,}
+                \hlkwc{DNAZ} \hlstd{=} \hlstr{"matrix"}\hlstd{,}
+                \hlkwc{DNAR} \hlstd{=} \hlstr{"matrix"}\hlstd{,}
+    \hlkwc{bvs} \hlstd{=} \hlstr{"numeric"}\hlstd{,}
+    \hlkwc{bvr} \hlstd{=} \hlstr{"numeric"}\hlstd{,}
+    \hlkwc{ARS} \hlstd{=} \hlstr{"integer"}
+        \hlstd{)}
+\hlstd{)}
+
+\hlcom{############### Definition of the basic methods (for printing to the screen and initialisation)######}
+\hlcom{###############################################################################################%}
+\hlkwd{setMethod}\hlstd{(}\hlstr{"show"}\hlstd{,}\hlstr{"Leprechaun"}\hlstd{,}
+        \hlkwa{function}\hlstd{(}\hlkwc{object}\hlstd{)\{}
+                \hlkwd{cat}\hlstd{(object}\hlopt{@}\hlkwc{ID}\hlstd{,}\hlstr{"\textbackslash{}t"}\hlstd{,object}\hlopt{@}\hlkwc{size}\hlstd{,}\hlstr{"\textbackslash{}t"}\hlstd{,object}\hlopt{@}\hlkwc{camemberts}\hlstd{,}\hlstr{"\textbackslash{}t"}\hlstd{,object}\hlopt{@}\hlkwc{age}\hlstd{,}\hlstr{"\textbackslash{}t"}\hlstd{,object}\hlopt{@}\hlkwc{sex}\hlstd{,}\hlstr{"\textbackslash{}t("}\hlstd{,object}\hlopt{@}\hlkwc{pID}\hlstd{[}\hlnum{1}\hlstd{],}\hlstr{","}\hlstd{,object}\hlopt{@}\hlkwc{pID}\hlstd{[}\hlnum{2}\hlstd{],}\hlstr{")\textbackslash{}t"}\hlstd{,object}\hlopt{@}\hlkwc{Birth}\hlstd{,}\hlstr{"\textbackslash{}t"}\hlstd{,object}\hlopt{@}\hlkwc{alive}\hlstd{,}\hlstr{"\textbackslash{}n"}\hlstd{,}\hlkwc{sep}\hlstd{=}\hlstr{""}\hlstd{)}
+        \hlstd{\}}
+\hlstd{)}
+
+\hlkwd{setMethod}\hlstd{(}\hlstr{"initialize"}\hlstd{,}\hlstr{"Leprechaun"}\hlstd{,}\hlkwa{function}\hlstd{(}\hlkwc{.Object}\hlstd{,}\hlkwc{parent1}\hlstd{,}\hlkwc{parent2}\hlstd{)\{}\hlcom{#parent1 is the mother}
+  \hlstd{.Object}\hlopt{@}\hlkwc{DNAZ}\hlkwb{<-}\hlkwd{matrix}\hlstd{(}\hlnum{NA}\hlstd{,}\hlkwc{nrow}\hlstd{=}\hlnum{2}\hlstd{,}\hlkwc{ncol}\hlstd{=nbLociZ)}
+  \hlstd{.Object}\hlopt{@}\hlkwc{DNAR}\hlkwb{<-}\hlkwd{matrix}\hlstd{(}\hlnum{NA}\hlstd{,}\hlkwc{nrow}\hlstd{=}\hlnum{2}\hlstd{,}\hlkwc{ncol}\hlstd{=nbLociR)}
+        \hlkwa{if}\hlstd{(}\hlkwd{missing}\hlstd{(parent1))\{}
+                \hlstd{parent1}\hlkwb{<-}\hlnum{NA}
+                \hlstd{.Object}\hlopt{@}\hlkwc{DNAZ}\hlstd{[}\hlnum{1}\hlstd{,]}\hlkwb{<-}\hlkwd{floor}\hlstd{(}\hlkwd{runif}\hlstd{(nbLociZ,}\hlkwc{min}\hlstd{=}\hlnum{1}\hlstd{,}\hlkwc{max}\hlstd{=nbAllelesZ}\hlopt{+}\hlnum{1}\hlstd{))}
+                \hlstd{.Object}\hlopt{@}\hlkwc{DNAR}\hlstd{[}\hlnum{1}\hlstd{,]}\hlkwb{<-}\hlkwd{floor}\hlstd{(}\hlkwd{runif}\hlstd{(nbLociR,}\hlkwc{min}\hlstd{=}\hlnum{1}\hlstd{,}\hlkwc{max}\hlstd{=nbAllelesR}\hlopt{+}\hlnum{1}\hlstd{))}
+        \hlstd{\}}\hlkwa{else}\hlstd{\{}
+                        \hlcom{#weight1<-pop[[parent1]]@size}
+                        \hlstd{.Object}\hlopt{@}\hlkwc{DNAZ}\hlstd{[}\hlnum{1}\hlstd{,]}\hlkwb{<-}\hlstd{pop[[parent1]]}\hlopt{@}\hlkwc{DNAZ}\hlstd{[}\hlkwd{cbind}\hlstd{(}\hlkwd{floor}\hlstd{(}\hlkwd{runif}\hlstd{(}\hlkwc{n}\hlstd{=nbLociZ,} \hlkwc{min}\hlstd{=}\hlnum{1}\hlstd{,} \hlkwc{max}\hlstd{=}\hlnum{3}\hlstd{)),} \hlnum{1}\hlopt{:}\hlstd{nbAllelesZ)]}
+                        \hlstd{.Object}\hlopt{@}\hlkwc{DNAR}\hlstd{[}\hlnum{1}\hlstd{,]}\hlkwb{<-}\hlstd{pop[[parent1]]}\hlopt{@}\hlkwc{DNAR}\hlstd{[}\hlkwd{cbind}\hlstd{(}\hlkwd{floor}\hlstd{(}\hlkwd{runif}\hlstd{(}\hlkwc{n}\hlstd{=nbLociR,} \hlkwc{min}\hlstd{=}\hlnum{1}\hlstd{,} \hlkwc{max}\hlstd{=}\hlnum{3}\hlstd{)),} \hlnum{1}\hlopt{:}\hlstd{nbAllelesR)]}
+        \hlstd{\}}
+        \hlkwa{if}\hlstd{(}\hlkwd{missing}\hlstd{(parent2))\{}
+                \hlstd{parent2}\hlkwb{<-}\hlnum{NA}
+                \hlstd{.Object}\hlopt{@}\hlkwc{DNAZ}\hlstd{[}\hlnum{2}\hlstd{,]}\hlkwb{<-}\hlkwd{floor}\hlstd{(}\hlkwd{runif}\hlstd{(}\hlkwc{n} \hlstd{= nbLociZ,} \hlkwc{min}\hlstd{=}\hlnum{1}\hlstd{,} \hlkwc{max}\hlstd{=nbAllelesZ}\hlopt{+}\hlnum{1}\hlstd{))}
+                \hlstd{.Object}\hlopt{@}\hlkwc{DNAR}\hlstd{[}\hlnum{2}\hlstd{,]}\hlkwb{<-}\hlkwd{floor}\hlstd{(}\hlkwd{runif}\hlstd{(}\hlkwc{n} \hlstd{= nbLociR,} \hlkwc{min}\hlstd{=}\hlnum{1}\hlstd{,} \hlkwc{max}\hlstd{=nbAllelesR}\hlopt{+}\hlnum{1}\hlstd{))}
+        \hlstd{\}}\hlkwa{else}\hlstd{\{}
+          \hlstd{.Object}\hlopt{@}\hlkwc{DNAZ}\hlstd{[}\hlnum{2}\hlstd{,]}\hlkwb{<-}\hlstd{pop[[parent2]]}\hlopt{@}\hlkwc{DNAZ}\hlstd{[}\hlkwd{cbind}\hlstd{(}\hlkwd{floor}\hlstd{(}\hlkwd{runif}\hlstd{(}\hlkwc{n}\hlstd{=nbAllelesZ,} \hlkwc{min}\hlstd{=}\hlnum{1}\hlstd{,} \hlkwc{max}\hlstd{=}\hlnum{3}\hlstd{)),} \hlnum{1}\hlopt{:}\hlstd{nbAllelesZ)]}
+          \hlstd{.Object}\hlopt{@}\hlkwc{DNAR}\hlstd{[}\hlnum{2}\hlstd{,]}\hlkwb{<-}\hlstd{pop[[parent2]]}\hlopt{@}\hlkwc{DNAR}\hlstd{[}\hlkwd{cbind}\hlstd{(}\hlkwd{floor}\hlstd{(}\hlkwd{runif}\hlstd{(}\hlkwc{n}\hlstd{=nbAllelesR ,}\hlkwc{min}\hlstd{=}\hlnum{1}\hlstd{,} \hlkwc{max}\hlstd{=}\hlnum{3}\hlstd{)),} \hlnum{1}\hlopt{:}\hlstd{nbAllelesR)]}
+        \hlstd{\}}
+        \hlstd{.Object}\hlopt{@}\hlkwc{age}\hlkwb{<-}\hlkwd{as.integer}\hlstd{(}\hlnum{0}\hlstd{)}
+        \hlstd{.Object}\hlopt{@}\hlkwc{ID}\hlkwb{<-}\hlstd{CID}
+        \hlstd{.Object}\hlopt{@}\hlkwc{pID}\hlkwb{<-}\hlkwd{c}\hlstd{(}\hlkwd{as.integer}\hlstd{(parent1),}\hlkwd{as.integer}\hlstd{(parent2))}
+        \hlstd{.Object}\hlopt{@}\hlkwc{Birth}\hlkwb{<-}\hlkwd{as.integer}\hlstd{(YR)}
+        \hlstd{.Object}\hlopt{@}\hlkwc{alive}\hlkwb{<-}\hlnum{TRUE}
+  \hlstd{BreedingValueSize}\hlkwb{<-}\hlnum{0}
+  \hlkwa{for} \hlstd{(Locus} \hlkwa{in} \hlnum{1}\hlopt{:}\hlstd{nbLociZ)}\hlcom{#take the mean of genetic values}
+    \hlstd{\{}
+      \hlstd{BreedingValueSize}\hlkwb{<-}\hlstd{BreedingValueSize}\hlopt{+}\hlstd{(gvaluesZ[ .Object}\hlopt{@}\hlkwc{DNAZ}\hlstd{[}\hlnum{1}\hlstd{,Locus], .Object}\hlopt{@}\hlkwc{DNAZ}\hlstd{[}\hlnum{2}\hlstd{,Locus], Locus]}\hlopt{/}\hlstd{nbLociZ)}
+    \hlstd{\}}
+  \hlstd{.Object}\hlopt{@}\hlkwc{bvs}\hlkwb{<-}\hlstd{BreedingValueSize}
+        \hlstd{size}\hlkwb{<-}\hlstd{MeanBirthSize}\hlopt{+}\hlstd{BreedingValueSize}
+
+  \hlkwa{if}\hlstd{(}\hlopt{!}\hlkwd{is.na}\hlstd{(parent1))\{}
+  \hlstd{size}\hlkwb{<-}\hlstd{size}\hlopt{+}\hlstd{MaternalEffect}\hlopt{*}\hlstd{pop[[parent1]]}\hlopt{@}\hlkwc{size}
+  \hlstd{\}}
+  \hlstd{.Object}\hlopt{@}\hlkwc{size}\hlkwb{<-}\hlkwd{abs}\hlstd{(}\hlkwd{rnorm}\hlstd{(}\hlkwc{n}\hlstd{=}\hlnum{1}\hlstd{,}\hlkwc{mean}\hlstd{=size,}\hlkwc{sd}\hlstd{=PlasticityBirthSize))} \hlcom{# sd plasticity birth size}
+
+
+        \hlstd{BreedingValueReproduction}\hlkwb{<-}\hlnum{0}
+        \hlkwa{for} \hlstd{(Locus} \hlkwa{in} \hlnum{1}\hlopt{:}\hlstd{nbLociR)}\hlcom{#take the mean of genetic values}
+        \hlstd{\{}
+          \hlstd{BreedingValueReproduction}\hlkwb{<-}\hlstd{BreedingValueReproduction}\hlopt{+}\hlstd{(gvaluesR[ .Object}\hlopt{@}\hlkwc{DNAR}\hlstd{[}\hlnum{1}\hlstd{,Locus], .Object}\hlopt{@}\hlkwc{DNAR}\hlstd{[}\hlnum{2}\hlstd{,Locus], Locus]}\hlopt{/}\hlstd{nbLociR)}
+        \hlstd{\}}
+  \hlstd{.Object}\hlopt{@}\hlkwc{bvr}\hlkwb{<-}\hlstd{BreedingValueReproduction}
+  \hlstd{.Object}\hlopt{@}\hlkwc{FixRepro}\hlkwb{<-}\hlkwd{rnorm}\hlstd{(}\hlkwc{n}\hlstd{=}\hlnum{1}\hlstd{,}\hlkwc{mean}\hlstd{=.Object}\hlopt{@}\hlkwc{bvr}\hlstd{,}\hlkwc{sd}\hlstd{=PlasticityReproduction)} \hlcom{#plasticity reproductive quality}
+
+  \hlstd{.Object}\hlopt{@}\hlkwc{camemberts}\hlkwb{<-}\hlkwd{as.integer}\hlstd{(}\hlnum{0}\hlstd{)}
+
+  \hlstd{.Object}\hlopt{@}\hlkwc{ARS}\hlkwb{<-}\hlkwd{as.integer}\hlstd{(}\hlnum{0}\hlstd{)}\hlcom{#annual reproductive success}
+
+        \hlkwa{if}\hlstd{(}\hlkwd{runif}\hlstd{(}\hlnum{1}\hlstd{)}\hlopt{>}\hlnum{0.5}\hlstd{)\{.Object}\hlopt{@}\hlkwc{sex}\hlkwb{<-}\hlstr{'F'}\hlstd{\}}\hlkwa{else}\hlstd{\{.Object}\hlopt{@}\hlkwc{sex}\hlkwb{<-}\hlstr{'M'}\hlstd{\}}
+
+        \hlstd{CID}\hlkwb{<<-}\hlkwd{as.integer}\hlstd{(CID}\hlopt{+}\hlnum{1}\hlstd{)}
+
+        \hlkwd{return}\hlstd{(.Object)}
+\hlstd{\})}
+
+\hlcom{################### Definition of more biologically relevant methods (e.g. survival)######}
+\hlcom{####################################################################################%}
+
+\hlcom{##### Implementing the famous bathtub, ages 1 to 20#####}
+\hlstd{bathtub}\hlkwb{<-}\hlkwa{function}\hlstd{(}\hlkwc{age}\hlstd{,}\hlkwc{shift}\hlstd{=}\hlnum{6}\hlstd{,}\hlkwc{BaseMortality}\hlstd{=}\hlnum{0.1}\hlstd{)\{}
+  \hlstd{p}\hlkwb{<-}\hlstd{BaseMortality}\hlopt{*}\hlkwd{exp}\hlstd{(}\hlopt{-}\hlstd{(age}\hlopt{-}\hlstd{shift)}\hlopt{/}\hlnum{4}\hlstd{)}\hlopt{+}\hlstd{(}\hlopt{-}\hlnum{1}\hlopt{+}\hlkwd{exp}\hlstd{((age}\hlopt{-}\hlstd{shift)}\hlopt{*}\hlkwd{log}\hlstd{(}\hlnum{2}\hlstd{)}\hlopt{/}\hlstd{(}\hlnum{30}\hlopt{-}\hlstd{shift)))}
+  \hlstd{p[p}\hlopt{>}\hlnum{1}\hlstd{]}\hlkwb{<-}\hlnum{1}
+  \hlkwd{return}\hlstd{(p)}
+\hlstd{\}}
+\hlcom{#curve(expr =bathtub(x),0,20,add = F,ylim=c(0,1))}
+\hlcom{#prod((1-bathtub(0:15)))}
+\hlcom{#prod(sizeSurvival(0:10,size = 10,camemberts = 100,ARS =1))}
+\hlcom{# Incorporate the effect of size to the survival function}
+\hlstd{sizeSurvival}\hlkwb{<-}\hlkwa{function}\hlstd{(}\hlkwc{age}\hlstd{,}\hlkwc{size}\hlstd{,}\hlkwc{camemberts}\hlstd{,}\hlkwc{ARS}\hlstd{)\{}
+  \hlcom{#sizedeviation<-size-(MeanBirthSize*prod(Growth[1:(age+1)]))}
+  \hlstd{p}\hlkwb{<-}\hlkwd{bathtub}\hlstd{(age)}
+  \hlkwa{if}\hlstd{(p}\hlopt{<}\hlnum{1}\hlstd{)}\hlcom{#because size does not prevent animals of maximal age to die out}
+    \hlstd{\{}
+      \hlstd{plogit}\hlkwb{<-}\hlkwd{log}\hlstd{(p}\hlopt{/}\hlstd{(}\hlnum{1}\hlopt{-}\hlstd{p))}
+      \hlstd{Philogit}\hlkwb{<-}\hlstd{plogit}\hlopt{-}\hlstd{SurvivalSelection1}\hlopt{*}\hlstd{(size}\hlopt{-}\hlstd{sizeSurvivalInflection)}\hlopt{-}\hlstd{SurvivalSelection2}\hlopt{*}\hlstd{(size}\hlopt{-}\hlstd{sizeSurvivalInflection)}\hlopt{^}\hlnum{2}\hlopt{+}\hlstd{ARS}\hlopt{*}\hlstd{SurvivalPenaltyForRepro}
+      \hlstd{p}\hlkwb{<-}\hlkwd{exp}\hlstd{(Philogit)}\hlopt{/}\hlstd{(}\hlnum{1}\hlopt{+}\hlkwd{exp}\hlstd{(Philogit))}
+      \hlkwa{if}\hlstd{(camemberts}\hlopt{<}\hlnum{100}\hlstd{)}
+        \hlstd{\{}
+          \hlstd{p}\hlkwb{<-}\hlnum{1}\hlopt{-}\hlstd{(}\hlnum{1}\hlopt{-}\hlstd{p)}\hlopt{*}\hlstd{(camemberts}\hlopt{/}\hlnum{100}\hlstd{)}\hlopt{^}\hlstd{(}\hlnum{1}\hlopt{/}\hlnum{2}\hlstd{)}
+        \hlstd{\}}
+    \hlstd{\}}
+  \hlkwd{return}\hlstd{(}\hlnum{1}\hlopt{-}\hlstd{p)}
+\hlstd{\}}
+
+\hlcom{# Applying the bathtub in a surival function}
+\hlkwd{setGeneric}\hlstd{(}\hlstr{"Surv"}\hlstd{,}\hlkwa{function}\hlstd{(}\hlkwc{Object}\hlstd{)\{}\hlkwd{standardGeneric}\hlstd{(}\hlstr{"Surv"}\hlstd{)\})}
+
+\hlkwd{setMethod}\hlstd{(}\hlstr{"Surv"}\hlstd{,}\hlstr{"Leprechaun"}\hlstd{,}\hlkwa{function}\hlstd{(}\hlkwc{Object}\hlstd{)\{}
+
+        \hlkwa{if}\hlstd{(}\hlkwd{runif}\hlstd{(}\hlnum{1}\hlstd{)}\hlopt{>}\hlkwd{sizeSurvival}\hlstd{(Object}\hlopt{@}\hlkwc{age}\hlstd{,Object}\hlopt{@}\hlkwc{size}\hlstd{,Object}\hlopt{@}\hlkwc{camemberts}\hlstd{,Object}\hlopt{@}\hlkwc{ARS}\hlstd{))\{}
+                \hlstd{Object}\hlopt{@}\hlkwc{alive}\hlkwb{<-}\hlnum{FALSE}
+                \hlstd{DEAD}\hlkwb{<<-}\hlkwd{c}\hlstd{(DEAD,Object}\hlopt{@}\hlkwc{ID}\hlstd{)}
+        \hlstd{\}}
+
+        \hlkwd{return}\hlstd{(Object)}
+
+\hlstd{\})}
+
+\hlcom{# Simple function, simply adds 1 to the age}
+\hlkwd{setGeneric}\hlstd{(}\hlstr{"Age"}\hlstd{,}\hlkwa{function}\hlstd{(}\hlkwc{Object}\hlstd{)\{}\hlkwd{standardGeneric}\hlstd{(}\hlstr{"Age"}\hlstd{)\})}
+
+\hlkwd{setMethod}\hlstd{(}\hlstr{"Age"}\hlstd{,}\hlstr{"Leprechaun"}\hlstd{,}\hlkwa{function}\hlstd{(}\hlkwc{Object}\hlstd{)\{}
+        \hlstd{Object}\hlopt{@}\hlkwc{age}\hlkwb{<-}\hlkwd{as.integer}\hlstd{(Object}\hlopt{@}\hlkwc{age}\hlopt{+}\hlnum{1}\hlstd{)}
+        \hlkwd{return}\hlstd{(Object)}
+\hlstd{\})}
+
+\hlcom{# Growth // Sizes change, this fact is known by many - if not all}
+\hlkwd{setGeneric}\hlstd{(}\hlstr{"Grow"}\hlstd{,}\hlkwa{function}\hlstd{(}\hlkwc{Object}\hlstd{)\{}\hlkwd{standardGeneric}\hlstd{(}\hlstr{"Grow"}\hlstd{)\})}
+
+\hlkwd{setMethod}\hlstd{(}\hlstr{"Grow"}\hlstd{,}\hlstr{"Leprechaun"}\hlstd{,}\hlkwa{function}\hlstd{(}\hlkwc{Object}\hlstd{)\{}
+  \hlstd{MeanGrowthAge}\hlkwb{<-}\hlstd{(MeanGrowth}\hlopt{+}\hlstd{Object}\hlopt{@}\hlkwc{age}\hlopt{-}\hlnum{1}\hlstd{)}\hlopt{/}\hlstd{Object}\hlopt{@}\hlkwc{age} \hlcom{#maximal growth converge to 1 with increasing age}
+  \hlstd{SdGrowthAge}\hlkwb{<-}\hlstd{(MeanGrowthAge}\hlopt{-}\hlnum{1}\hlstd{)}\hlopt{/}\hlnum{2}
+
+  \hlstd{GrowthC}\hlkwb{<-} \hlnum{1}\hlopt{+} \hlstd{(MeanGrowthAge}\hlopt{-}\hlnum{1}\hlstd{)}\hlopt{*}\hlstd{(}\hlnum{2}\hlopt{/}\hlstd{(}\hlnum{1}\hlopt{+}\hlkwd{exp}\hlstd{(}\hlopt{-}\hlnum{0.1}\hlopt{*}\hlstd{(Object}\hlopt{@}\hlkwc{camemberts}\hlopt{-}\hlstd{CamembertthresholdGrowth)))}\hlopt{-}\hlnum{1}\hlstd{)}\hlcom{#gives the camemebert specific expected growth}
+
+        \hlstd{Object}\hlopt{@}\hlkwc{size}\hlkwb{<-}\hlstd{Object}\hlopt{@}\hlkwc{size}\hlopt{*}\hlkwd{rnorm}\hlstd{(}\hlnum{1}\hlstd{,}\hlkwc{mean}\hlstd{=GrowthC,}\hlkwc{sd} \hlstd{= SdGrowthAge)}\hlcom{# but the animal can always shrink}
+        \hlkwd{return}\hlstd{(Object)}
+\hlstd{\})}
+
+\hlcom{# Retrieving the ID of an individual}
+\hlkwd{setGeneric}\hlstd{(}\hlstr{"IDretrieve"}\hlstd{,}\hlkwa{function}\hlstd{(}\hlkwc{Object}\hlstd{)\{}\hlkwd{standardGeneric}\hlstd{(}\hlstr{"IDretrieve"}\hlstd{)\})}
+
+\hlkwd{setMethod}\hlstd{(}\hlstr{"IDretrieve"}\hlstd{,}\hlstr{"Leprechaun"}\hlstd{,}\hlkwa{function}\hlstd{(}\hlkwc{Object}\hlstd{)\{}
+  \hlkwd{return}\hlstd{(Object}\hlopt{@}\hlkwc{ID}\hlstd{)}
+\hlstd{\})}
+
+\hlcom{# Retrieving the size of an individual}
+\hlkwd{setGeneric}\hlstd{(}\hlstr{"Size"}\hlstd{,}\hlkwa{function}\hlstd{(}\hlkwc{Object}\hlstd{)\{}\hlkwd{standardGeneric}\hlstd{(}\hlstr{"Size"}\hlstd{)\})}
+
+\hlkwd{setMethod}\hlstd{(}\hlstr{"Size"}\hlstd{,}\hlstr{"Leprechaun"}\hlstd{,}\hlkwa{function}\hlstd{(}\hlkwc{Object}\hlstd{)\{}
+  \hlkwd{return}\hlstd{(Object}\hlopt{@}\hlkwc{size}\hlstd{)}
+\hlstd{\})}
+
+\hlcom{# Retrieving the reproductive quality of an individual}
+\hlkwd{setGeneric}\hlstd{(}\hlstr{"FixRepro"}\hlstd{,}\hlkwa{function}\hlstd{(}\hlkwc{Object}\hlstd{)\{}\hlkwd{standardGeneric}\hlstd{(}\hlstr{"FixRepro"}\hlstd{)\})}
+
+\hlkwd{setMethod}\hlstd{(}\hlstr{"FixRepro"}\hlstd{,}\hlstr{"Leprechaun"}\hlstd{,}\hlkwa{function}\hlstd{(}\hlkwc{Object}\hlstd{)\{}
+  \hlkwd{return}\hlstd{(Object}\hlopt{@}\hlkwc{FixRepro}\hlstd{)}
+\hlstd{\})}
+
+\hlcom{# Retrieving the sex of an individual}
+\hlkwd{setGeneric}\hlstd{(}\hlstr{"Sex"}\hlstd{,}\hlkwa{function}\hlstd{(}\hlkwc{Object}\hlstd{)\{}\hlkwd{standardGeneric}\hlstd{(}\hlstr{"Sex"}\hlstd{)\})}
+
+\hlkwd{setMethod}\hlstd{(}\hlstr{"Sex"}\hlstd{,}\hlstr{"Leprechaun"}\hlstd{,}\hlkwa{function}\hlstd{(}\hlkwc{Object}\hlstd{)\{}
+  \hlkwd{return}\hlstd{(Object}\hlopt{@}\hlkwc{sex}\hlstd{)}
+\hlstd{\})}
+
+\hlcom{# Calculating the number of offspring for a females}
+\hlkwd{setGeneric}\hlstd{(}\hlstr{"Num_off"}\hlstd{,}\hlkwa{function}\hlstd{(}\hlkwc{Object}\hlstd{)\{}\hlkwd{standardGeneric}\hlstd{(}\hlstr{"Num_off"}\hlstd{)\})}
+
+\hlkwd{setMethod}\hlstd{(}\hlstr{"Num_off"}\hlstd{,}\hlstr{"Leprechaun"}\hlstd{,}\hlkwa{function}\hlstd{(}\hlkwc{Object}\hlstd{)\{}
+  \hlstd{lambda}\hlkwb{<-}\hlkwd{exp}\hlstd{(}\hlkwd{log}\hlstd{(MeanRepro)}\hlopt{+}\hlstd{Object}\hlopt{@}\hlkwc{FixRepro}\hlopt{+}\hlstd{fertilitySelection1}\hlopt{*}\hlstd{(Object}\hlopt{@}\hlkwc{size}\hlopt{-}\hlstd{MeanBirthSize)}\hlopt{/}\hlnum{10}\hlopt{+}\hlstd{fertilitySelection2}\hlopt{*}\hlstd{((Object}\hlopt{@}\hlkwc{size}\hlopt{-}\hlstd{MeanBirthSize)}\hlopt{/}\hlnum{10}\hlstd{)}\hlopt{^}\hlnum{2}
+                \hlopt{+}\hlstd{camembertSelection}\hlopt{*}\hlstd{((Object}\hlopt{@}\hlkwc{camemberts}\hlstd{)}\hlopt{^}\hlstd{(}\hlnum{1}\hlopt{/}\hlnum{3}\hlstd{))}\hlopt{/}\hlnum{10}\hlstd{)}
+  \hlstd{repro}\hlkwb{<-}\hlkwd{rpois}\hlstd{(}\hlkwc{n}\hlstd{=}\hlnum{1}\hlstd{,}\hlkwc{lambda}\hlstd{=lambda)}\hlopt{+}\hlnum{1}
+
+  \hlstd{logitV}\hlkwb{<-}\hlstd{Object}\hlopt{@}\hlkwc{age}\hlopt{-}\hlstd{SexualMaturity}
+  \hlstd{p}\hlkwb{<-}\hlnum{1}\hlopt{/}\hlstd{(}\hlnum{1}\hlopt{+}\hlkwd{exp}\hlstd{(}\hlopt{-}\hlstd{logitV))}
+  \hlstd{Object}\hlopt{@}\hlkwc{ARS}\hlkwb{<-}\hlkwd{as.integer}\hlstd{(repro)}\hlopt{*}\hlkwd{rbinom}\hlstd{(}\hlnum{1}\hlstd{,}\hlkwc{size} \hlstd{=} \hlnum{1}\hlstd{,}\hlkwc{prob} \hlstd{= p)}\hlcom{#*disaster[YR]}
+        \hlkwd{return}\hlstd{(Object)}
+\hlstd{\})}
+
+
+\hlcom{# Function for camembert attributions }
+\hlkwd{setGeneric}\hlstd{(}\hlstr{"Food"}\hlstd{,}\hlkwa{function}\hlstd{(}\hlkwc{Object}\hlstd{,}\hlkwc{Camams}\hlstd{)\{}\hlkwd{standardGeneric}\hlstd{(}\hlstr{"Food"}\hlstd{)\})}
+
+\hlkwd{setMethod}\hlstd{(}\hlstr{"Food"}\hlstd{,}\hlstr{"Leprechaun"}\hlstd{,}\hlkwa{function}\hlstd{(}\hlkwc{Object}\hlstd{,}\hlkwc{Camams}\hlstd{)\{}
+  \hlstd{Object}\hlopt{@}\hlkwc{camemberts}\hlkwb{<-}\hlkwd{as.integer}\hlstd{(Camams)}
+  \hlkwd{return}\hlstd{(Object)}
+\hlstd{\})}
+
+\hlcom{############### Creating an initial population with 100 individuals#######}
+\hlstd{pop}\hlkwb{<-}\hlkwd{c}\hlstd{(}\hlkwd{new}\hlstd{(}\hlstr{"Leprechaun"}\hlstd{))}
+\hlkwa{for}\hlstd{(i} \hlkwa{in} \hlnum{2}\hlopt{:}\hlstd{InitialPopSize)\{}
+        \hlstd{pop}\hlkwb{<-}\hlkwd{c}\hlstd{(pop,}\hlkwd{new}\hlstd{(}\hlstr{"Leprechaun"}\hlstd{))}
+\hlstd{\}}
+\hlcom{############### Function for printing values########}
+\hlstd{print_info}\hlkwb{<-}\hlkwa{function}\hlstd{(}\hlkwc{YR}\hlstd{,}\hlkwc{ALIVE}\hlstd{,}\hlkwc{CID}\hlstd{,}\hlkwc{camembert}\hlstd{)\{}
+        \hlkwd{cat}\hlstd{(}\hlstr{"\textbackslash{}nAt the beginning of year:"}\hlstd{,YR,}\hlstr{"\textbackslash{}nThere are:"}\hlstd{,}\hlkwd{length}\hlstd{(ALIVE),}\hlstr{"Leprechauns\textbackslash{}n-----------------\textbackslash{}n"}\hlstd{)}
+        \hlkwd{cat}\hlstd{(}\hlstr{"ALIVE:"}\hlstd{,ALIVE,}\hlstr{"\textbackslash{}n"}\hlstd{)}
+        \hlkwd{cat}\hlstd{(}\hlstr{"Current ID:"}\hlstd{,CID,}\hlstr{"\textbackslash{}n"}\hlstd{)}
+        \hlkwd{cat}\hlstd{(}\hlstr{"\textbackslash{}n-----------------\textbackslash{}nThe camembert production is:"}\hlstd{,camembert,}\hlstr{"\textbackslash{}n"}\hlstd{)}
+        \hlkwd{return}\hlstd{()}
+\hlstd{\}}
+
+\hlcom{############### List of living individuals [their indices], this will save time later, because dead individuals are not looped over}
+\hlstd{ALIVE}\hlkwb{<-}\hlnum{1}\hlopt{:}\hlkwd{length}\hlstd{(pop)}
+
+\hlkwd{cat}\hlstd{(}\hlstr{"t\textbackslash{}tID\textbackslash{}tz\textbackslash{}tbvs\textbackslash{}tFixRepro\textbackslash{}tbvr\textbackslash{}tC\textbackslash{}ts\textbackslash{}tARS\textbackslash{}tage\textbackslash{}tp1\textbackslash{}tp2\textbackslash{}tphi"}\hlstd{,}\hlkwc{file}\hlstd{=filename,}\hlkwc{append}\hlstd{=}\hlnum{FALSE}\hlstd{)}
+
+\hlcom{#disaster<-as.integer(rep(c(1,1,1),times = 1+StudyLength/3))}
+
+
+\hlcom{############### The start of time}
+\hlkwa{for}\hlstd{(YR} \hlkwa{in} \hlnum{1}\hlopt{:}\hlstd{StudyLength)\{}
+
+  \hlstd{ExpectedCamembert}\hlkwb{<-}\hlkwd{ifelse}\hlstd{(}\hlkwc{test} \hlstd{= YR}\hlopt{>}\hlnum{10}\hlstd{,} \hlkwc{yes} \hlstd{= MeanCamembert}\hlopt{+}\hlstd{(YR}\hlopt{-}\hlnum{10}\hlstd{)}\hlopt{*}\hlstd{CamembertTrend,} \hlkwc{no} \hlstd{= MeanCamembert)}\hlcom{#after the year 10, availability decreases }
+  \hlstd{camembert}\hlkwb{<-}\hlkwd{abs}\hlstd{(}\hlkwd{round}\hlstd{(}\hlkwd{rnorm}\hlstd{(}\hlkwc{n}\hlstd{=}\hlnum{1}\hlstd{,}\hlkwc{mean}\hlstd{=ExpectedCamembert,}\hlkwc{sd}\hlstd{=ExpectedCamembert}\hlopt{/}\hlstd{SDCamembert),}\hlkwc{digits}\hlstd{=}\hlnum{0}\hlstd{))} \hlcom{# resources for year YR}
+
+  \hlcom{#print_info(YR,ALIVE,CID,camembert)}
+        \hlcom{#### Competition for resources}
+  \hlstd{HunterQualities} \hlkwb{<-} \hlkwd{runif}\hlstd{(}\hlkwc{n} \hlstd{=} \hlkwd{length}\hlstd{(ALIVE),}\hlkwc{min} \hlstd{=} \hlnum{0.5}\hlstd{,}\hlkwc{max} \hlstd{=} \hlnum{1}\hlstd{)}
+  \hlkwa{if}\hlstd{(}\hlkwd{length}\hlstd{(HunterQualities)}\hlopt{==}\hlnum{1}\hlstd{)\{HunterQualities}\hlkwb{=}\hlnum{1}\hlstd{\}}
+
+  \hlcom{#podium<-table(factor(sample(as.character(ALIVE),size=camembert,replace=T,prob=HunterQualities),levels=ALIVE))}
+  \hlcom{#camams<-as.numeric(podium[match(ALIVE,names(podium))])}
+  \hlstd{camams}\hlkwb{<-}\hlkwd{round}\hlstd{(camembert}\hlopt{*}\hlstd{HunterQualities}\hlopt{/}\hlkwd{sum}\hlstd{(HunterQualities),}\hlkwc{digits} \hlstd{=} \hlnum{0}\hlstd{)}
+  \hlcom{#pop[ALIVE]<-lapply(1:length(ALIVE), function(x) Food(pop[[ALIVE[x]]],camams[x]))}
+  \hlstd{pop[ALIVE]}\hlkwb{<-}\hlkwd{lapply}\hlstd{(}\hlnum{1}\hlopt{:}\hlkwd{length}\hlstd{(ALIVE),} \hlkwa{function}\hlstd{(}\hlkwc{x}\hlstd{)} \hlkwd{Food}\hlstd{(pop[[ALIVE[x]]],camams[x]))}
+
+  \hlcom{#### Survival}
+  \hlstd{DEAD}\hlkwb{<-}\hlkwd{c}\hlstd{()}
+        \hlstd{pop[ALIVE]}\hlkwb{<-}\hlkwd{lapply}\hlstd{(pop[ALIVE],Surv)}
+        \hlstd{ALIVE}\hlkwb{<-}\hlstd{ALIVE[}\hlopt{!}\hlstd{(ALIVE} \hlopt{%in%} \hlstd{DEAD)]}
+
+  \hlkwa{if}\hlstd{(}\hlkwd{length}\hlstd{(ALIVE)}\hlopt{==}\hlnum{0}\hlstd{)\{}
+    \hlkwa{for}\hlstd{(i} \hlkwa{in} \hlstd{DEAD)\{}
+      \hlkwd{cat}\hlstd{(}\hlstr{"\textbackslash{}n"}\hlstd{,YR,}\hlstr{"\textbackslash{}t"}\hlstd{,pop[[i]]}\hlopt{@}\hlkwc{ID}\hlstd{,}\hlstr{"\textbackslash{}t"}\hlstd{,pop[[i]]}\hlopt{@}\hlkwc{size}\hlstd{,}\hlstr{"\textbackslash{}t"}\hlstd{,pop[[i]]}\hlopt{@}\hlkwc{bvs}\hlstd{,}\hlstr{"\textbackslash{}t"}\hlstd{,pop[[i]]}\hlopt{@}\hlkwc{FixRepro}\hlstd{,}\hlstr{"\textbackslash{}t"}\hlstd{,pop[[i]]}\hlopt{@}\hlkwc{bvr}\hlstd{,}\hlstr{"\textbackslash{}t"}\hlstd{,pop[[i]]}\hlopt{@}\hlkwc{camemberts}\hlstd{,}\hlstr{"\textbackslash{}t"}\hlstd{,pop[[i]]}\hlopt{@}\hlkwc{sex}\hlstd{,}\hlstr{"\textbackslash{}t"}\hlstd{,pop[[i]]}\hlopt{@}\hlkwc{ARS}\hlstd{,}\hlstr{"\textbackslash{}t"}\hlstd{,pop[[i]]}\hlopt{@}\hlkwc{age}\hlstd{,}\hlstr{"\textbackslash{}t"}\hlstd{,pop[[i]]}\hlopt{@}\hlkwc{pID}\hlstd{[}\hlnum{1}\hlstd{],}\hlstr{"\textbackslash{}t"}\hlstd{,pop[[i]]}\hlopt{@}\hlkwc{pID}\hlstd{[}\hlnum{2}\hlstd{],}\hlstr{"\textbackslash{}t"}\hlstd{,}\hlnum{0}\hlstd{,}\hlkwc{file}\hlstd{=filename,}\hlkwc{append}\hlstd{=}\hlnum{TRUE}\hlstd{)}
+    \hlstd{\}}
+    \hlkwa{break}
+  \hlstd{\}}
+        \hlcom{#### Age+1 and growth}
+        \hlstd{pop[ALIVE]}\hlkwb{<-}\hlkwd{lapply}\hlstd{(pop[ALIVE],Age)}
+        \hlstd{pop[ALIVE]}\hlkwb{<-}\hlkwd{lapply}\hlstd{(pop[ALIVE],Grow)}
+
+        \hlcom{#### Reproduction  ### Not the easiest part (but necessary if we want to allow the population to grow)}
+
+        \hlcom{##########}
+        \hlcom{### Part dedicated to retrieving the indices of all living males and of all living females}
+        \hlcom{##########}
+        \hlstd{males}\hlkwb{<-}\hlkwd{lapply}\hlstd{(pop,Sex)}\hlopt{==}\hlstr{"M"} \hlcom{# Determine which individuals are males -- logicaly all other individuals should be females... However, this includes dead ones... Simply a list of T,T,F,F,T,F,F,....}
+        \hlstd{females}\hlkwb{<-}\hlkwd{which}\hlstd{(}\hlopt{!}\hlstd{males)} \hlcom{# Get the indices of the non-males (that is females..)}
+        \hlstd{males}\hlkwb{<-}\hlkwd{which}\hlstd{(males)}   \hlcom{# Get the indices of the males}
+        \hlstd{females}\hlkwb{<-}\hlkwd{intersect}\hlstd{(females,ALIVE)} \hlcom{# Retrieve the indices of the living(!) females}
+        \hlstd{males} \hlkwb{<-}\hlkwd{intersect}\hlstd{(males,ALIVE)} \hlcom{# Retrieve the indises of the living males}
+        \hlcom{#cat(females)}
+
+        \hlcom{##########}
+        \hlcom{# Part dedicated to breeding.. }
+        \hlcom{##########}
+
+        \hlcom{# We take a female based approach: we determine for each females }
+        \hlstd{from}\hlkwb{<-}\hlstd{CID}
+        \hlstd{pop[females]}\hlkwb{<-}\hlkwd{lapply}\hlstd{(pop[females],}\hlkwc{FUN} \hlstd{=Num_off)}
+        \hlkwa{for}\hlstd{(i} \hlkwa{in} \hlstd{females)\{}
+                \hlstd{Noffs}\hlkwb{<-}\hlstd{pop[[i]]}\hlopt{@}\hlkwc{ARS}
+                \hlkwa{if}\hlstd{(Noffs}\hlopt{>}\hlnum{0} \hlopt{&} \hlkwd{length}\hlstd{(males}\hlopt{>}\hlnum{0}\hlstd{))\{}
+                        \hlcom{#Determine the father}
+                        \hlstd{fat}\hlkwb{<-}\hlkwd{sample}\hlstd{(males,}\hlnum{1}\hlstd{)}
+                        \hlkwa{for}\hlstd{(j} \hlkwa{in} \hlnum{1}\hlopt{:}\hlstd{Noffs)\{}
+                                \hlcom{#cat(j,"\textbackslash{}n")}
+                                \hlcom{# Create the offspring}
+                                \hlstd{pop}\hlkwb{<-}\hlkwd{c}\hlstd{(pop,}\hlkwd{new}\hlstd{(}\hlstr{"Leprechaun"}\hlstd{,}\hlkwc{parent1}\hlstd{=i,}\hlkwc{parent2}\hlstd{=fat))}
+                        \hlstd{\}}
+                \hlstd{\}}
+        \hlstd{\}}
+
+        \hlkwa{if}\hlstd{(from}\hlopt{!=}\hlstd{CID)\{}
+        \hlstd{ALIVE}\hlkwb{<-}\hlkwd{c}\hlstd{(ALIVE,(from)}\hlopt{:}\hlstd{(CID}\hlopt{-}\hlnum{1}\hlstd{))}
+        \hlstd{\}}
+        \hlcom{### Everything should be written to a dataframe, to make sure we have all the values for ever and ever}
+  \hlkwa{for}\hlstd{(i} \hlkwa{in} \hlstd{ALIVE)\{}
+    \hlkwd{cat}\hlstd{(}\hlstr{"\textbackslash{}n"}\hlstd{,YR,}\hlstr{"\textbackslash{}t"}\hlstd{,pop[[i]]}\hlopt{@}\hlkwc{ID}\hlstd{,}\hlstr{"\textbackslash{}t"}\hlstd{,pop[[i]]}\hlopt{@}\hlkwc{size}\hlstd{,}\hlstr{"\textbackslash{}t"}\hlstd{,pop[[i]]}\hlopt{@}\hlkwc{bvs}\hlstd{,}\hlstr{"\textbackslash{}t"}\hlstd{,pop[[i]]}\hlopt{@}\hlkwc{FixRepro}\hlstd{,}\hlstr{"\textbackslash{}t"}\hlstd{,pop[[i]]}\hlopt{@}\hlkwc{bvr}\hlstd{,}\hlstr{"\textbackslash{}t"}\hlstd{,pop[[i]]}\hlopt{@}\hlkwc{camemberts}\hlstd{,}\hlstr{"\textbackslash{}t"}\hlstd{,pop[[i]]}\hlopt{@}\hlkwc{sex}\hlstd{,}\hlstr{"\textbackslash{}t"}\hlstd{,pop[[i]]}\hlopt{@}\hlkwc{ARS}\hlstd{,}\hlstr{"\textbackslash{}t"}\hlstd{,pop[[i]]}\hlopt{@}\hlkwc{age}\hlstd{,}\hlstr{"\textbackslash{}t"}\hlstd{,pop[[i]]}\hlopt{@}\hlkwc{pID}\hlstd{[}\hlnum{1}\hlstd{],}\hlstr{"\textbackslash{}t"}\hlstd{,pop[[i]]}\hlopt{@}\hlkwc{pID}\hlstd{[}\hlnum{2}\hlstd{],}\hlstr{"\textbackslash{}t"}\hlstd{,}\hlnum{1}\hlstd{,}\hlkwc{file}\hlstd{=filename,}\hlkwc{append}\hlstd{=}\hlnum{TRUE}\hlstd{)}
+  \hlstd{\}}
+  \hlkwa{for}\hlstd{(i} \hlkwa{in} \hlstd{DEAD)\{}
+    \hlkwd{cat}\hlstd{(}\hlstr{"\textbackslash{}n"}\hlstd{,YR,}\hlstr{"\textbackslash{}t"}\hlstd{,pop[[i]]}\hlopt{@}\hlkwc{ID}\hlstd{,}\hlstr{"\textbackslash{}t"}\hlstd{,pop[[i]]}\hlopt{@}\hlkwc{size}\hlstd{,}\hlstr{"\textbackslash{}t"}\hlstd{,pop[[i]]}\hlopt{@}\hlkwc{bvs}\hlstd{,}\hlstr{"\textbackslash{}t"}\hlstd{,pop[[i]]}\hlopt{@}\hlkwc{FixRepro}\hlstd{,}\hlstr{"\textbackslash{}t"}\hlstd{,pop[[i]]}\hlopt{@}\hlkwc{bvr}\hlstd{,}\hlstr{"\textbackslash{}t"}\hlstd{,pop[[i]]}\hlopt{@}\hlkwc{camemberts}\hlstd{,}\hlstr{"\textbackslash{}t"}\hlstd{,pop[[i]]}\hlopt{@}\hlkwc{sex}\hlstd{,}\hlstr{"\textbackslash{}t"}\hlstd{,pop[[i]]}\hlopt{@}\hlkwc{ARS}\hlstd{,}\hlstr{"\textbackslash{}t"}\hlstd{,pop[[i]]}\hlopt{@}\hlkwc{age}\hlstd{,}\hlstr{"\textbackslash{}t"}\hlstd{,pop[[i]]}\hlopt{@}\hlkwc{pID}\hlstd{[}\hlnum{1}\hlstd{],}\hlstr{"\textbackslash{}t"}\hlstd{,pop[[i]]}\hlopt{@}\hlkwc{pID}\hlstd{[}\hlnum{2}\hlstd{],}\hlstr{"\textbackslash{}t"}\hlstd{,}\hlnum{0}\hlstd{,}\hlkwc{file}\hlstd{=filename,}\hlkwc{append}\hlstd{=}\hlnum{TRUE}\hlstd{)}
+  \hlstd{\}}
+\hlstd{\}}
+ \hlkwd{return}\hlstd{(filename)}
+\hlstd{\}}\hlcom{#end of LeprechaunSimul}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+

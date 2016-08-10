@@ -1,0 +1,57 @@
+
+\section{Using IPMs to decompose trait dynamics} \label{app:ipm}
+In this section we will give details on the application of the integral projection model (IPM) framework in order to decompose changes in mean body size into underlying processes \citep{Coulson2010}, using the simulated data. First, we give details on the constructed IPM, and second, all functions which were fitted to the data are shown.
+
+\subsection{Construction of the IPM}
+\label{app:ipm:construction}
+An IPM was constructed to describe population dynamics in discrete time whereby body size $z$ was used as a continuous state variable. We built an age-structured IPM, considering only females. In total, the IPM consisted of four kernels, which were all made a function of age $\alpha$ and body size $z$: 1) A survival kernel $S(\alpha,z)$, describing yearly survival probabilities for individuals of size $z$ and age $\alpha$. 2) A growth kernel $G(z'|z,\alpha)$ describing probabilities for individuals of size $z$ and age $\alpha$ at time $t$, to obtain size $z'$ at time $t+1$. 3) A reproduction kernel $R(\alpha,z)$, describing yearly reproductive success for a female of size $z$, as the product of the reproduction probability function ($p_{repr}(\alpha,z)$) and the number of offspring produced function $f_{littersize}(\alpha,z)$. 4) An inheritance function $D(z'|z,\alpha)$, describing the probability of offspring having size $z'$ at time $t+1$, given that their mother has age $\alpha$ and size $z$ at time $t$. These four kernels together form the IPM:
+
+\begin{equation}
+n(t+1,z') = \sum_{\alpha=0}^{30} \int [S(\alpha,z) \cdot G(z'|z,\alpha) + R(\alpha,z) \cdot D(z'|z,\alpha)] n(\alpha,z) dz
+\end{equation}
+
+The IPM was discretized into at 3100$\times$3100 matrix (i.e. 100 size classes per age class) and we followed methods described by \citet{Coulson2010} to perform the decomposition. More details on the construction of IPMs can be found in e.g. \citet{Ellner2006} and \citet{merow2014}.
+
+\subsection{Fitted vital rate functions}
+\label{app:ipm:vitalrates}
+Vital rates were fitted using generalized linear mixed models, whereby year was included as random effect. For all vital rates, we tested different models including age and body size as fixed effects influencing the intercept, and an age*size interaction. For each vital rate, we applied model selection and used the model with the lowest AIC. Below, we show for each vital rate the most complex model, including the age*size interaction.
+
+Yearly survival probability was estimated using mixed logistic regression, on binomial data describing survival to $t+1$.
+\begin{equation}
+S(\alpha,z) = \frac{1} {1 + e^{- (\beta_0 + \beta_{1} \cdot z + \beta_{2} \cdot \alpha + \beta_3 \cdot \alpha \cdot z + \epsilon_{year1} +  \epsilon_{res1})}}
+\end{equation}
+
+Annual growth was estimated using linear mixed effects models. Here, $g(z,\alpha)$ is size at $t+1$.
+
+\begin{equation}
+g(z,\alpha) = \beta_{4} + \beta_{5} \cdot z + \beta_{6} \cdot \alpha + \beta_7 \cdot \alpha \cdot z + \epsilon_{year2} + \epsilon_{res2}
+\end{equation}
+
+The standard deviation of the residual error term $\epsilon_{res2}$ was used to obtain the growth kernel. Here we used $N$, the normal distribution density function $\mathcal{N}(x|\mu,\sigma)$, that returns the probability density at point $x$ of a normal distribution with mean $\mu$ and standard deviation $\sigma$:
+
+\begin{equation}
+G(z'|z,\alpha) = N(z'|g(z,\alpha),\sigma_{res2})
+\end{equation}
+
+The reproduction probability function was fitted using mixed effects logistic regression, on binomial data describing reproduction to $t+1$ (0 = not reproductive, 1 = reproductive).
+\begin{equation}
+p_{repr}(z,\alpha) = \frac{1} {1 + e^{-(\beta_8 + \beta_{9} \cdot z + \beta_{10} \cdot \alpha + \beta_{11} \cdot \alpha \cdot z + \epsilon_{year3} + \epsilon_{res3})}}
+\end{equation}
+
+Litter size was estimated using linear mixed models, with a log link function. Here, we included data on litter size for all reproductive females, and performed the regression on these numbers subtracted by one. In the IPM, $f_{litter size}(z,\alpha)$ was divided by two to include only female offspring.
+\begin{equation}
+f_{litter size}(z,\alpha) = e^{\beta_{12} + \beta_{13} \cdot z + \beta_{14} \cdot \alpha + \beta_{15} \cdot \alpha \cdot z + \epsilon_{year4} + \epsilon_{res4}}
+\end{equation}
+
+Finally, the inheritance function was fitted, relating offspring size to maternal size (at the moment they reproduce):
+\begin{equation}
+d(z,\alpha) = \beta_{16} + \beta_{17} \cdot z + \beta_{18} \cdot \alpha + \beta_{19} \cdot \alpha \cdot z + \epsilon_{year5} + \epsilon_{res5}
+\end{equation}
+
+The standard deviation of the residual error term $\epsilon_{res5}$ was used to obtain the offspring size distribution, where $N$ is again the normal distribution probability function:
+
+\begin{equation}
+D(z'|z,\alpha) = N(z'|d(z,\alpha),\sigma_{res5})
+\end{equation}
+
+Using the fitted relations shown above, we parametrized an IPM for a median year. To do so, for each vital rate, we calculated the linear part of the model, using the estimated fixed effects. To avoid bias due to Jensen's inequality \citep[e.g.][]{Fox2002}, we sampled 10,000 times from a normal distribution with $\mu$=0 and a standard deviation equal to the estimated random effect ($\epsilon_{year}$), and added this to the fixed part. We subsequently applied the appropriate link function on the averaged linear component. Vital rates were combined into the IPM according to Eq. E.1.

@@ -1,0 +1,236 @@
+\graphicspath{{./Appendices/}}
+\section{Investigation of Ellners 'Does Rapid Evolution Matter'}
+\label{app:gpe}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{On the derivation of the GPE-equation}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+As a starting point we take the equation that describes changes in population variables from \citet[equation 3]{Hairston2005}. In the case where we work with a single trait ($z$) and one environmental varaible ($k$), this equation reduces to:
+\begin{equation}
+\frac{d X}{d t} = \frac{\partial X}{\partial z}\frac{d\overline{z}}{dt} + \frac{\partial X}{\partial k}\frac{dk}{dt}. 
+\end{equation}
+in which $X$ is a population level trait such as population growth rate and $t$ is time. Each term explained in more detail:
+\begin{itemize}
+\item $\frac{dX}{dt}$ is the rate of change of the population trait of interest.
+\item $\frac{\partial X}{\partial z}$ is the partial effect of $z$ on $X$. \emph{"how many units does $X$ change when $z$ changes by 1 unit."}
+\item $\frac{dz}{dt}$ is the temporal change of $z$. \emph{"of how many units does $z$ change per unit of time."}
+\item thereby $\frac{\partial X}{\partial z}\frac{dz}{dt}$ is the change in $X$ due to the change in $z$. It can be called the "evolutionary" component of change in $X$ if one assume no phenotypic plasticity.
+\item $\frac{\partial X}{\partial k}$ is the partial effect of $k$ on $X$. \emph{"how many units does $X$ change when $k$ changes by 1 unit."}
+\item $\frac{dk}{dt}$ is the temporal change of $k$. \emph{"how many units does $k$ change per unit of time."}
+\item thereby $\frac{\partial X}{\partial k}\frac{dk}{dt}$ is the change in $X$ due to the change in $k$. It can be called the "ecological" component of change in $X$.
+\end{itemize}
+
+When writing that the phenotypic component is $\frac{\partial X}{\partial z}\frac{d\bar{z}}{dt}$, one uses the population mean assumption in order to extrapolate the partial derivative estimated within the population, at a given time, to the whole range of phenotypic values between the means of the population at different time. \todo{we should check this thoroughly}
+
+Again, it might be wrong, but a more exact formulation might be (here the population mean assumption is taken into account explicitly, this should be checked thoroughly too...)
+
+\begin{equation}\label{simHairston3_second}
+\frac{dX}{dt} = \frac{\partial X}{\partial z}\frac{d\bar{z}}{dt}+\frac{\partial X}{\partial k}\frac{d\bar{k}}{dt}
+\end{equation}
+
+\subsection{Distinguishing between evolution and plasticity}
+In order to further decompose the changes in $X$ due to trait change into changes due to evolutionary and due to plastic trait change, we introduce a constant $C$ and we write:
+\begin{eqnarray}
+\frac{d X}{d t} &=& \frac{\partial X}{\partial \overline{z}}\left(\frac{d\overline{z}}{dt}-C+C\right) + \frac{\partial X}{\partial k}\frac{dk}{dt}\\ &=& \frac{\partial X}{\partial \overline{z}}\left(\frac{d\overline{z}}{dt}-C\right)+\frac{\partial X}{\partial \overline{z}} C + \frac{\partial X}{\partial k}\frac{dk}{dt}. 
+\end{eqnarray}
+The meaning of this decomposition in three terms depends solely on the definition of $C$. For this reason, we choose $C$ to be the change in trait value due to 'changes in genotype specific means'. If we consider $N$ genotypes $i$, $C$ can be written as:
+\begin{equation}
+C = E[\Delta \overline{z}] = \sum_i p_i \frac{dz_i}{dt}
+\end{equation}
+That is: $C$ measures how much the mean trait value would change if the frequency ($p_i = \frac{n_i}{N}$) of all genotypes would remain constant. From this definition, we can now find an expression for the evolutionary term:
+\begin{eqnarray}
+\frac{d\overline{z}}{dt} - C &=& \frac{d\overline{z}}{dt} - \sum_i p_i \frac{dz_i}{dt}
+\end{eqnarray}
+Realise that $\overline{z}=\sum_i p_i z_i$ and use the chain rule to find:
+\begin{eqnarray}
+\frac{d\overline{z}}{dt} - C &=& \frac{d \left(\sum_i p_i z_i\right)}{dt} - \sum_i p_i \frac{dz_i}{dt} \\ &=& \sum_i p_i \frac{dz_i}{dt} + \sum_i z_i \frac{dp_i}{dt} - \sum_i p_i \frac{dz_i}{dt} \\ &=& \sum_i z_i \frac{dp_i}{dt}
+\end{eqnarray}
+Using basic algebra it can be shown that this last expression is equal to $Cov(m,z)$ where $m$ refers to the malthusian fitness \citep{Crow1970} and is given by: 
+\begin{equation}
+m_i = \frac{1}{n_i} \frac{dn_i}{dt}
+\end{equation}
+with $n_i$ the number of individuals in the population with genotype $i$.
+\todo{we should use the same notation for fitness accross frameworks, and not use omega for both maximum age and fitness :) }
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{On applying the framework}
+At $t$ we observe $X(z_t,k_t)$ and at $t+1$ we observe $X(z_{t+1},k_{t+1})$. \citet{Becks2012} predict what would be $X(z_t,k_{t+1})$, that is to say $X$ if $k$ would change with $z$ held constant, and $X(z_{t+1},k_{t})$, that is to say $X$ if $z$ would change with $k$ held constant. These predictions and observed $X$ are then used to estimate the components of the dynamics of $X$, from time $t$ to time $t+1$, as follows:
+\begin{equation}
+\frac{\partial X}{\partial z}\frac{dz}{dt}=((X(z_{t+1},k_{t})-X(z_{t},k_{t}))+(X(z_{t+1},k_{t+1})-X(z_{t},k_{t+1})))/2
+\end{equation}
+and 
+\begin{equation}
+\frac{\partial X}{\partial k}\frac{dk}{dt}=((X(z_{t},k_{t+1})-X(z_{t},k_{t}))+(X(z_{t+1},k_{t+1})-X(z_{t+1},k_{t})))/2
+\end{equation}
+this is equivalent to a two-way ANOVA explaining $X$ by the two times two crossed levels of $z$ and $k$. 
+Of course, the difficulty lies in the prediction of the $X(z_{t},k_{t+1})$ and the $X(z_{t+1},k_{t})$. They must be based on a good knowledge of the mechanism and on assumptions specific to the system. A possible approach to get them is to fit a linear model $X \sim 1 + z + k$, which gives $\frac{\partial X}{\partial z}$ and $\frac{\partial X}{\partial k}$. Which requires some kind of replication of the data, or an independent experiment. From that, one can predict values of the unobserved $X$s:
+\begin{equation}
+X(z_{t},k_{t+1})=\hat{\beta_1}+\hat{\beta_z}z_{t}+\hat{\beta_k}k_{t+1}
+\end{equation}
+\begin{equation}
+X(z_{t+1},k_{t})=\hat{\beta_1}+\hat{\beta_z}z_{t+1}+\hat{\beta_k}k_{t}
+\end{equation}
+
+
+Here $\beta_1$ is the intercept and $\hat{\beta}$ is the maximum-likelihood (or equivalently least-squares as we use a linear model) estimate of the parameter $\beta$. The ANOVA approach does not leave any residual degree of freedom, so there is no information about the accuracy of the estimates. However, the process is repeated numerous times (for each pair of successive time points), so the global relative importance of evolution and ecology is averaged over many points of unknown accuracy. This averaging does not inform us about the accuracy of a particular estimate as the component importances are unlikely to be stable. It only contains information about the realized overall relative importances.
+
+Let us see why this works, and why the ANOVA part is useless
+
+First, let us express the unobservable $X$ in a different way:
+\begin{equation} \label{eq:X1_2}
+X(z_{t+1},k_{t})=X(z_{t},k_{t})+\frac{\partial X}{\partial z} \Delta \bar{z}
+\end{equation}
+\begin{equation} \label{eq:X2_2}
+X(z_{t},k_{t+1})=X(z_{t},k_{t})+\frac{\partial X}{\partial k} \Delta \bar{k}
+\end{equation}
+
+Now we are going to do some rearrangement of the "evolutionary" component:
+\begin{equation}
+\mathrm{Evo}=\frac{1}{2}((X(z_{t+1},k_{t})-X(z_{t},k_{t}))+(X(z_{t+1},k_{t+1})-X(z_{t},k_{t+1})))
+\end{equation}
+
+Using \eqref{eq:X1_2} and \eqref{eq:X2_2}:
+
+\begin{equation}
+\mathrm{Evo}=\frac{1}{2}((X(z_{t},k{t})+\frac{\partial X}{\partial z} \Delta \bar{z}-X(z_{t},k_{t}))+(X(z_{t+1},k_{t+1})-X(z_{t},k{t})-\frac{\partial X}{\partial k} \Delta \bar{k}))
+\end{equation}
+\begin{equation}
+\mathrm{Evo}=\frac{1}{2}(\frac{\partial X}{\partial z} \Delta \bar{z}+X(z_{t+1},k_{t+1})-X(z_{t},k{t})-\frac{\partial X}{\partial k} \Delta \bar{k})
+\end{equation}
+\begin{equation}
+\mathrm{Evo}=\frac{1}{2}(\frac{\partial X}{\partial z} \Delta \bar{z}+X(z_{t},k{t})+\frac{\partial X}{\partial z} \Delta \bar{z} +  \frac{\partial X}{\partial k} \Delta \bar{k}-X(z_{t},k{t})-\frac{\partial X}{\partial k} \Delta \bar{k})
+\end{equation}
+
+\begin{equation}
+\mathrm{Evo}=\frac{1}{2}(\frac{\partial X}{\partial z} \Delta \bar{z}+\frac{\partial X}{\partial z} \Delta \bar{z})
+\end{equation}
+\begin{equation}
+\mathrm{Evo}=\frac{\partial X}{\partial z} \Delta \bar{z}
+\end{equation}
+
+Great! That is exactly what we wanted! The trouble is that we have already used $\frac{\partial X}{\partial z} \Delta \bar{z}$ to calculate $X(z_{t+1},k_{t})$ (see equantion \ref{eq:X1_2}), which was itself necessary to calculate Evo. The estimation procedure thus appears circular.
+
+Similarly, $Eco=\frac{\partial X}{\partial k} \Delta \bar{k}$, but we need $\frac{\partial X}{\partial z} \Delta \bar{z}$ to calculate $X(z_{t},k{t+1})$ to get Eco.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{On the rapid evolution of mixis in rotifers example}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+In this example the assumption is made that the trait of interest $z$ can be described in terms of a constant $a$ and the density of the population ($R$):
+\begin{equation}
+z=aR
+\end{equation}
+This trait value can be used to calculate the response variable $X$: the per-capita rate of amictic offspring production by amictic females. For this calculation we also need $F(C)$: the per-fapita fecundity of the mictic females as a function of the algal prey abundance ($C$). Using these functions the following relation is given in \citet{Ellner2011}:
+\begin{eqnarray}
+X &=& (1-z) F(C) \\
+  &=& (1-aR) F(C)
+\end{eqnarray}
+If we assume the genotype to be caused by $a$, we find a contribution of evolution to $X$ of:
+\begin{equation}
+\frac{\partial X}{\partial a}\frac{da}{dt} = - R F(C) \frac{da}{dt}
+\end{equation}
+Notice that the decomposition depends completely on the assumption that $a$ represents the genotype. The GPE-equation itself does not make any assumption as to which factors are genetic, it solely allows one to calculate how such an assumption propagates to the response variable level.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{On the rapid evolution of juvenile growth rates in Daphnia example}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Using resurrection ecology Daphnia were obtained from two separate time periods: before eutrophication and during. Subsequently both all obtained daphnia were grown under two different conditions: poor and good. The response variable of interest is the  adult body mass. The question is how this varies as a function of the juvenile growth rate. The juvenile growth rate is expected to be subject to both evolution and plasticity.
+\textit{this example is not very interesting, it is correct but is also relatively boring. I will therefore complete this section later}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{On the Fledging mass in great tits example}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+To calculate the ecological and evolutionary contribution on the changes in body mass of a population of great tits between 1965 and 2000, \citet{Ellner2011} revert to data collected by \citet{Garant2004}. In this appendix we will exactly go over this example once more to show our acclaimed understanding of the framework.
+
+The dataset contains 35 years of data($1965-2000$). To correct the fledging masses for the effects of laying date, clutch size and average egg weight of the clutch, a GLM was fitted with these effects as explanatory variables and the rest of the analysis was carried out on the residuals of this fit \citep{Garant2004} (This information seems to be omitted in \citet{Ellner2011}). Next using quantitative genetics breeding values are estimated for the fledging mass. This is where the actual decomposition takes place. Below both the average mass over time and the average breeding value for the mass over time are shown. Included in the graphs is a linear regression. This regression is used to estimate the breeding value of mass and the value of mass itself in 1965 and 2000, instead of using the pointwise estimates of these numbers.
+\begin{figure}[h!]
+\center
+\subfigure[]{
+\includegraphics[width=0.45\textwidth]{App_ellner_1.eps}
+\label{appEl_fig1:1}
+}
+\subfigure[]{
+\includegraphics[width=0.45\textwidth]{App_ellner_2.eps}
+\label{appEl_fig1:2}
+}
+\caption{Changes in \subref{appEl_fig1:1} breeding value for fledging mass and \subref{appEl_fig1:2} fledging mass itself over the course of the study.}
+\label{appEl_fig1}
+\end{figure}
+The linear regressions shown in figure \ref{appEl_fig1} relates the breeding value ($b$) for fledging mass and fledging mass itself ($m$) to time ($t$ in years since the birth of Christ). From this we can predict the values of these variables as a function of time:
+\begin{equation}
+\hat{m}(t)=0.21-0.0097(t-1965)
+\label{kappeq1}
+\end{equation}
+\begin{equation}
+\hat{b}(t)=0.026+0.0019(t-1965)
+\label{kappeq2}
+\end{equation}
+Discripancies between these values and the ones given in \citet{Ellner2011} are due to the fact that we manually read in the data from figure $1$ and $2$ in \citet{Garant2004}.
+
+The question that is to be answered in the end is how the changes in these values over time influenced the survival probabilities ($s$). In order to answer this question we fit a GLM of the following form to the data:
+\begin{equation}
+\text{logit}(s) \sim b + m + \epsilon
+\label{kappeq3}
+\end{equation}
+The values for $m$ and $b$ were obtained from figures $2$ and $3$ in \citet{Garant2004} and the values for $s$ come from table $2$ in that publication. This regression returned the following relation between the survival rate of a population, its average mass and its average breeding value for mass:
+\begin{equation}
+\hat{s}(t) = \frac{1}{1+e^{2.65-6.18b-0.70m}}
+\end{equation}
+Using equations \ref{kappeq1} and \ref{kappeq2}, we estimate the value of mass and breeding value in the years $1965$ and $2000$. From these values we are able to calculate $\hat{e}$ in both these years (using $\hat{e}=\hat{m}-\hat{b}$). Now we can estimate the mass of an individual with the genotype of year $1965$ and the environmental conditions of year $2000$ simply by adding up the breeding value of $1965$ to the value of $e$ in $2000$. These values together with equation \ref{kappeq3} allow us to estimate the survival rates in these (hypothetical) situations:
+% latex table generated in R 3.1.0 by xtable 1.7-3 package
+% Fri Sep  5 11:53:40 2014
+\begin{table}[ht]
+\centering
+\begin{tabular}{rrrrrr}
+  \hline
+Breeding value of year ($t_b$) & Value of $e$ from year ($t_e$)& $\hat{b}(t_b)$ & $\hat{e}(t_e)$ & $\hat{m}$ & $\hat{s}(\hat{b}(t_b),\hat{m}(t_b,t_e))$\\ 
+  \hline
+1965 & 1965 & 0.03 & 0.18 & 0.21 & 0.09 \\ 
+  2000 & 1965 & 0.09 & 0.18 & 0.27 & 0.13 \\ 
+  1965 & 2000 & 0.03 & -0.22 & -0.20 & 0.07 \\ 
+  2000 & 2000 & 0.09 & -0.22 & -0.13 & 0.10 \\ 
+   \hline
+\end{tabular}
+\end{table}
+Now using equation 12 from \citet{Ellner2011}, we estimate the contributions of ecology and evolution to the change in survival rate between $1965$ and $2000$:
+\begin{align}
+\text{Evolution:} & & \frac{1}{2} (0.13-0.09) + \frac{1}{2} (0.10-0.07) &\approx 0.040 \label{evopathav}\\
+\text{Ecology:} & & \frac{1}{2} (0.07-0.09) + \frac{1}{2} (0.10-0.13) &\approx -0.025 \label{ecopathav}
+\end{align}
+Shown here are rounded numbers. These numbers are in close agreement with the numbers in equation 17 in \citet{Ellner2011}.
+\subsubsection{Regressing survival on $e$ and $b$}
+When survival is regressed on $e$ and $b$ instead of on $b$ and $m$, exactly the same results are obtained.
+\subsubsection{Path dependence}
+Important to calculate the actual contributions of evolution and ecology to the change in the trait mean, is the specific path that was taken to go from one step to the other. Let us consider the survival function $\hat{s}(\hat{b}(t_b),\hat{e}(t_e))$. Hypothetically it is possible that first all ecological processes took place and only after that the environmental changes occured (of course the actual data proves this hypothesis wrong, but we shall continue to illustrate a point -- one that is definitely important if we would consider a one-year transition). That is:
+\begin{equation}
+\hat{s}(\hat{b}(1965),\hat{e}(1965)) \rightarrow \hat{s}(\hat{b}(1965),\hat{e}(2000)) \rightarrow \hat{s}(\hat{b}(2000),\hat{e}(2000))
+\end{equation}
+In this case we would consider the evolutionary and ecological contributions to be:
+\begin{align}
+\text{Evolution:} & & \hat{s}(\hat{b}(2000),\hat{e}(2000))-\hat{s}(\hat{b}(1965),\hat{e}(2000)) &= 0.035 \label{evopath1}\\ 
+\text{Ecology:} & & \hat{s}(\hat{b}(1965),\hat{e}(2000))-\hat{s}(\hat{b}(1965),\hat{e}(1965)) &= -0.020 \label{ecopath1}
+\end{align}
+Alternatively we could imagine the situation where first the breeding values change and only after that the environmentally induced :
+  \begin{equation}
+\hat{s}(\hat{b}(1965),\hat{e}(1965)) \rightarrow \hat{s}(\hat{b}(2000),\hat{e}(1965)) \rightarrow \hat{s}(\hat{b}(2000),\hat{e}(2000))
+\end{equation}
+Which would give contributions of: 
+  \begin{align}
+\text{Evolution:} & & \hat{s}(\hat{b}(2000),\hat{e}(1965))-\hat{s}(\hat{b}(1965),\hat{e}(1965)) &= 0.044\label{evopath2}\\
+\text{Ecology:} & & \hat{s}(\hat{b}(2000),\hat{e}(2000))-\hat{s}(\hat{b}(2000),\hat{e}(1965)) &= -0.029\label{ecopath2}
+\end{align}
+Note how the contributions that we calculated in equation \ref{evopathav} and \ref{ecopathav} are the averages of equation \ref{evopath1} and \ref{evopath2} and of equation \ref{ecopath1} and \ref{ecopath2} respectively. This shows that this method simply relies on the average of two extreme paths. The real values could however be any other path, depending on which path was taken to go from one value to the other. In the next subsection we will explore what happens to the result when we add more information on the precise path.
+
+We conclude this subsection by mathematically showing why this happens to be the case. The reason is that the derivative of $\hat{s}$ with respect to $b$ depends on $e$. As the starting point we take the general function:
+\begin{equation}
+\hat{s} = \frac{1}{1+e^{\alpha+\beta b +\gamma e}} = (1+e^{\alpha+\beta b +\gamma e})^{-1}
+\end{equation}
+From this it follows straightforwardly that:
+\begin{equation}
+\frac{\partial \hat{s}}{\partial b} = - \beta e^{\alpha+\beta b +\gamma e}(1+e^{\alpha+\beta b +\gamma e})^{-2} = - \frac{\beta e^{\alpha+\beta b +\gamma e}}{(1+e^{\alpha+\beta b +\gamma e})^{2}}
+\end{equation}
+From this we see that the effect of a change in $b$ depends on the value of $e$.\todo{I could show this more formally by showing $\frac{\partial \hat{s}}{\partial b \partial e}\neq 0$ -- but not sure if it would add anything.}
+\subsubsection{Following the path (or: choice of timestep)}
+So far we have only compared the endpoint ($t=2000$) with the starting point ($t=1965$). We could however also calculate contribution to changes in survival on a yearly basis and add these contributions up to get an idea of the total contributions to the change in survival. Although we introduce more error by using the highly variable values of $b$ and $e$ directly, we might gain some accuracy by taking into account a more precise version of the path of the change (in terms of $b$ and $e$). In this case we calculate the per step contributions by averaging between the evolution first and the ecology first scenarios. Mathematically speaking the calculation is:
+\begin{align}
+\text{Evolution:} & & \sum_{t=1965}^{1999} \frac{1}{2}(\hat{s}(b(t+1),e(t+1))-\hat{s}(b(t),e(t+1))) + \frac{1}{2}(\hat{s}(b(t+1),e(t))-\hat{s}(b(t),e(t))) \\
+\text{Ecology:} & & \sum_{t=1965}^{1999} \frac{1}{2}(\hat{s}(b(t+1),e(t+1))-\hat{s}(b(t+1),e(t))) + \frac{1}{2}(\hat{s}(b(t),e(t+1))-\hat{s}(b(t),e(t))) 
+\end{align}

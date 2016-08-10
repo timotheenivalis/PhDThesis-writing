@@ -1,0 +1,13 @@
+\section{Survival selection rewritten}
+\label{app:rebke}
+In this section, the similarities between the survival term as used by the APE, and the approach outlined by \citet{Rebke2010} is shown.
+
+One of the main terms in the APE is the survival selection, which is the covariance between trait value ($z$) and survival ($s$). Here, survival is a binary variable with a value of either $0$ (death) or $1$ (survival). This covariance can be re-written as follows:
+\begin{equation}
+\Cov (Z,S) = \overline{ZS} - \overline{Z} \; \overline{S} =  \frac{\sum_{i=1}^N z_i s_i}{N} - \frac{\sum_{i=1}^N z_i \sum_{j=1}^N s_j}{N^2}
+\end{equation}
+We note that $\sum_{j=1}^N s_j$ is equal to the number of survivors ($N_{surv}$). Hence we can write:
+\begin{equation}
+\Cov (Z,S) = \frac{\sum_{i=1}^N z_i s_i}{N} - \frac{N_{surv} \sum_{i=1}^N z_i}{N^2} = \frac{N_{surv}}{N} \left( \frac{\sum_{i=1}^N z_i s_i}{N_{surv}} - \frac{\sum_{i=1}^N z_i}{N} \right)
+\end{equation}
+Here the first term between parenthesis equals the average trait value of the survivals (the sum adds up all the trait values of those that survive, for other individuals $s_i=0$ and divides it by the total number of survivors). The term that is substracted from this term is simply the average trait value for all individuals. Apart from a factor ($\frac{N_{surv}}{N}$ that weighs the size of the effect by the number of survivors, the covariance between survival and trait value is thus the difference in trait value between those that survive the time step and those that don't. The latter was used directly by \citet{Rebke2010}.

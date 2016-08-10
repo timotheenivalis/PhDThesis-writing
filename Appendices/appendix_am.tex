@@ -1,0 +1,97 @@
+\section{The application of the animal model}
+\label{app:am}
+In this appendix we give details on the application of the animal model to the simulated data and provide all estimated coefficients. We have used two different approaches to decompose changes in $\overline z$ into underlying processes: 1) a univariate animal model, using the temporal trend in BLUPs (best linear unbiased predictors) and 2) a bivariate animal model with both size and lifetime reproductive output as response variables, estimating the contribution of selection per generation.
+
+\subsection{Animal model using the BLUPs approach}
+Following \cite{Hadfield2010}, we estimated the temporal change in the mean components of variation (breeding values, maternal effects, individual repeatability and within individual residual variation) by regressing their estimates on time, within a Bayesian framework. 
+To this end we fitted a univariate animal model on the vector of size observations, $\boldsymbol{z}$, as:
+
+\begin{equation}
+\boldsymbol{z}=\boldsymbol{X_z}\boldsymbol{b_z}+\boldsymbol{D_1a}+\boldsymbol{D_2m}+\boldsymbol{D_3p}+\boldsymbol{D_4y}+\boldsymbol{Ir} \text{ .}\\
+\end{equation}
+
+\noindent Here $\boldsymbol{X_z}$, $\boldsymbol{D_1}$, $\boldsymbol{D_2}$, $\boldsymbol{D_3}$, $\boldsymbol{D_4}$ and $\boldsymbol{I}$ are design matrices, $\boldsymbol{b_z}$ is a matrix of fixed effects, $\boldsymbol{a}$, $\boldsymbol{m}$, $\boldsymbol{p}$ and $\boldsymbol{y}$ random effects accounting for the variance associated with breeding value, mothers, permanent environment and years respectively, and $\boldsymbol{r}$ represents residuals. The fixed part of the model included an intercept and the effect of age (up to second order). In addition to a random additive genetic effect, the model thus included three additional random effects: the identity of individual (accounting for any permanent environment effects), the identity of the mother and the year of measurement \citep{Kruuk2004}.
+
+From this model, the posterior distribution of each Best Linear Unbiased Predictors (BLUPs), that is the value of each level of the random effect, of the random effect $\boldsymbol{a}$, $\boldsymbol{m}$, $\boldsymbol{p}$ and $\boldsymbol{r}$ were extracted. 
+Each posterior sample, $j$, of the BLUPs was regressed on time. For instance, for breeding values:
+\begin{equation}
+a_{i,j} = \mu_{a,j} + \bar{t_i} \beta_{a,j} + \epsilon_{i,j} \text{ ,}
+\end{equation}
+where $a_{i,j}$ is the posterior sample $j$ of the breeding value of the individual $i$, $\mu_{a,j}$ is the intercept for the $j$th regression, $\bar{t_i}$ is the mean time of presence of the individual $i$,  $\beta_{a,j}$ is the slope of the $j$th regression and  $\epsilon_{i,j}$ is the error. 
+Combining all the slope estimates, $\beta_{a,j}$, and multiplying it by the length of the period considered, 39 time steps, we thus obtained the posterior distribution of the change in the random effect \citep{Hadfield2010}.
+
+\begin{table}[H]
+\caption{Estimated changes in BLUPs.}
+\label{table:UnivariateAM}
+\begin{tabular}{c c c c c}
+\hline
+				&	Breeding values & Permanent environment & Maternal effects & Residual \\
+                \hline
+Posterior mode 	& 0.389     &    0.0879 & 0.005 &     -1.190\\
+95\%CI 			& [0.122;0.664]			&[-0.0387;0.206]		& [-0.0433;0.066]	& [-1.388;-0.848]\\
+\hline
+\end{tabular}
+\end{table}
+
+\subsection{Bivariate animal model}
+Following \cite{Morrissey2012}, we fitted the bivariate animal model as:
+
+\begin{equation}
+\begin{pmatrix}
+\boldsymbol{z}\\
+\boldsymbol{\omega}\\
+\end{pmatrix}
+=\begin{pmatrix}
+\boldsymbol{X_z}	& 0\\
+0	&	\boldsymbol{X_{\omega}}\\
+\end{pmatrix}
+\begin{pmatrix}
+\boldsymbol{b_z}\\
+\boldsymbol{b_{\omega}}\\
+\end{pmatrix}+\boldsymbol{D_1a}+\boldsymbol{D_2m}+\boldsymbol{D_3p}+\boldsymbol{D_4y}+\boldsymbol{Ir} \text{ .}\\
+\end{equation}
+
+\noindent Here $\boldsymbol{X_z}$, $\boldsymbol{X_{\omega}}$, $\boldsymbol{D_1}$, $\boldsymbol{D_2}$, $\boldsymbol{D_3}$, $\boldsymbol{D_4}$ and $\boldsymbol{I}$ are design matrices, $\boldsymbol{b_z}$ and $\boldsymbol{b_{\omega}}$ are matrices of fixed effects, $\boldsymbol{a}$, $\boldsymbol{m}$, $\boldsymbol{p}$ and $\boldsymbol{y}$ random effects accounting for the variance associated with breeding value, mothers, permanent environment and years respectively, and $\boldsymbol{r}$ represents residuals. The fixed part of the model included an intercept for both traits, and the effect of age (up to the second order) on $z$. In addition to a random additive genetic effect, the model thus included three additional random effects: the identity of individual (accounting for any permanent environment effects), the identity of the mother and the year of measurement \citep{Kruuk2004}. The breeding values were assumed to follow a multivariate normal distribution ($MVN()$):
+
+\begin{equation}
+\boldsymbol{a}=
+\begin{pmatrix}
+\boldsymbol{a_{z}}\\
+\boldsymbol{a_{\omega}}
+\end{pmatrix}
+\sim MVN\left(\boldsymbol{0},
+\begin{pmatrix}
+\boldsymbol{A}\sigma_{A}^2(z) & \boldsymbol{A}\Cov_{A}(z,\omega)\\
+\boldsymbol{A}\Cov_{A}(z,\omega)& \boldsymbol{A}\sigma_{A}^2(\omega)\\
+\end{pmatrix}\right)
+\end{equation}
+where $\begin{pmatrix}
+\sigma_{A}^2(z) & \Cov_{A}(z,\omega)\\
+\Cov_{A}(z,\omega)& \sigma_{A}^2(\omega)\\
+\end{pmatrix}$ is the additive genetic variance covariance matrix and $\boldsymbol{A}$ is the relatedness matrix between all individuals. 
+
+\subsection{Estimates of the bivariate animal model}
+In table \ref{table:BivariateAM} all estimated (co)variances based on the bivariate animal model can be found.
+
+\begin{table}[H] 
+\centering
+\caption{Estimated variances and covariances for the bivariate animal model.}
+\label{table:BivariateAM}
+\begin{tabular}{c c c}
+\hline
+ & Posterior mode & 95\%CI\\
+ \hline
+ $\sigma_{A}^2(z)$ & 0.853 & [0.642 ; 1.042]\\
+$\Cov_{A}(z,\omega)$ & 0.019 & [-0.003 ; 0.045] \\
+$\sigma_{A}^2(\omega)$ & 0.001 & [$6\times 10^{-9}$ ; 0.003]\\
+$\sigma_{PE}^2(z)$ & 2.156 & [1.962 ; 2.342]\\
+$\Cov_{PE}(z,\omega)$ & 0.077 &  [0.0318 ; 0.121]\\
+$\sigma_{PE}^2(\omega)$ & 0.573 & [0.546 ; 0.601]\\
+$\sigma_{M}^2(z)$ & 0.0266 & [$10^{-8}$ ; 0.094] \\
+$\sigma_{Y}^2(z)$ & 0.229 & [0.117 ; 0.361] \\
+$\sigma_{R}^2(z)$ & 1.595 & 0.051\\
+$\Cov_{R}(z,\omega)$ & 1.250 & [1.205 ; 1.286]\\
+$\sigma_{R}^2(\omega)$ & 0.060 &  [0.058 ; 0.062]\\
+\hline
+\end{tabular}
+\end{table}

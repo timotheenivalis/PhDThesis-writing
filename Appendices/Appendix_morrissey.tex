@@ -1,0 +1,255 @@
+\section{The two fundamental equations predicting evolution, 
+and conditions for their equivalence}
+\label{app:mor}
+The predicted evolutionary change in the focal trait after one generation, $\Delta \bar{Z}$, can be obtained from the two main models of quantitative genetics, Breeder's equation and Robertson-Price's equation. 
+
+\subsection{The two equations in a nutshell}
+\paragraph{Univariate Breeder's equation}
+
+The predicted change in mean trait value $Z$, $\bar{Z}$, within a generation, is given by:
+
+\begin{align}
+\Delta \bar{Z} & = h^2 s \\ \label{UVBE} & = \frac{\sigma_{a(Z)}^2}{\sigma_{p(Z)}^2}\sigma_{p(Z,\omega)} %\notag
+\end{align}
+
+whereby $h^2$ is the narrow sense heritability, and $s$ the selection differential, being the phenotypic covariance between our trait of interest, $Z$, and fitness $\omega$. $\sigma_{p(Z,\omega)}$. Assuming non-overlapping generations, stable population size and stable selective conditions, $\omega$ can be accurately measured by lifetime reproductive success. If some of these conditions are not fulfilled, it might get a bit more difficult to find the right measure of fitness, but often lifetime reproductive success makes a good job anyways and alternative proxies are highly correlated \citep{Brommer2004}.
+
+
+\paragraph{Genetic Price's equation}
+It is actually more exact to talk about ``Robertson-Price'' identity or ``secondary theorem of selection'' here, as this equation is a version of the Price equation without transmission bias. It contains only a term describing evolution \textit{sensu stricto}, that is additive genetic change, from one generation to the next one, and completely overlooks any phenotypic change not due to evolution (demographic composition or plastic change). 
+
+\begin{equation}
+\Delta \bar{Z}= \sigma_{a(Z,\omega)}
+\label{STS}
+\end{equation}
+
+Importantly, despite its name, this equation is not really about selection, but about evolution, whether its driver is selection on the focal trait, selection on a genetically correlated trait, or random genetic drift.
+
+
+In brief, equation \ref{STS} provides a direct prediction of evolutionary change but does not inform on its causes.
+
+$\sigma_{a(Z,\omega)}$ cannot be estimated directy since breeding values, $a_i$, are not observable but have to be predicted from the comparison of phenotypic data with relatedness data (either obtained from a pedigree, often using an ``animal model'', or from genotyping in so-called ``pedigree-free animal models''). 
+
+\subsection{Conditions for the equivalence of the two equations}
+
+Equation \ref{UVBE} and equation \ref{STS} are equivalent when
+
+\begin{quote}
+``the causative effect of the trait on fitness is solely responsible for the covariance between the trait and fitness".\end{quote} 
+
+This is not the case when a third variable affects $Z$ and $\omega$ at the same time. Such a third variable is either a trait under selection and genetically correlated to the focal trait, or an environmental variable that affects $Z$ and $\omega$ plastically. For instance when territories vary in food availability, animals that inhabit good territories will be well fed and therefore heavy and also reproduce well, altough there might be no causal link between size and reproductive success. The correlation can be seen as arising from the environmental covariance between $Z$ and $\omega$, or alternatively from the covariance between the trait "food intake", which is under direct selection and influences $Z$.  
+
+Although it is unlikely to know all the variables correlated to fitness and to the focal trait, one approach to refine the prediction, while not losing insights about selection (as one does using equation \ref{STS}), is to include several variables in a so-called multivariate Breeder's equation.  
+
+\paragraph{Multivariate Breeder's equation}
+Instead of a single trait, we now consider a vector of traits $\boldsymbol{Z}$, in which it might also be possible to include environmental covariates although I have never seen this being done. Assuming that all the traits affecting the trait-fitness covariation are included, the expected joint evolutionary change in this traits can be written
+
+\begin{equation}
+\Delta \boldsymbol{\bar{Z}}=\boldsymbol{GP^{-1}S}
+\label{MVBE}
+\end{equation}
+
+where $\boldsymbol{G}$  and $\boldsymbol{P}$ are the genetic and phenotypic variance-covariance matrices, and $\boldsymbol{S}$ is a vector of selection differential. To make it a bit more explicit:
+
+\begin{align*}
+	&\begin{pmatrix}
+	\Delta \bar{Z_1}\\
+    \Delta \bar{Z_2}\\
+    \vdots\\
+    \Delta \bar{Z_n}\\
+	\end{pmatrix}
+    =\\
+    &\begin{pmatrix}
+	\sigma_{A(Z_1)}^2 & \sigma_{A(Z_1,Z_2)} & \cdots & \sigma_{A(Z_1,Z_n)}\\
+    \sigma_{A(Z_1,Z_2)} & \sigma_{A(Z_2)}^2 & \cdots & \vdots \\
+    \vdots & \cdots & \mathrel{\rotatebox[origin=c]{25}{$\ddots$}} & \vdots \\
+    \sigma_{A(Z_1,Z_n)}& \cdots & \cdots & \sigma_{A(Z_n)}^2\\
+	\end{pmatrix}
+    \begin{pmatrix}
+	\sigma_{P(Z_1)}^2 & \sigma_{P(Z_1,Z_2)} & \cdots & \sigma_{P(Z_1,Z_n)}\\
+    \sigma_{P(Z_1,Z_2)} & \sigma_{P(Z_2)}^2 & \cdots & \vdots \\
+    \vdots & \cdots & \mathrel{\rotatebox[origin=c]{25}{$\ddots$}} & \vdots \\
+    \sigma_{P(Z_1,Z_n)}& \cdots & \cdots & \sigma_{P(Z_n)}^2\\
+	\end{pmatrix}^{-1}
+    \begin{pmatrix}
+	\sigma_{P(Z_1,\omega)}\\
+    \sigma_{P(Z_2,\omega)}\\
+    \vdots \\
+    \sigma_{P(Z_n,\omega)}\\
+	\end{pmatrix}   
+\end{align*}
+
+From this equation it becomes clear that if there is no genetic covariation between traits, $\sigma_{A(Z_i,Z_j)}=0$, then the evolutionary change in each trait can be predicted from equation \ref{UVBE}.
+
+\subsection{Estimation of parameters}
+
+A multivariate animal model including the traits of interest, including fitness, can estimate all the relevant parameters for the application of equations \ref{UVBE}, \ref{STS} and \ref{MVBE} (REFS).
+
+Tha Animal Model is a linear mixed effect model that is fit on individual data and pedigree information. It seperates the contributions to population trait dynamics into a genetic and a non-genetic 'residual', also called 'environmental', part  \citep{Lynch1998}. The method is based on the partition of variances. In its simplest, univariate, form it can be written as:
+
+\begin{equation}
+	Z_i = \overline{Z} + a_i + e_i
+\end{equation}
+
+in which $z_i$ is the trait value of individuals $i$, $\overline{z}$ the population mean trait value, $a_i$ the breeding value of an individual for trait $z$ and $e_i$ the residual term. Breeding values and residuals are assumed to be normally distributed ($norm(0,V_A)$ and $norm(0,V_E)$). Based on this assumption the additive genetic variance ($V_A$) and the residual variance ($V_E$) can be estimated from data. The model can be fit using restricted maximum likelihood (REML) or Bayesian markov chain monte carlo (MCMC) sampling (Kruuk, REFS). Additional fixed effects, such as age or sex, and random effects such as maternal or common environment effects, could be included to account for similarities between relatives that are not due to genetics (REFS).
+
+By extending this univariate model towards a bivariate model including the trait $z$ and individual relative fitness $w$, one can estimate the additive genetic covariance ($\mathrm{cov}_A$) between trait and relative fitness which equals the directional response to selection ($R$) \citep{Morrissey2010}. Below we focus on only one trait, thus comparing equations \ref{UVBE} and \ref{STS} only, but including more traits to compare the three equations is possible \citep{Stinchcombe2014}. We write a bivariate animal model, using the covariance between $Z$ and $\omega$:
+
+\begin{equation}
+\begin{pmatrix}
+Z\\
+\omega\\
+\end{pmatrix}
+=\boldsymbol{Xb}+\boldsymbol{Z_1n}+\boldsymbol{Z_2y}+\boldsymbol{Z_3pe}+\boldsymbol{Z_4a}+\boldsymbol{Z_5m}+\boldsymbol{Ie}.
+\end{equation}
+
+$\boldsymbol{X}$, $\boldsymbol{Z_1}$, $\boldsymbol{Z_2}$, $\boldsymbol{Z_3}$, $\boldsymbol{Z_4}$, $\boldsymbol{Z_5}$ and $\boldsymbol{I}$ are design matrices relating observations to the right fixed or random effect, and the latter of these matrices is an identity matrix. $\boldsymbol{b}$ is a matrix of fixed effects, that we ignore here although they might be of interest in a decomposition, as one could use them to estimate various plastic and demographic effects. 
+$\boldsymbol{n}$ 
+\textit{\color{red} why do we want to include all these random factors of natal year, measurement year, maternal effects etc? Is it crucial for the main message? I would say that its not and that is makes it unnecessary complicated.}
+\todo{tim 21/10: I was mainly trying to stick to the paper to explain it, but anyway, yes I think it is crucial. If you explain the estimation of genetic variance without incorporating confounding sources of variance, there is obviously something wrong.}
+is a random intercept accounting for the variance associated with natal year, $\boldsymbol{y}$ a random intercept accounting for the variance associated with measurment year, $\boldsymbol{pe}$ a random intercept accounting for the non genetic individual-level repeatability, $\boldsymbol{m}$ a random intercept accounting for the variance associated with mothers, and $\boldsymbol{a}$ a random intercept accounting for the variance associated with breeding values. We assume that this random effects are independent and that each of them follows a multivariate normal distribution. In particular, a crucial assumption in this model is that the breeding values for $Z$ and fitness have a joint multivariate distribution of means \{ 0,0 \} and with a variance-covariance matrix
+
+\begin{equation}
+\begin{pmatrix}
+\sigma_{a(\omega)}^2 \boldsymbol{A} & \sigma_{a(\omega,Z)} \boldsymbol{A}\\
+\sigma_{a(\omega,Z)} \boldsymbol{A} & \sigma_{a(Z)}^2 \boldsymbol{A}\\
+\end{pmatrix}
+\end{equation}
+
+where $\boldsymbol{A}$ is the additive genetic relatedness matrix between all pair of individuals. This matrix is estimated from a pedigree or genetic markers, and is considered known. Thereby, it is possible to retrieve the parameters $\sigma_{a(\omega)}^2$, $\sigma_{a(Z)}^2$ and $\sigma_{a(\omega,Z)}$ from this model.
+
+With this information, we can apply equation \ref{STS}, and thus predict total genetic change. In order to obtain information on direct and indirect selection, required for equation \ref{UVBE}, we use the independence assumption to sum variances and covariances from different random effects. The sum of the phenotypic variance at the level of the individual is calculated as $\sigma_{P(Z)}^2= \sigma_{pe(Z)}^2+\sigma_{a(Z)}^2+\sigma_{e(Z)}^2$. Similarly, the selection differentials are calculated as the sum of the covariances involving components at the individual level: $\sigma_{P(\omega,Z)}=\sigma_{a(\omega,Z)}+\sigma_{pe(\omega,Z)}$. Because the residual variance in fitness is fixed at 0, $\sigma_{e(\omega,Z)}=0$, this is added to  $\sigma_{pe(\omega,Z)}$, and enables the estimation of this selection differential. Note that the repeatability of the fitness is not defined as there is only one measure per individual, so the $pe$ variance in fitness is actually only the residual variance in fitness. The term $\sigma_{pe(\omega,Z)}$ is therefore a difficult to understand; it is the covariance between the non-genetic repeatable part of the phenotype and residual fitness. This is quite a unusual definition of selection and probably differs from defining selection as the observed covariance between a trait and fitness. I wonder if it removes some stochastic components by setting the covariance between fitness and the residual variation in phenotype to zero.
+We have now all the elements to apply equation \ref{UVBE}.
+
+By combining these two equations, a better prediction of evolutionary change can be made (equation \ref{STS}), while keeping insight in selection processes (equation \ref{UVBE}) and possibly genetic constraints between traits \ref{MVBE}.
+
+\subsection{Heywood's Breeder's equation}
+In the previous subsection, we have seen that the classical form of the Breeder's equation generally does not give an exact prediction of evolution and generally is not equivalent to Price's equation. \citep{Heywood2005} provides an exact form of the Breeder's equation by starting from Price's equation, which is exact, and showing its relation to Breeder's. This allows for an in-depth investigation of the potential causes of the mismatch. 
+
+
+We start from the Price equation:
+
+\begin{equation}
+\Delta \bar{Z} = \sigma_{\omega,Z}+E(\omega \Delta Z)
+\label{PriceClassical}
+\end{equation}.
+
+This equation has two right-side terms contrary to what we previously called the "genetic Price equation" (equation \ref{STS}) because it is about phenotypes and not about genetic values: there is no transmission bias in equation \ref{STS}, the transmission from the genes to their copies is assumed to be perfect.
+
+We need two equalities to go further:
+
+\begin{align}
+\sigma_{\omega,Z} &=E(\omega Z)-E(\omega)E(Z) \\
+\sigma_{\omega,Z} &=E(\omega (Z'+\Delta Z))-E(\omega)E(Z'+\Delta Z) \\
+\sigma_{\omega,Z} &=E(\omega Z')+E(\omega \Delta Z)-E(\omega)E(Z')-E(\omega)E(\Delta Z) \\
+\sigma_{\omega,Z} &=\sigma_{\omega,Z'}-\sigma_{\omega, \Delta Z}
+\label{step1}
+\end{align}
+ 
+ where $Z'$ is offspring phenotype; and
+ 
+ \begin{align}
+  E(\omega \Delta Z)=\sigma_{\omega,\Delta Z}+E(\Delta Z)
+ \label{step2}
+ \end{align}
+ 
+ 
+Putting \ref{step1} and \ref{step2} into \ref{PriceClassical} gives:
+
+\begin{equation}
+\Delta \bar{Z}= \sigma_{\omega,Z'}+E(\Delta Z)
+\end{equation}
+
+Correcting the covariance $\sigma_{\omega,Z'}$ for the parental phenotype $Z$ gives the partial covariance:
+
+\begin{equation}
+\sigma_{\omega,Z' . Z}=\sigma_{\omega,Z'}-\beta_{Z',Z}\sigma_{\omega, Z}
+\end{equation}
+
+where $\beta_{Z',Z}=\sigma_{Z',Z}/\sigma_{Z}^2$. We incorporate this partial covariance into the previous equation:
+
+\begin{equation}
+\Delta \bar{Z}= \sigma_{\omega,Z'}\beta_{Z',Z}+\sigma_{\omega,Z'.Z}+E(\Delta Z)
+\label{eqH8}
+\end{equation}
+
+The first right-term of this equation is Breeder's equation: 
+
+\begin{equation}
+\sigma_{\omega,Z'}\beta_{Z',Z}=S h^2
+\end{equation}
+
+using a \textit{biometric definition of heritability}, that is the regression coefficient of offspring trait on parental trait. This is an important equation, but we are going a bit further.
+Indeed, we are now using an "after selection" definition of heritability. 
+
+
+
+$Z^{\ast}_i$ is the mean offspring pheotype for parent $i$, before selection.
+Parents are defined as the individuals that reproduce, and must not be confused with the "parental population".
+We also define $\delta=Z'-Z^{\ast}$, that is the difference between the mean phenotype of offspring before and after selection.
+The distinction before/after selection is relevant because selection can affect the distribution of potential mates. Therefore, it is not useful to make this distinction in mid-parent / offspring regression, where the mate identity is already established.
+
+Using this two new notations we can write the three next equations:
+
+\begin{equation}
+\beta_{Z',Z}\sigma_{\omega,Z}=\beta_{Z^{\ast} ,Z}\sigma_{\omega,Z}+\sigma_{\delta,Z}\sigma_{\omega, Z}/\sigma_{Z}^2
+\label{eqH9}
+\end{equation}
+
+\begin{equation}
+\sigma_{\omega,Z' | Z}=\sigma_{\omega,Z^{\ast} | Z}+\sigma_{\omega,\delta}-\sigma_{\delta,Z}\sigma_{\omega,Z}/\sigma_{Z}^2
+\label{eqH10}
+\end{equation}
+where $\sigma_{\omega,Z' | Z}$ means the partial $\sigma_{\omega,Z'}$ controlled for $Z$.
+
+\begin{align}
+\Delta Z =& Z' - Z\\
+		=& \delta + (Z^{\ast}-Z)
+\label{eqH11}
+\end{align}
+
+Using equations \ref{eqH9} \ref{eqH10} and \ref{eqH11} into equation \ref{eqH8} gives:
+
+
+\begin{equation}
+\Delta \bar{Z}=\beta_{Z^{\ast}Z}S+\sigma_{\omega,Z^{\ast} | Z}+\sigma_{\omega,\delta}+\mathrm{E}(\delta) + \mathrm{E}(Z^{\ast}-Z)
+\label{eqH12}
+\end{equation}
+
+This uses heritability before selection $\beta_{Z^{\ast}Z}$.
+To get an alternative form of \ref{eqH12} that uses the heritability after selection, we use:
+
+\begin{equation}
+\sigma_{\omega, \delta} - \sigma_{\delta,Z}\sigma_{\omega,Z}/\sigma_{Z}^2 = \sigma_{\omega,\delta | Z}
+\end{equation}
+
+and get:
+
+\begin{equation}
+\Delta \bar{Z}=\beta_{Z'Z}S+\sigma_{\omega,Z^{\ast} | Z}+\sigma_{\omega,\delta |Z}+\mathrm{E}(\delta) + \mathrm{E}(Z^{\ast}-Z)
+\label{eqH14}
+\end{equation}
+
+Either using heritability before or after selection, it is quite clear that Breeder's equation, the first right hand term of both \ref{eqH12} and \ref{eqH14}, will be wrong in many cases, when the other terms are non-zero or do not cancel out.
+
+Heywood give a name and an interpretation to all of these terms, representing the components of phenotypic evolution. They are either some sort of "transmission bias" or a "spurious response to selection". 
+
+$\mathrm{E}(Z^{\ast}-Z)$ is the constitutive transmission bias and represent the phenotypic change that would happen with or without variation in fitness. For instance, a global environmental change (temperature) could shift the plastic component of phenotype for all genotypes.
+
+Therefore, $\Delta \bar{Z} - \mathrm{E}(Z^{\ast}-Z)$ can be labelled as the \emph{total} response to selection, that is, the change occuring only in the presence of fitness variation.
+
+Within this component, the most intuitive is the \textit{linear} response to selection, written $\beta_{Z^{\ast}Z}S$ in equation \ref{eqH12} or $\beta_{Z'Z}S$ in equation \ref{eqH14}.
+
+The term $\sigma_{\omega,Z^{\ast} | Z}$ is labelled as spurious response to selection.
+In Lynch and Walsh "chapter 12", page 171:
+\quote{"There are two ways to generate a nonzero $\sigma_{\omega,Z^{\ast} | Z}$. First, both regressions (w on z and z′ on z) may be nonlinear and, as a result, their residuals may be correlated, generating a spurious response that is not a function of how linear changes in z change fitness. Second,even if one (or both) of these regressions are linear, if both w and z′ are correlated through an unmeasured variable (such as an environmental effect), their residuals after being regressed on z can still be correlated, again generating a potentially spurious response"}
+
+
+The other terms are transmission biases induced by fitness variation, more precisely, by the difference between $Z^{\ast}$ and $Z'$, $\delta$. Either the bias is "\emph{general}", for $\mathrm{E}\delta$, that is, there is a directional change between $Z^{\ast}$ and $Z'$, $\delta$; or the bias is "\emph{special}", for $\sigma_{\omega,\delta}$ (in equation \ref{eqH12}) or $\sigma_{\omega,\delta | Z}$ (in equation \ref{eqH14}), that is, the change depends on parental fitness.
+
+
+
+
+
+
+
