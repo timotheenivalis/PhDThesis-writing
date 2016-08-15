@@ -25,9 +25,10 @@ The first question seemingly received a positive answer with the publication of 
 
 Instead of estimating the variance of the distribution of temporal estimates of selection, as in \parencite{Siepielski2009}, tests for fluctuating selection must estimate the variance of the temporal distribution of selection \cite{Morrissey2012flusel}. As of yet, \cite{Chevin2015b} are among the few to have done this: Using a random regression approach, they found that phenotypic selection on laying date fluctuated over a short time period in a population of great tits (\textit{Parus major} Linnaeus, 1758). The generality of this finding however needs to be confirmed across across a wider range of species, populations and traits, using the same robust approach. 
 
-\begin{figure}
-	\includegraphics[width=\textwidth]{FiguresFluSel/concetpualplot-1}
-	\caption{Evolutionary change under constant and fluctuating selection regimes. 
+\begin{figure}[H]
+\centering
+	\includegraphics[width=0.8\textwidth]{FiguresFluSel/concetpualplot-1}
+	\caption{\footnotesize Evolutionary change under constant and fluctuating selection regimes. 
 	In \textbf{(A)}, selection is constant among years. Following the breeder's equation, the genetic differential (i.e. the response to selection) is equal to the product of the selection differential and the heritability, which is here set to $0.3$. The resultant cumulative response to selection, i.e the evolutionary trajectory, is described by a straight line. 
 	In \textbf{(B)}, selection fluctuates but does not reverse, and mean selection and the rate of evolution are only slightly reduced compared to \textbf{(A)}.
 	In \textbf{(C)}, selection fluctuates and reverses, resulting in fluctuating and reversing evolution, and thereby evolutionary stasis over the time frame considered. 
@@ -171,14 +172,14 @@ Yearly estimates of selection gradients showed considerable variation (standard 
 Fertility and viability selection gradients showed similar patterns and were either positive or close to zero, except for two years (Figure \ref{fig:yearSel} (B-C)). The standard deviations of the estimates of viability and fertility selection were high, but so were the mean standard errors of these estimates (table \ref{tab:varsel})
 
 
-\begin{figure}[ht]
+\begin{figure}[H]
 \centering
 	\includegraphics[width=0.5\textwidth]{FiguresFluSel/SelByYear-1}
 	
 	\includegraphics[width=0.5\textwidth]{FiguresFluSel/SelByYearRho-1}
 	
 	\includegraphics[width=0.5\textwidth]{FiguresFluSel/SelByYearPhi-1}
-	\caption{Estimates of overall, viability and fertility selection gradients, year-by-year and across all years. (A) Selection was estimated as the slope of absolute annual fitness (ARS + twice survival) on body mass, on the transformed scale of a Poisson GLM. (B) Selection was estimated as the slope of survival on body mass, on the transformed scale of a binomial GLM. (C) Selection was estimated as the slope of annual reproductive success on body mass, on the transformed scale of a Poisson GLM.
+	\caption{\footnotesize Estimates of overall, viability and fertility selection gradients, year-by-year and across all years. (A) Selection was estimated as the slope of absolute annual fitness (ARS + twice survival) on body mass, on the transformed scale of a Poisson GLM. (B) Selection was estimated as the slope of survival on body mass, on the transformed scale of a binomial GLM. (C) Selection was estimated as the slope of annual reproductive success on body mass, on the transformed scale of a Poisson GLM.
 	Year-by-year estimates (black dots with 95\%CI error bars) were obtained by fitting separate GLMs for each year. The overall estimate (dashed line with 95\%CI as a grey polygon) was produced by pooling all years together.}
 	\label{fig:yearSel}
 \end{figure}
@@ -221,16 +222,18 @@ We found significant additive genetic variation in age-corrected mass ($1.99$ g$
 
 
 \begin{figure}[ht]
-\includegraphics[width=\textwidth]{FiguresFluSel/EvolSmooth-1}
-\caption{Temporal dynamics of mean breeding value for mass. Each line was obtained from a different MCMC posterior sample, by fitting a time-spline to the mean of estimated breeding values among individuals alive in any given year.}
+\centering
+\includegraphics[width=0.7\textwidth]{FiguresFluSel/EvolSmooth-1}
+\caption{\footnotesize Temporal dynamics of mean breeding value for mass. Each line was obtained from a different MCMC posterior sample, by fitting a time-spline to the mean of estimated breeding values among individuals alive in any given year.}
 \label{fig:evolsmooth}
 \end{figure}
 
 The same pattern emerges when looking at the posterior distribution of change in breeding values between any two successive years (Fig. \ref{fig:evoldiff}). None of the year-to-year changes are statistically different from zero (Fig. \ref{fig:evoldiff}), but because they are largely negative or null, they sum up to a strongly negative and statistically significant trend from 2006 to 2014 \parencite{Bonnet2016}. Similarly, although none of the observed changes are stronger than what could be expected due to drift alone (Fig. \ref{fig:evoldiff}), drift cannot explain the cumulative change \parencite{Bonnet2016}.
  
 \begin{figure}[ht]
-\includegraphics[width=\textwidth]{FiguresFluSel/EvolDiff-1}
-\caption{Posterior distribution of the change in breeding values for mass relative to the mean in the previous year, and the range of change possible due to genetic drift. For each posterior sample of the estimated breeding values, we computed the difference between the mean breeding value of individuals alive in year $t$ and individuals alive in year $t-1$. Box plots show the median, the first and third quartiles, quantiles 2.5\% and 97.5\% and outliers. The grey envelope shows the 95\% interval of year-to-year evolution simulated with drift only.}
+\centering
+\includegraphics[width=0.7\textwidth]{FiguresFluSel/EvolDiff-1}
+\caption{\footnotesize Posterior distribution of the change in breeding values for mass relative to the mean in the previous year, and the range of change possible due to genetic drift. For each posterior sample of the estimated breeding values, we computed the difference between the mean breeding value of individuals alive in year $t$ and individuals alive in year $t-1$. Box plots show the median, the first and third quartiles, quantiles 2.5\% and 97.5\% and outliers. The grey envelope shows the 95\% interval of year-to-year evolution simulated with drift only.}
 \label{fig:evoldiff}
 \end{figure}
 
@@ -243,10 +246,12 @@ Moreover, during years of positive selection, the genetic and environmental grad
 On the other hand, during years of negative selection, the genetic and environmental gradients were both negative (fig. \ref{fig:betas}), and not significantly different ($\beta_{A-}-\beta_{E-} = -0.010$, 95\%CI[-0.138;-0.058], $p_{MCMC}=0.424$). Finally, the genetic correlation between mass in positive selection years and mass in negative selection years was strong and positive (0.82, 95\%CI $[0.46; 0.93]$).
 
 \begin{figure}[ht]
-\includegraphics[width=\textwidth]{FiguresFluSel/Betas-1}
-\caption{Phenotypic selection gradients and their decomposition into environmental and genetic gradients for years with positive selection on mass and for years with negative selection on mass. Error bars show 95\% confidence intervals.}
+\centering
+\includegraphics[width=0.7\textwidth]{FiguresFluSel/Betas-1}
+\caption{\footnotesize Phenotypic selection gradients and their decomposition into environmental and genetic gradients for years with positive selection on mass and for years with negative selection on mass. Error bars show 95\% confidence intervals.}
 \label{fig:betas}
 \end{figure}
+
 
 \section*{Discussion}
 Here we have shown that selection on body mass fluctuates in a natural population of snow voles. Fluctuations in total selection originate from changes in fertility rather than viability selection. 
