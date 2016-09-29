@@ -1,3 +1,7 @@
+# Title slide
+
+#black slide
+
 ### Acknowledgements ###
 
 Thanks to Erik for :
@@ -26,10 +30,72 @@ so, a huge shared thank you to the Zurich folks with who I shared scientific dis
 they made my stay here very pleasant and enriching
 
 
+# Same slide
+Looking at these people, you might realize that they are all very different
+some are blond, some are dark-haired
+some are tall, some are short
+some are serious looking, some like to have funny faces
 
-### Why are individual different ? ###
+
+Why is that? 
+
+Very complicated question. They ate different food, had different exposure to sun, did more or less physical activities, had different parents...
+The number of factors making us who we are is tremendous and it seems hopeless to try and disentangle them all. 
+
+Now if we forget these humans and look at other organisms, one can ask the same question
+
+Phenotypic variation in size / color morphes 
+Survival and fertility variation 
+
+
+Why are individuals within a population different ?
+The question is a long lasting one, 
+
+
+However, what we can do is to make groups of factors that do not behave in the same way and leave different type of prints in the variation among individuals.
+
+
+
+### Why are individuals different ? ###
 # The problem explained with dice
+So, why individuals differ in some trait is a very complicated question because there can be a lot of factors contributing to differences
+And you can think that the more complicated the trait, the more it is difficult to disentangle all the causes of variation.
+So called life-history traits, for instance survival and reproductive success are among the most complicated traits, 
+because they depend themselves on many other traits as well as on unpredictable environmental factors.
+Thus, example mortality: depend on not carrying a lethal genetic disease, on living in a suitable habitat that provides abundance of food and few predators, but there can always be unpredictable accidents such as a meteoritic impact.
+That is why we can think about life-history traits as a stochastic process. 
+
+Imagine that we consider the annual reproductive success of some animal; every year, each individual is likely to produce a different number of offsrping
+and a reasonable first model for how this work would be a die:
 
 
 
-# T
+# The neutral case
+
+# Power problem -> mixed models better
+
+# Heritability solves the question. 
+
+#### Wait, why are we interested in that? Why do we want to know ? ####
+
+On contemporary evolution, environmental changes, understanding of responses, prediction
+Rate of evolution = heritability fitness
+
+So studying the causes of variation in fitness is also studying its consequences or the other way around. 
+
+-> persistence => selection ; -> heritability => evolutionary potential
+
+
+### How do we disentangle changes in a population into evolution / plasticity components ? ####
+
+
+
+### Intro snow vole and its monitoring ###
+
+### Snow vole contemporary evolution ###
+
+
+### The temporal dynamic of selection and evolution ###
+
+
+### Ways to go further? ###

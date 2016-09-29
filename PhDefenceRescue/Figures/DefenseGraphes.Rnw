@@ -1,0 +1,56 @@
+\documentclass{article}
+
+\begin{document}
+\definecolor{blendedblue}{rgb}{0.137,0.466,0.741}
+
+\definecolor{darkred}{rgb}{0.545,0,0}
+<<load>>=
+setwd(dir = "D:/Documents/GitHub/PhDThesis-writing/PhDefenceRescue/Figures/")
+ped <- read.table(file = "ped.txt", header =TRUE)
+ind <- read.table(file = "ForFluctuatingSelectionRaw.txt", header = TRUE)
+ind <- ind[!duplicated(ind$ID_Individual),]
+library(pedantics)
+
+pedind <- merge(x=ped, y=ind,by.x = "animal", by.y = "ID_Individual", all.x = TRUE, all.y = FALSE)
+
+year <- 2005
+for(i in 1:nrow(pedind))
+{ 
+  if(is.na(pedind$Cohort[i]))
+  {
+    pedind$Cohort[i] <- year
+  }else{year <- pedind$Cohort[i]}
+}
+@
+
+<<pedigreeplot, dev='tikz', echo=F,out.width='\\textwidth',fig.width=9,fig.height=7,fig.align='center',fig.keep='last'>>=
+
+tikz(standAlone = FALSE)
+plot(1,1)
+dev.off()
+
+pdf(file = "pedigreeplot.pdf",width = 7, height = 10)
+par(col.lab = "white")
+pedantics::drawPedigree(ped,cohorts = pedind$Cohort,writeCohortLabels = "y", sexColours =c(rgb(0.9, 0,0),rgb(0.14,0.46,0.74)))
+dev.off()
+@
+
+
+<<>>=
+
+time <- 1:20
+nind <- 3
+par(las=1, pch=16)
+
+ARS <- round(runif(n=time, min =1, max=6))
+pdf(file = "dice1plot.pdf",width = 10, height = 7)
+plot(x=time, y=ARS, type="b", ylim=c(0,6), xlab="Years", ylab = "Reproduction")
+dev.off()
+
+ARS <- round(runif(n=time, min =1, max=6))
+lines(x=time, y=ARS, type="b", col=rgb(0.9, 0,0))
+ARS <- round(runif(n=time, min =1, max=6))
+lines(x=time, y=ARS, type="b", col=rgb(0, 0, 0.9))
+@
+
+\end{document}

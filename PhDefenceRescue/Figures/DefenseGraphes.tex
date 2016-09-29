@@ -1,0 +1,102 @@
+\documentclass{article}
+
+\begin{document}
+\definecolor{blendedblue}{rgb}{0.137,0.466,0.741}
+
+\definecolor{darkred}{rgb}{0.545,0,0}
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{setwd}\hlstd{(}\hlkwc{dir} \hlstd{=} \hlstr{"D:/Documents/GitHub/PhDThesis-writing/PhDefenceRescue/Figures/"}\hlstd{)}
+\hlstd{ped} \hlkwb{<-} \hlkwd{read.table}\hlstd{(}\hlkwc{file} \hlstd{=} \hlstr{"ped.txt"}\hlstd{,} \hlkwc{header} \hlstd{=}\hlnum{TRUE}\hlstd{)}
+\hlstd{ind} \hlkwb{<-} \hlkwd{read.table}\hlstd{(}\hlkwc{file} \hlstd{=} \hlstr{"ForFluctuatingSelectionRaw.txt"}\hlstd{,} \hlkwc{header} \hlstd{=} \hlnum{TRUE}\hlstd{)}
+\hlstd{ind} \hlkwb{<-} \hlstd{ind[}\hlopt{!}\hlkwd{duplicated}\hlstd{(ind}\hlopt{$}\hlstd{ID_Individual),]}
+\hlkwd{library}\hlstd{(pedantics)}
+\end{alltt}
+
+
+{\ttfamily\noindent\itshape\color{messagecolor}{\#\# Loading required package: MasterBayes}}
+
+{\ttfamily\noindent\itshape\color{messagecolor}{\#\# Loading required package: coda}}
+
+{\ttfamily\noindent\itshape\color{messagecolor}{\#\# Loading required package: genetics}}
+
+{\ttfamily\noindent\itshape\color{messagecolor}{\#\# Loading required package: combinat}}
+
+{\ttfamily\noindent\itshape\color{messagecolor}{\#\# \\\#\# Attaching package: 'combinat'}}
+
+{\ttfamily\noindent\itshape\color{messagecolor}{\#\# The following object is masked from 'package:utils':\\\#\# \\\#\#\ \ \ \  combn}}
+
+{\ttfamily\noindent\itshape\color{messagecolor}{\#\# Loading required package: gdata}}
+
+{\ttfamily\noindent\itshape\color{messagecolor}{\#\# gdata: Unable to locate valid perl interpreter\\\#\# gdata: \\\#\# gdata: read.xls() will be unable to read Excel XLS and XLSX files\\\#\# gdata: unless the 'perl=' argument is used to specify the location\\\#\# gdata: of a valid perl intrpreter.\\\#\# gdata: \\\#\# gdata: (To avoid display of this message in the future, please\\\#\# gdata: ensure perl is installed and available on the executable\\\#\# gdata: search path.)}}
+
+{\ttfamily\noindent\itshape\color{messagecolor}{\#\# gdata: Unable to load perl libaries needed by read.xls()\\\#\# gdata: to support 'XLX' (Excel 97-2004) files.}}
+
+{\ttfamily\noindent\itshape\color{messagecolor}{\#\# }}
+
+{\ttfamily\noindent\itshape\color{messagecolor}{\#\# gdata: Unable to load perl libaries needed by read.xls()\\\#\# gdata: to support 'XLSX' (Excel 2007+) files.}}
+
+{\ttfamily\noindent\itshape\color{messagecolor}{\#\# }}
+
+{\ttfamily\noindent\itshape\color{messagecolor}{\#\# gdata: Run the function 'installXLSXsupport()'\\\#\# gdata: to automatically download and install the perl\\\#\# gdata: libaries needed to support Excel XLS and XLSX formats.}}
+
+{\ttfamily\noindent\itshape\color{messagecolor}{\#\# \\\#\# Attaching package: 'gdata'}}
+
+{\ttfamily\noindent\itshape\color{messagecolor}{\#\# The following object is masked from 'package:stats':\\\#\# \\\#\#\ \ \ \  nobs}}
+
+{\ttfamily\noindent\itshape\color{messagecolor}{\#\# The following object is masked from 'package:utils':\\\#\# \\\#\#\ \ \ \  object.size}}
+
+{\ttfamily\noindent\itshape\color{messagecolor}{\#\# The following object is masked from 'package:base':\\\#\# \\\#\#\ \ \ \  startsWith}}
+
+{\ttfamily\noindent\itshape\color{messagecolor}{\#\# Loading required package: gtools}}
+
+{\ttfamily\noindent\itshape\color{messagecolor}{\#\# Loading required package: MASS}}
+
+{\ttfamily\noindent\itshape\color{messagecolor}{\#\# Loading required package: mvtnorm}}
+
+{\ttfamily\noindent\itshape\color{messagecolor}{\#\# }}
+
+{\ttfamily\noindent\itshape\color{messagecolor}{\#\# NOTE: THIS PACKAGE IS NOW OBSOLETE.}}
+
+{\ttfamily\noindent\itshape\color{messagecolor}{\#\# }}
+
+{\ttfamily\noindent\itshape\color{messagecolor}{\#\#\ \  The R-Genetics project has developed an set of enhanced genetics}}
+
+{\ttfamily\noindent\itshape\color{messagecolor}{\#\#\ \  packages to replace 'genetics'. Please visit the project homepage}}
+
+{\ttfamily\noindent\itshape\color{messagecolor}{\#\#\ \  at http://rgenetics.org for informtion.}}
+
+{\ttfamily\noindent\itshape\color{messagecolor}{\#\# }}
+
+{\ttfamily\noindent\itshape\color{messagecolor}{\#\# \\\#\# Attaching package: 'genetics'}}
+
+{\ttfamily\noindent\itshape\color{messagecolor}{\#\# The following objects are masked from 'package:base':\\\#\# \\\#\#\ \ \ \  \%in\%, as.factor, order}}
+
+{\ttfamily\noindent\itshape\color{messagecolor}{\#\# Loading required package: kinship2}}
+
+{\ttfamily\noindent\itshape\color{messagecolor}{\#\# Loading required package: Matrix}}
+
+{\ttfamily\noindent\itshape\color{messagecolor}{\#\# Loading required package: quadprog}}
+
+{\ttfamily\noindent\itshape\color{messagecolor}{\#\# Loading required package: MCMCglmm}}
+
+{\ttfamily\noindent\itshape\color{messagecolor}{\#\# Loading required package: ape}}
+
+{\ttfamily\noindent\itshape\color{messagecolor}{\#\# Loading required package: grid}}\begin{alltt}
+\hlstd{pedind} \hlkwb{<-} \hlkwd{merge}\hlstd{(}\hlkwc{x}\hlstd{=ped,} \hlkwc{y}\hlstd{=ind,}\hlkwc{by.x} \hlstd{=} \hlstr{"animal"}\hlstd{,} \hlkwc{by.y} \hlstd{=} \hlstr{"ID_Individual"}\hlstd{,} \hlkwc{all.x} \hlstd{=} \hlnum{TRUE}\hlstd{,} \hlkwc{all.y} \hlstd{=} \hlnum{FALSE}\hlstd{)}
+
+
+\hlkwa{for}\hlstd{(i} \hlkwa{in} \hlnum{1}\hlopt{:}\hlkwd{nrow}\hlstd{(pedind))}
+\hlstd{\{ year} \hlkwb{<-} \hlnum{2005}
+  \hlkwa{if}\hlstd{(}\hlkwd{is.na}\hlstd{(pedind}\hlopt{$}\hlstd{Cohort[i]))}
+  \hlstd{\{}
+    \hlstd{pedind}\hlopt{$}\hlstd{Cohort[i]} \hlkwb{<-} \hlstd{year}
+  \hlstd{\}}\hlkwa{else}\hlstd{\{year} \hlkwb{<-} \hlstd{pedind}\hlopt{$}\hlstd{Cohort[i]\}}
+\hlstd{\}}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+
+
+

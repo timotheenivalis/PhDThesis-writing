@@ -65,11 +65,14 @@
 \end{frame}
 %%%%%%%%%%%
 
-\begin{frame}{These humans helped}
+%\section{Acknowledgements}
+
+\begin{frame}[plain]
 
 \begin{columns}
-	\begin{column}[c]{0.33\textwidth}
+	\begin{column}[c]{0.35\textwidth}
 		\begin{itemize}
+		\small
 			\item<2-> Erik Postma
 		%committee
 			\item<3-> Lukas Keller
@@ -82,6 +85,14 @@
 			\item<5-> Ursina Tobler
 			\item<6-> Dominique Waldvogel
 			\item<6-> Martina Schenkel
+			\item<6-> Vicente Garc{\'{i}}a-Navas
+			\item<7-> Andres Hagmayer
+			\item<8-> Koen van Benthem
+			\item<8-> Marjolein Bruijning
+			\item<8-> Eelke Jongejans
+			\item<9-> Pirmin Nietlisbach
+			\item<9-> Philipp Becker
+			\item<9-> Judith Bachmann
 					
 
 %former colleagues?
@@ -94,15 +105,35 @@
 		\begin{figure}[c]
 			\begin{tikzpicture}
 				\uncover<2->{\node (erik) at (0,0) {\includegraphics[width = 0.2 \textwidth]{Figures/Erik}};}
-				\uncover<3->{\node (lukas) at (1.2,0) {\includegraphics[width = 0.15 \textwidth]{Figures/Lukas}};
-				\node (barbara) at (2.2,0) {\includegraphics[width = 0.15 \textwidth]{Figures/Barbara}};
-				\node (arpat) at (3.5,0) {\includegraphics[width = 0.2 \textwidth]{Figures/Arpat}};
-				\node (marc) at (4.7,0) {\includegraphics[width = 0.2 \textwidth]{Figures/Marc}};
-				\node (jarrod) at (6,0) {\includegraphics[width = 0.2\textwidth]{Figures/Jarrod}};}
-				\uncover<4->{\node (glauco) at (0,-1.4) {\includegraphics[width = 0.22 \textwidth]{Figures/Glauco}};}
-				\uncover<5->{\node (ursina) at (1.2,-1.4) {\includegraphics[width = 0.20 \textwidth]{Figures/Ursina}};}
-				\uncover<6->{\node (domi) at (2.6,-1.4) {\includegraphics[width = 0.20 \textwidth]{Figures/Domi}};}
-				\uncover<6->{\node (martina) at (3.8,-1.4) {\includegraphics[width = 0.17 \textwidth]{Figures/Martina}};}
+				\uncover<3->{\node (lukas) at ($(erik)+(1.2,0)$) {\includegraphics[width = 0.15 \textwidth]{Figures/Lukas}};
+				\node (barbara) at ($(lukas)+(1,0)$) {\includegraphics[width = 0.15 \textwidth]{Figures/Barbara}};
+				\node (arpat) at ($(barbara)+(1.3,0)$) {\includegraphics[width = 0.2 \textwidth]{Figures/Arpat}};
+				\node (marc) at ($(arpat)+(1.2,0)$) {\includegraphics[width = 0.2 \textwidth]{Figures/Marc}};
+				\node (jarrod) at ($(marc)+(1.3,0)$) {\includegraphics[width = 0.2\textwidth]{Figures/Jarrod}};}
+				\uncover<4->{\node (glauco) at ($(erik)+(0,-1.4)$) {\includegraphics[width = 0.22 \textwidth]{Figures/Glauco}};}
+				\uncover<5->{\node (ursina) at ($(glauco)+(1.2,0)$) {\includegraphics[width = 0.20 \textwidth]{Figures/Ursina}};}
+				\uncover<6->{\node (domi) at ($(ursina)+(1.4,0)$) {\includegraphics[width = 0.20 \textwidth]{Figures/Domi}};}
+				\uncover<6->{\node (martina) at ($(domi)+(1.2,0)$) {\includegraphics[width = 0.17 \textwidth]{Figures/Martina}};}
+				\uncover<6->{\node (vicente) at ($(martina)+(1.2,-0.2)$) {\includegraphics[width = 0.16 \textwidth]{Figures/Vicente}};}
+				\uncover<7->{\node (andres) at ($(vicente)+(1.2,-0.1)$) {\includegraphics[width = 0.2 \textwidth]{Figures/Andres}};}
+				\uncover<8->{\node (koen) at ($(glauco)+(0,-1.4)$) {\includegraphics[width = 0.2 \textwidth]{Figures/Koen}};
+				\node (marjolein) at ($(koen)+(1.2,0)$) {\includegraphics[width = 0.15 \textwidth]{Figures/Marjolein}};
+				\node (eelke) at ($(marjolein)+(1.2,0)$) {\includegraphics[width = 0.2 \textwidth]{Figures/Eelke}};
+				}
+				\uncover<9->{
+				
+				\node (philipp) at ($(eelke)+(1.2,0)$) {\includegraphics[width = 0.2 \textwidth]{Figures/Philipp}};
+				\node (pirmin) at ($(philipp)+(1.2,0)$) {\includegraphics[width = 0.2 \textwidth]{Figures/Pirmin}};
+				\node (judith) at ($(pirmin)+(1.2,0)$) {\includegraphics[width = 0.18 \textwidth]{Figures/Judith}};
+				}
+				\uncover<10->{
+				\node (ashley) at ($(koen)+(0,-1.4)$) {\includegraphics[width = 0.2 \textwidth]{Figures/Ashley}};
+				\node (nina) at ($(koen)+(0,-1.4)$) {\includegraphics[width = 0.2 \textwidth]{Figures/Nina}};
+				\node (hedwig) at ($(nina)+(1.2,0)$) {\includegraphics[width = 0.2 \textwidth]{Figures/Hedwig}};
+				\node (kasia) at ($(hedwig)+(1.2,0)$) {\includegraphics[width = 0.2 \textwidth]{Figures/Kasia}};
+
+				\node (chelsea) at ($(kasia)+(1.2,0)$) {\includegraphics[width = 0.2 \textwidth]{Figures/Chelsea}};
+				}
 				
 			\end{tikzpicture}
 		\end{figure}
@@ -111,18 +142,112 @@
 
 \end{frame}
 %%%%%%%%%%%
+\begin{frame}[plain]
 
+\begin{columns}
+	\begin{column}[c]{0.35\textwidth}
+		\begin{itemize}
+		\footnotesize
+			\item Erik Postma
+		%committee
+			\item Lukas Keller
+			\item Barbara Tschirren
+			\item Arpat Ozgul
+			\item Marc Kéry 
+			\item Jarrod Hadfield
+		%colleagues
+			\item Glauco Camenisch
+			\item Ursina Tobler
+			\item Dominique Waldvogel
+			\item Martina Schenkel
+			\item Vicente Garc{\'{i}}a-Navas
+			\item Andres Hagmayer
+			\item Koen van Benthem
+			\item Marjolein Bruijning
+			\item Eelke Jongejans
+			\item Pirmin Nietlisbach
+			\item Philipp Becker
+			\item Judith Bachmann
+					
+
+%former colleagues?
+
+%friends and family
+		\end{itemize}
+	\end{column}
+	\begin{column}[c]{0.7\textwidth}
+		%Residual
+		\begin{figure}[c]
+			\begin{tikzpicture}
+{\node (erik) at (0,0) {\includegraphics[width = 0.2 \textwidth]{Figures/Erik}};}
+{\node (lukas) at ($(erik)+(1.2,0)$) {\includegraphics[width = 0.15 \textwidth]{Figures/Lukas}};
+				\node (barbara) at ($(lukas)+(1,0)$) {\includegraphics[width = 0.15 \textwidth]{Figures/Barbara}};
+				\node (arpat) at ($(barbara)+(1.3,0)$) {\includegraphics[width = 0.2 \textwidth]{Figures/Arpat}};
+				\node (marc) at ($(arpat)+(1.2,0)$) {\includegraphics[width = 0.2 \textwidth]{Figures/Marc}};
+				\node (jarrod) at ($(marc)+(1.3,0)$) {\includegraphics[width = 0.2\textwidth]{Figures/Jarrod}};}
+			{\node (glauco) at ($(erik)+(0,-1.4)$) {\includegraphics[width = 0.22 \textwidth]{Figures/Glauco}};}
+			{\node (ursina) at ($(glauco)+(1.2,0)$) {\includegraphics[width = 0.20 \textwidth]{Figures/Ursina}};}
+			{\node (domi) at ($(ursina)+(1.4,0)$) {\includegraphics[width = 0.20 \textwidth]{Figures/Domi}};}
+			{\node (martina) at ($(domi)+(1.2,0)$) {\includegraphics[width = 0.17 \textwidth]{Figures/Martina}};}
+			{\node (vicente) at ($(martina)+(1.2,-0.2)$) {\includegraphics[width = 0.16 \textwidth]{Figures/Vicente}};}
+			{\node (andres) at ($(vicente)+(1.2,-0.1)$) {\includegraphics[width = 0.2 \textwidth]{Figures/Andres}};}
+			{\node (koen) at ($(glauco)+(0,-1.4)$) {\includegraphics[width = 0.2 \textwidth]{Figures/Koen}};
+				\node (marjolein) at ($(koen)+(1.2,0)$) {\includegraphics[width = 0.15 \textwidth]{Figures/Marjolein}};
+				\node (eelke) at ($(marjolein)+(1.2,0)$) {\includegraphics[width = 0.2 \textwidth]{Figures/Eelke}};
+				}
+				{\node (philipp) at ($(eelke)+(1.2,0)$) {\includegraphics[width = 0.2 \textwidth]{Figures/Philipp}};
+				\node (pirmin) at ($(philipp)+(1.2,0)$) {\includegraphics[width = 0.2 \textwidth]{Figures/Pirmin}};
+				\node (judith) at ($(pirmin)+(1.2,0)$) {\includegraphics[width = 0.18 \textwidth]{Figures/Judith}};
+				}
+				\uncover<2->{
+				\node (ashley) at ($(koen)+(0,-1.4)$) {\includegraphics[width = 0.2 \textwidth]{Figures/Ashley}};
+				\node (nina) at ($(koen)+(0,-1.4)$) {\includegraphics[width = 0.2 \textwidth]{Figures/Nina}};
+				\node (hedwig) at ($(nina)+(1.2,0)$) {\includegraphics[width = 0.2 \textwidth]{Figures/Hedwig}};
+				\node (kasia) at ($(hedwig)+(1.2,0)$) {\includegraphics[width = 0.2 \textwidth]{Figures/Kasia}};
+
+				\node (chelsea) at ($(kasia)+(1.2,0)$) {\includegraphics[width = 0.2 \textwidth]{Figures/Chelsea}};
+				}
+				
+			\end{tikzpicture}
+		\end{figure}
+	\end{column}
+\end{columns}
+
+\end{frame}
+%%%%%%%%%%%
 %Acknowledgements
 
 %Intro on variation within species/population
 %Explain causes of variation imply consequences
 
+\begin{frame}{Phenotypic variation within population}
+	\begin{figure}
+		\includegraphics[width = 0.6 \textwidth]{Figures/Humansize}
+	\end{figure}
+	\begin{figure}
+		\includegraphics[width = 0.45 \textwidth]{Figures/Cepaea}\hspace{0.1cm}		
+		\includegraphics[width = 0.45 \textwidth]{Figures/Harmonia}
+	\end{figure}
+\end{frame}
+%%%%%%%%%%%
 
+\begin{frame}
+	\begin{figure}
+		\includegraphics[width=0.4\textwidth,height=0.3\textwidth]{Figures/babyTurtle} \hspace{1pt}
+		\includegraphics[width=0.4\textwidth,height=0.3\textwidth]{Figures/adultTurtle}
+		\vspace{1pt}
+		\includegraphics[width=0.4\textwidth,height=0.3\textwidth]{Figures/BlueTits2}\hspace{1pt}
+		\includegraphics[width=0.4\textwidth,height=0.3\textwidth]{Figures/BlueTits8}
+	\end{figure}
+\end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%% Chap 1 %%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %Dice!
+\begin{frame}
+
+\end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%% Chap 2 %%%%%%%%%%%%%%%%%%%%%%%
@@ -239,6 +364,8 @@
 		\only<2>{\includegraphics[height= \textheight]{Figures/CN2015_MeulenbroekLiz_00024}}
 		\only<3>{\includegraphics[height= \textheight]{Figures/CN2015_MeulenbroekLiz_00022}}
 		\only<4>{\includegraphics[height= \textheight]{Figures/IMG_20160916_075241}}
+		\only<5>{\includegraphics[height= 0.5\textheight]{Figures/familytree}}
+		\only<6>{\includegraphics[height= \textheight]{Figures/pedigreeplot}}
 
 	\end{column}
 \end{columns}
