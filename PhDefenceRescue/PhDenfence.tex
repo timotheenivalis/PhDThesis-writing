@@ -33,6 +33,13 @@
 \usepackage{tikz} % for arrows and figures
 \usetikzlibrary{positioning,decorations.pathreplacing,shapes,trees,calc}
 
+\makeatletter
+\newcommand{\gettikzxy}[3]{%
+  \tikz@scan@one@point\pgfutil@firstofone#1\relax
+  \edef#2{\the\pgf@x}%
+  \edef#3{\the\pgf@y}%
+}
+
 \usepackage{amsmath}%
 \usepackage{amsfonts}%
 \usepackage{amssymb}%
@@ -234,16 +241,216 @@
 \begin{frame}
 
 	\begin{figure}
-
+		\only<1>{\includegraphics[width=\textwidth]{Figures/figure/dice1-1.pdf}}
+		\only<2>{\includegraphics[width=\textwidth]{Figures/figure/dice1-2.pdf}}
+		\only<3>{\includegraphics[width=\textwidth]{Figures/figure/dice1-3.pdf}}
+		\only<4>{\includegraphics[width=\textwidth]{Figures/figure/dice1-4.pdf}}
+		\only<5>{\includegraphics[width=\textwidth]{Figures/figure/dice1-5.pdf}}
+		\only<6>{\includegraphics[width=\textwidth]{Figures/figure/dice1-6.pdf}}
+		\only<7>{\includegraphics[width=\textwidth]{Figures/figure/dice1-7.pdf}}
 	\end{figure}
 
 \end{frame}
+%%%%%%%%%%%
+
+\begin{frame}
+
+\begin{columns}
+\begin{column}[c]{0.5\textwidth}
+	\centering
+	\textbf{One dice theory }
+		\includegraphics[width=\textwidth]{Figures/figure/dice1-7.pdf}
+	\end{column}
+\begin{column}[c]{0.5\textwidth}
+	\centering
+	\uncover<2->{
+	\textbf{Real pattern}
+		\includegraphics[width=\textwidth]{Figures/figure/dice2-4.pdf}
+	}
+\end{column}
+\end{columns}
+\end{frame}
+%%%%%%%%%%%
+
+\begin{frame}
+\includegraphics[width=\textwidth]{Figures/NeutralTheory}
+\end{frame}
+%%%%%%%%%%%
+
+\begin{frame}
+\begin{figure}
+\begin{tikzpicture}[%
+  % common options for blocks:
+  block/.style = {draw, align=center, anchor=north,
+              minimum height=0.50cm, inner sep=1pt,fill=black!80},
+	roundblock/.style = {draw, align=center, anchor=north,
+              minimum height=2cm, inner sep=2pt,rounded corners=3pt,fill=black!80},
+	backblock/.style = {fill=gray!90, align=center, anchor=west,
+               inner sep=2pt,rounded corners=3pt},
+  % common options for the circles:
+  ball/.style = {circle, draw, align=center, anchor=north, inner sep=0},
+	oval/.style = {ellipse, draw, align=center, anchor=north, inner sep=1pt,fill=white}
+	]
+\footnotesize	
+\node[backblock,minimum width=5.25cm,minimum height=5.2cm] (Abb) at (-4,-1) {};
+\node[backblock,fill=gray!75,minimum width=5.25cm,minimum height=5.2cm] (Bbb) at ($(Abb.east) +(0.25,0)$) {};
+\node[] (a) at ($(Abb.north)+(-1,-0.25)$){\textbf{Simulate data}};
+\node[] (b) at ($(Bbb.north)+(-0.5,-0.25)$) {\textbf{Test fixed heterogeneity}};
+
+\node[roundblock,text width=2cm, anchor=west] (Parameters) at ($(Abb.west)+(0.25,0)$) {\textbf{Parameters}\\ Fertility, Viability, Persistence, \textbf{\color{OwlYellow}{Individual differences}}};
+
+{\scriptsize 
+\node[block,text width=1.5cm] (scenario1) at ($(Parameters.north)+(2.2,0)$) {Scenario 1};
+\node[text width=2cm, align=center] (par) at ($(scenario1)+(0,0.8)$) {Parameter};
+\node[text width=2cm, align=center] (comb) at ($(par)+(0,-0.3)$) {combinations};
+\node[block,text width=1.5cm] (scenario2) at ($(scenario1)+(0,-0.6)$) {Scenario 2};
+\node[] (scenarion) at ($(scenario1)+(0,-1.45)$) {\textbf{\vdots}};
+\node[block,text width=1.5cm] (scenario240) at ($(scenario1)+(0,-2)$) {Scenario 249};
+}
+
+\draw[->,shorten >= 2pt] (Parameters.east) to (scenario1.west);
+\draw[->,shorten >= 2pt] (Parameters.east) to (scenario2.west);
+\draw[->,shorten >= 2pt] (Parameters.east) to (scenario240.west);
+
+{\scriptsize 
+\coordinate (stos) at (1.8,0);
+\node[backblock,text width=1.8cm, anchor=west, fill=black!80] (simdata1) at ($(scenario1.west) + (stos)$) {1000 data sets};
+\node[backblock,text width=1.8cm, anchor=west, fill=black!80] (simdata2) at ($(scenario2.west) + (stos)$) {1000 data sets};
+\node[] (simn) at ($(scenarion)+(stos)$) {\textbf{\vdots}};
+\node[backblock,text width=1.8cm, anchor=west, fill=black!80] (simdata240) at ($(scenario240.west) + (stos)$) {1000 data sets};
+}
+
+{\scriptsize 
+\gettikzxy{(simdata1.east)}{\ax}{\ay}
+\gettikzxy{(Parameters.north)}{\px}{\py}
+\coordinate (cordtest) at ($(\ax,\py)+(2.5,0)$);
+\node[roundblock,text width=3cm,minimum height=0.2cm] (test) at (cordtest) {\tikz{\node[anchor=north] (ts) at (0.825,0.6){\centering\textbf{\color{OwlYellow}{Individual differences?}}};
+\node[roundblock,text width=2.6cm,minimum height=0.2cm] (MM) at (0,-0.1) {\parbox[t][0.2cm][t]{2.6cm}{\centering\textbf{Mixed models}}};
+}};
+}
+%\node[roundblock,text width=2.6cm,minimum height=0.5cm] (MM) at (0,-0.1) {\parbox[t][1.3cm][t]{1.2cm}{\centering\textbf{Mixed models}}};\\ \node[roundblock,text width=2.6cm,minimum height=0.5cm,anchor=north] (NS) at (1.5,-0.1) {\parbox[t][1.3cm][t]{1.2cm}{\centering\textbf{Neutral matrices}}};
+ %}};
+
+
+\node[block, anchor=south] (error) at ($(Bbb.south)+(0,0.25)$) {False positive and false negative rates};
+
+\end{tikzpicture}
+\end{figure}
+\end{frame}
+
+\begin{frame}
+\begin{figure}
+\begin{tikzpicture}[%
+  % common options for blocks:
+  block/.style = {draw, align=center, anchor=north,
+              minimum height=0.50cm, inner sep=1pt,fill=white},
+	roundblock/.style = {draw, align=center, anchor=north,
+              minimum height=2cm, inner sep=2pt,rounded corners=3pt,fill=white},
+	backblock/.style = {fill=gray!10, align=center, anchor=west,
+               inner sep=2pt,rounded corners=3pt},
+  % common options for the circles:
+  ball/.style = {circle, draw, align=center, anchor=north, inner sep=0},
+	oval/.style = {ellipse, draw, align=center, anchor=north, inner sep=1pt,fill=white}, 
+	scale=0.5
+	]
+\node[backblock,minimum width=9.8cm,minimum height=4.2cm] (Abb) at (-4,-1) {};
+\node[backblock,fill=gray!25,minimum width=7cm,minimum height=4.2cm] (Bbb) at (6,-1) {};
+
+\node[backblock,fill=gray!40,minimum width=17cm,minimum height=1.8cm] (Cbb) at (-4,-4.2) {};
+
+\node[roundblock,text width=3cm] (Parameters) at (-2,0) {\textbf{Simulation parameters}\\ \tikz{\node[roundblock,text width=1.3cm,minimum height=1cm] (svparam) at (0,0) {\parbox[t][1.3cm][t]{1.2cm}{ \centering $\bar{\rho}$, $\phi$ \\ \dots \vfill {\scriptsize Estimated}}}; \node[roundblock,text width=1.3cm,minimum height=1cm] (estparam) at (1.5,0) {\parbox[t][1.3cm][t]{1.2cm}{ \centering $\boldsymbol{\sigma_{\rho}^2}$, $\boldsymbol{\sigma_{\phi}^2}$, $m$, $c$ \vfill {\scriptsize Unknown}}}}};
+	
+\node[block,text width=2cm] (scenario1) at ($(Parameters.north)+(3,0)$) {Scenario 1};
+\node[text width=2cm, align=center] (par) at ($(scenario1)+(0,0.8)$) {Parameter};
+\node[text width=2cm, align=center] (comb) at ($(par)+(0,-0.3)$) {combinations};
+\node[block,text width=2cm] (scenario2) at ($(scenario1)+(0,-0.6)$) {Scenario 2};
+\node[] (scenarion) at ($(scenario1)+(0,-1.45)$) {\textbf{\vdots}};
+\node[block,text width=2cm] (scenario240) at ($(scenario1)+(0,-2)$) {Scenario 249};
+
+\coordinate (stos) at (3,-0.0275);
+
+\node[oval,text width=2.3cm, inner sep=-1pt] (sv) at ($(Parameters.south)+(6,-1.2)$) {Snow vole data set};
+\node[oval,text width=2.2cm] (simdata1) at ($(scenario1.north) + (stos)$) {1000 data sets};
+\node[oval,text width=2.2cm] (simdata2) at ($(scenario2.north) + (stos)$) {1000 data sets};
+\node[] (simn) at ($(scenarion)+(stos)$) {\textbf{\vdots}};
+\node[oval,text width=2.2cm] (simdata240) at ($(scenario240.north) + (stos)$) {1000 data sets};
+
+\gettikzxy{(sv.west)}{\svwx}{\svwy}
+\gettikzxy{(Parameters.south)}{\psx}{\psy}
+\draw[->,thick] (sv.west) -- (-2.7,\svwy) -- ($(-2.7,\psx)+(0,-0.4)$);
+
+\draw[->,shorten >= 2pt] (Parameters.east) to (scenario1.west);
+\draw[->,shorten >= 2pt] (Parameters.east) to (scenario2.west);
+\draw[->,shorten >= 2pt] (Parameters.east) to (scenario240.west);
+
+\draw[->] (scenario1.east) to (simdata1.west);
+\draw[->] (scenario2.east) to (simdata2.west);
+\draw[->] (scenario240.east) to (simdata240.west);
+%
+\gettikzxy{(simdata1.east)}{\ax}{\ay}
+\gettikzxy{(Parameters.north)}{\px}{\py}
+\coordinate (cordtest) at ($(\ax,\py)+(2.5,0)$);
+\node[roundblock,text width=3cm,minimum height=0.2cm] (test) at (cordtest) {\tikz{\node[anchor=north] (ts) at (0.825,0.6){\textbf{\{$\boldsymbol{\hat{\sigma}_{\rho}^2}$,$\boldsymbol{\hat{\sigma}_{\phi}^2}$\}=\{0,0\} ? }};
+\node[roundblock,text width=1.3cm,minimum height=1.5cm] (MM) at (0,-0.1) {\parbox[t][1.3cm][t]{1.2cm}{\centering\textbf{MM:} \vspace{0.1cm} \footnotesize \\ LRT$_\phi$ \\ LRT$_\rho$}}; \node[roundblock,text width=1.3cm,minimum height=1.5cm,anchor=north] (NS) at (1.5,-0.1) {\parbox[t][1.3cm][t]{1.2cm}{\centering\textbf{NS:}\footnotesize \\ KS, $\chi^2$,\\ M, V,\\ H, P}};
+ }};
+%
+%\draw[->,shorten >= 2pt] (simdata1.east) to (test.170);
+%\draw[->,shorten >= 2pt] (simdata2.east) to (test.180);
+%\draw[->,shorten >= 2pt] (simdata240.east) to (test.190);
+%%\draw [decorate, decoration = {brace, amplitude = 10pt}]  ($(simdata1.east)+(0.15,0.25)$) -- ($(simdata240.east)+(0.15,-0.25)$);
+%
+%\node[block,text width=2cm,anchor=west, inner sep=2pt] (sig) at ($(test.east)+(0.7,0)$) {Type I and II error rates};
+%\draw[->,double,thick] (test.east) to (sig.west);
+%
+%\gettikzxy{(sv.east)}{\svx}{\svy}
+%\gettikzxy{(test.south)}{\tsx}{\tsy}
+%\gettikzxy{(sig.south)}{\ssx}{\ssy}
+%\coordinate (cordinf) at ($(\ax,\svy)+(2,-0.2)$);
+
+%\draw[->, dashed, thick] (sig.south) to [out=270,in=350] (cordinf);
+%
+%\draw[->,shorten >= 1pt, dashed, thick] (sig.south) -- ($(\ssx,\svy)+(0,0.35)$) -- ($(\tsx,\svy)+(0,0.35)$);
+%
+%\draw[->,shorten >= 2pt,thick] (sv.east) -- (\tsx,\svy) -- (test.south);
+
+
+% indices for caption
+\node[] (a) at ($(scenario1.north)+(-3,0.7)$){\textbf{A: Data simulations}};
+\node[] (b) at ($(test.north)+(1.5,0.7)$) {\textbf{B: Tests for fixed heterogeneity}};
+
+%\draw[rectangle]
+\end{tikzpicture}
+\end{figure}
+\end{frame}
+%%%%%%%%%%%
+
+\begin{frame}
+\only<1>{
+\begin{figure}
+	\includegraphics[width=\textwidth]{Figures/figure/resultsdynhet-2.pdf}
+\end{figure}}
+\only<2>{
+\begin{figure}
+	\includegraphics[width=\textwidth]{Figures/figure/resultsdynhet-3.pdf}
+\end{figure}}
+\only<3>{
+\begin{figure}
+	\includegraphics[width=\textwidth]{Figures/figure/resultsdynhet-4.pdf}
+\end{figure}}
+	
+\end{frame}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%% Chap 2 %%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%% Monitoring %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %FIeld and population
 \begin{frame}[plain]{}
@@ -275,8 +482,6 @@
 	\end{columns}
 \end{frame}
 %%%%%%%%%%%
-
-
 
 \begin{frame}[plain]{}
 	\begin{figure}
