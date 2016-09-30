@@ -1,5 +1,7 @@
 \documentclass{article}
 
+
+
 \begin{document}
 \definecolor{blendedblue}{rgb}{0.137,0.466,0.741}
 
