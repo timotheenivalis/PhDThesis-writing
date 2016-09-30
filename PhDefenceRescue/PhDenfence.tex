@@ -300,15 +300,20 @@
 \centering
 	\begin{tikzpicture}
 		\uncover<3->{
-				\node (q) at (0,-1) {\textbf{?}};
+				\node (q) at (0,-0.7) {\textbf{?}};
 				\draw[thick] (0,0) -- (q);
-				\node (sel) at (-1.5,-2) {\parbox[t][0.2cm][t]{2cm}{\centering \textbf{Individuals} are different}};
+				\node (sel) at (-1.5,-1.5) {\parbox[t][0.2cm][t]{2cm}{\centering \textbf{Individuals} are different}};
 				\draw[->, thick] (q) -- (sel.north);
 		}
-		\uncover<4->{	\node (neutral) at (1.5,-2) {\parbox[t][0.2cm][t]{1.9cm}{\centering \textbf{Stages}\\ are different}};
+		\uncover<4->{	\node (neutral) at (1.5,-1.5) {\parbox[t][0.2cm][t]{1.9cm}{\centering \textbf{Stages}\\ are different}};
 		\draw[->, thick] (q) -- (neutral.north);
 		}
-		
+		\uncover<5->{
+			\node (sh) at (-1.5, -3) {Selection/Evolution};
+			\node (ne) at (1.5, -3)  {Neutrality};
+			\draw[->, thick] ($(sel.south)+(0,-0.5)$) -- (sh.north);
+			\draw[->, thick] ($(neutral.south)+(0,-0.5)$) -- (ne.north);
+		}
 	
 	\end{tikzpicture}
 \end{column}
@@ -321,7 +326,10 @@
 \includegraphics[width=\textwidth]{Figures/NeutralTheory}
 
 \textbf{Neutral matrix method}
-
+\vspace{0.5cm}
+\begin{columns}
+\begin{column}[c]{0.5\textwidth}
+\begin{table}
 \begin{tabular}{c|c c c}
 & \multicolumn{3}{c}{next year} \\
 	& 1 & 2 & 3\\
@@ -331,7 +339,21 @@
 3 & 0  	&	 \color{red!20}{0.2}	&	\color{red!80}{0.8}	\\
 
 \end{tabular}
-	
+\end{table}
+\end{column}
+\begin{column}[c]{0.5\textwidth}
+	\only<3>{
+	\vspace{-1cm}
+		\begin{figure}
+		\includegraphics[width=1\textwidth]{Figures/figure/lrssimul-1.pdf}
+		\end{figure}}
+	\only<4>{
+	\vspace{-1cm}
+	\begin{figure}
+	\includegraphics[width=1\textwidth]{Figures/figure/lrssimul-3.pdf}
+	\end{figure}}
+\end{column}
+\end{columns}
 
 \end{frame}
 %%%%%%%%%%%
