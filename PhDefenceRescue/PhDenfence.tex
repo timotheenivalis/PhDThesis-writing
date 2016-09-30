@@ -60,7 +60,7 @@
 \author[\textbf{\fontfamily{pcr}\selectfont timothee.bonnet@ieu.uzh.ch}]{\textbf{Timoth\'{e}e Bonnet}}
 %\date{\fcolorbox{blendedblue}{blendedblue}{\includegraphics[width=0.35\textwidth]{Figures/cutevole}}}
 \date{\vspace{1cm}}
-\institute[IEU, University of Zurich]{\small Department of evolutionary biology and environmental studies (IEU) \\ \vspace{-0.1cm} \\ \includegraphics[width=0.3\textwidth]{Figures/uzhlogo}}
+\institute[IEU, University of Zurich]{\small Department of evolutionary biology and environmental studies (IEU) \\ \vspace{-0.1cm} \\ \includegraphics[width=0.3\textwidth]{Figures/uzh_logo_e_neg}}
 
 
 
@@ -219,7 +219,7 @@
 \end{frame}
 %%%%%%%%%%%
 
-\begin{frame}
+\begin{frame}{Phenotypic variation within population}
 	\begin{figure}
 		\includegraphics[width=0.4\textwidth,height=0.3\textwidth]{Figures/babyTurtle} \hspace{1pt}
 		\includegraphics[width=0.4\textwidth,height=0.3\textwidth]{Figures/adultTurtle}
@@ -232,6 +232,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%% Chap 1 %%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Chance or fate? Why does fitness vary?}
 %Dice!
 %random graph
 %reality graph + examples
@@ -240,15 +241,35 @@
 %
 \begin{frame}
 
-	\begin{figure}
-		\only<1>{\includegraphics[width=\textwidth]{Figures/figure/dice1-1.pdf}}
-		\only<2>{\includegraphics[width=\textwidth]{Figures/figure/dice1-2.pdf}}
-		\only<3>{\includegraphics[width=\textwidth]{Figures/figure/dice1-3.pdf}}
-		\only<4>{\includegraphics[width=\textwidth]{Figures/figure/dice1-4.pdf}}
-		\only<5>{\includegraphics[width=\textwidth]{Figures/figure/dice1-5.pdf}}
-		\only<6>{\includegraphics[width=\textwidth]{Figures/figure/dice1-6.pdf}}
-		\only<7>{\includegraphics[width=\textwidth]{Figures/figure/dice1-7.pdf}}
-	\end{figure}
+		\only<1>{
+			\begin{figure}
+				\includegraphics[width=\textwidth]{Figures/figure/dice1-1.pdf}
+			\end{figure}}
+		\only<2>{
+			\begin{figure}
+				\includegraphics[width=\textwidth]{Figures/figure/dice1-2.pdf}
+			\end{figure}}
+		\only<3>{
+			\begin{figure}
+				\includegraphics[width=\textwidth]{Figures/figure/dice1-3.pdf}
+			\end{figure}}
+		\only<4>{
+			\begin{figure}
+				\includegraphics[width=\textwidth]{Figures/figure/dice1-4.pdf}
+			\end{figure}}
+		\only<5>{
+			\begin{figure}
+				\includegraphics[width=\textwidth]{Figures/figure/dice1-5.pdf}
+			\end{figure}}
+		\only<6>{
+			\begin{figure}
+				\includegraphics[width=\textwidth]{Figures/figure/dice1-6.pdf}
+			\end{figure}}
+		\only<7>{
+			\begin{figure}
+				\includegraphics[width=\textwidth]{Figures/figure/dice1-7.pdf}
+			\end{figure}}
+	
 
 \end{frame}
 %%%%%%%%%%%
@@ -267,17 +288,55 @@
 	\textbf{Real pattern}
 		\includegraphics[width=\textwidth]{Figures/figure/dice2-4.pdf}
 	}
+	
 \end{column}
 \end{columns}
+
+\begin{columns}
+\begin{column}[c]{0.5\textwidth}
+
+\end{column}
+\begin{column}[c]{0.5\textwidth}
+\centering
+	\begin{tikzpicture}
+		\uncover<3->{
+				\node (q) at (0,-1) {\textbf{?}};
+				\draw[thick] (0,0) -- (q);
+				\node (sel) at (-1.5,-2) {\parbox[t][0.2cm][t]{2cm}{\centering \textbf{Individuals} are different}};
+				\draw[->, thick] (q) -- (sel.north);
+		}
+		\uncover<4->{	\node (neutral) at (1.5,-2) {\parbox[t][0.2cm][t]{1.9cm}{\centering \textbf{Stages}\\ are different}};
+		\draw[->, thick] (q) -- (neutral.north);
+		}
+		
+	
+	\end{tikzpicture}
+\end{column}
+\end{columns}
+
 \end{frame}
 %%%%%%%%%%%
 
 \begin{frame}
 \includegraphics[width=\textwidth]{Figures/NeutralTheory}
+
+\textbf{Neutral matrix method}
+
+\begin{tabular}{c|c c c}
+& \multicolumn{3}{c}{next year} \\
+	& 1 & 2 & 3\\
+	\hline
+1	& \color{red!90}{0.9}	&	 \color{red!8}{0.08}	&	 \color{red!2}{0.02}	\\
+2 & 0  	&	\color{red!70}{0.7}	&	 \color{red!30}{0.3}	\\
+3 & 0  	&	 \color{red!20}{0.2}	&	\color{red!80}{0.8}	\\
+
+\end{tabular}
+	
+
 \end{frame}
 %%%%%%%%%%%
 
-\begin{frame}
+\begin{frame}{Method}
 \begin{figure}
 \begin{tikzpicture}[%
   % common options for blocks:
@@ -312,6 +371,7 @@
 \draw[->,shorten >= 2pt] (Parameters.east) to (scenario2.west);
 \draw[->,shorten >= 2pt] (Parameters.east) to (scenario240.west);
 
+
 {\scriptsize 
 \coordinate (stos) at (1.8,0);
 \node[backblock,text width=1.8cm, anchor=west, fill=black!80] (simdata1) at ($(scenario1.west) + (stos)$) {1000 data sets};
@@ -320,111 +380,34 @@
 \node[backblock,text width=1.8cm, anchor=west, fill=black!80] (simdata240) at ($(scenario240.west) + (stos)$) {1000 data sets};
 }
 
+\draw[->] (scenario1.east) to (simdata1.west);
+\draw[->] (scenario2.east) to (simdata2.west);
+\draw[->] (scenario240.east) to (simdata240.west);
+
 {\scriptsize 
 \gettikzxy{(simdata1.east)}{\ax}{\ay}
 \gettikzxy{(Parameters.north)}{\px}{\py}
 \coordinate (cordtest) at ($(\ax,\py)+(2.5,0)$);
-\node[roundblock,text width=3cm,minimum height=0.2cm] (test) at (cordtest) {\tikz{\node[anchor=north] (ts) at (0.825,0.6){\centering\textbf{\color{OwlYellow}{Individual differences?}}};
-\node[roundblock,text width=2.6cm,minimum height=0.2cm] (MM) at (0,-0.1) {\parbox[t][0.2cm][t]{2.6cm}{\centering\textbf{Mixed models}}};
+\node[roundblock,text width=3cm,minimum height=0.2cm] (test) at (cordtest) {\tikz{\node[anchor=north] (ts) at (0.125,0.6) {\centering\textbf{\color{OwlYellow}{Individual differences?}}};
+\node[roundblock,text width=2.6cm,minimum height=0.2cm] (MM) at (0,-0.1) {\parbox[t][0.2cm][t]{2.6cm}{\centering\textbf{\color{OwlBlue}{Mixed models}}}};
+\node[roundblock,text width=2.6cm,minimum height=0.2cm] (MM) at (0,-0.6) {\parbox[t][0.2cm][t]{2.6cm}{\centering\textbf{\color{OwlRed}{Neutral matrices}}}};
 }};
 }
-%\node[roundblock,text width=2.6cm,minimum height=0.5cm] (MM) at (0,-0.1) {\parbox[t][1.3cm][t]{1.2cm}{\centering\textbf{Mixed models}}};\\ \node[roundblock,text width=2.6cm,minimum height=0.5cm,anchor=north] (NS) at (1.5,-0.1) {\parbox[t][1.3cm][t]{1.2cm}{\centering\textbf{Neutral matrices}}};
- %}};
 
+\draw[->,shorten >= 2pt] (simdata1.east) to (test.170);
+\draw[->,shorten >= 2pt] (simdata2.east) to (test.180);
+\draw[->,shorten >= 2pt] (simdata240.east) to (test.190);
 
 \node[block, anchor=south] (error) at ($(Bbb.south)+(0,0.25)$) {False positive and false negative rates};
 
-\end{tikzpicture}
-\end{figure}
-\end{frame}
+\draw[->, shorten >= 2pt] (test.270) to (error.90);
 
-\begin{frame}
-\begin{figure}
-\begin{tikzpicture}[%
-  % common options for blocks:
-  block/.style = {draw, align=center, anchor=north,
-              minimum height=0.50cm, inner sep=1pt,fill=white},
-	roundblock/.style = {draw, align=center, anchor=north,
-              minimum height=2cm, inner sep=2pt,rounded corners=3pt,fill=white},
-	backblock/.style = {fill=gray!10, align=center, anchor=west,
-               inner sep=2pt,rounded corners=3pt},
-  % common options for the circles:
-  ball/.style = {circle, draw, align=center, anchor=north, inner sep=0},
-	oval/.style = {ellipse, draw, align=center, anchor=north, inner sep=1pt,fill=white}, 
-	scale=0.5
-	]
-\node[backblock,minimum width=9.8cm,minimum height=4.2cm] (Abb) at (-4,-1) {};
-\node[backblock,fill=gray!25,minimum width=7cm,minimum height=4.2cm] (Bbb) at (6,-1) {};
-
-\node[backblock,fill=gray!40,minimum width=17cm,minimum height=1.8cm] (Cbb) at (-4,-4.2) {};
-
-\node[roundblock,text width=3cm] (Parameters) at (-2,0) {\textbf{Simulation parameters}\\ \tikz{\node[roundblock,text width=1.3cm,minimum height=1cm] (svparam) at (0,0) {\parbox[t][1.3cm][t]{1.2cm}{ \centering $\bar{\rho}$, $\phi$ \\ \dots \vfill {\scriptsize Estimated}}}; \node[roundblock,text width=1.3cm,minimum height=1cm] (estparam) at (1.5,0) {\parbox[t][1.3cm][t]{1.2cm}{ \centering $\boldsymbol{\sigma_{\rho}^2}$, $\boldsymbol{\sigma_{\phi}^2}$, $m$, $c$ \vfill {\scriptsize Unknown}}}}};
-	
-\node[block,text width=2cm] (scenario1) at ($(Parameters.north)+(3,0)$) {Scenario 1};
-\node[text width=2cm, align=center] (par) at ($(scenario1)+(0,0.8)$) {Parameter};
-\node[text width=2cm, align=center] (comb) at ($(par)+(0,-0.3)$) {combinations};
-\node[block,text width=2cm] (scenario2) at ($(scenario1)+(0,-0.6)$) {Scenario 2};
-\node[] (scenarion) at ($(scenario1)+(0,-1.45)$) {\textbf{\vdots}};
-\node[block,text width=2cm] (scenario240) at ($(scenario1)+(0,-2)$) {Scenario 249};
-
-\coordinate (stos) at (3,-0.0275);
-
-\node[oval,text width=2.3cm, inner sep=-1pt] (sv) at ($(Parameters.south)+(6,-1.2)$) {Snow vole data set};
-\node[oval,text width=2.2cm] (simdata1) at ($(scenario1.north) + (stos)$) {1000 data sets};
-\node[oval,text width=2.2cm] (simdata2) at ($(scenario2.north) + (stos)$) {1000 data sets};
-\node[] (simn) at ($(scenarion)+(stos)$) {\textbf{\vdots}};
-\node[oval,text width=2.2cm] (simdata240) at ($(scenario240.north) + (stos)$) {1000 data sets};
-
-\gettikzxy{(sv.west)}{\svwx}{\svwy}
-\gettikzxy{(Parameters.south)}{\psx}{\psy}
-\draw[->,thick] (sv.west) -- (-2.7,\svwy) -- ($(-2.7,\psx)+(0,-0.4)$);
-
-\draw[->,shorten >= 2pt] (Parameters.east) to (scenario1.west);
-\draw[->,shorten >= 2pt] (Parameters.east) to (scenario2.west);
-\draw[->,shorten >= 2pt] (Parameters.east) to (scenario240.west);
-
-\draw[->] (scenario1.east) to (simdata1.west);
-\draw[->] (scenario2.east) to (simdata2.west);
-\draw[->] (scenario240.east) to (simdata240.west);
-%
-\gettikzxy{(simdata1.east)}{\ax}{\ay}
-\gettikzxy{(Parameters.north)}{\px}{\py}
-\coordinate (cordtest) at ($(\ax,\py)+(2.5,0)$);
-\node[roundblock,text width=3cm,minimum height=0.2cm] (test) at (cordtest) {\tikz{\node[anchor=north] (ts) at (0.825,0.6){\textbf{\{$\boldsymbol{\hat{\sigma}_{\rho}^2}$,$\boldsymbol{\hat{\sigma}_{\phi}^2}$\}=\{0,0\} ? }};
-\node[roundblock,text width=1.3cm,minimum height=1.5cm] (MM) at (0,-0.1) {\parbox[t][1.3cm][t]{1.2cm}{\centering\textbf{MM:} \vspace{0.1cm} \footnotesize \\ LRT$_\phi$ \\ LRT$_\rho$}}; \node[roundblock,text width=1.3cm,minimum height=1.5cm,anchor=north] (NS) at (1.5,-0.1) {\parbox[t][1.3cm][t]{1.2cm}{\centering\textbf{NS:}\footnotesize \\ KS, $\chi^2$,\\ M, V,\\ H, P}};
- }};
-%
-%\draw[->,shorten >= 2pt] (simdata1.east) to (test.170);
-%\draw[->,shorten >= 2pt] (simdata2.east) to (test.180);
-%\draw[->,shorten >= 2pt] (simdata240.east) to (test.190);
-%%\draw [decorate, decoration = {brace, amplitude = 10pt}]  ($(simdata1.east)+(0.15,0.25)$) -- ($(simdata240.east)+(0.15,-0.25)$);
-%
-%\node[block,text width=2cm,anchor=west, inner sep=2pt] (sig) at ($(test.east)+(0.7,0)$) {Type I and II error rates};
-%\draw[->,double,thick] (test.east) to (sig.west);
-%
-%\gettikzxy{(sv.east)}{\svx}{\svy}
-%\gettikzxy{(test.south)}{\tsx}{\tsy}
-%\gettikzxy{(sig.south)}{\ssx}{\ssy}
-%\coordinate (cordinf) at ($(\ax,\svy)+(2,-0.2)$);
-
-%\draw[->, dashed, thick] (sig.south) to [out=270,in=350] (cordinf);
-%
-%\draw[->,shorten >= 1pt, dashed, thick] (sig.south) -- ($(\ssx,\svy)+(0,0.35)$) -- ($(\tsx,\svy)+(0,0.35)$);
-%
-%\draw[->,shorten >= 2pt,thick] (sv.east) -- (\tsx,\svy) -- (test.south);
-
-
-% indices for caption
-\node[] (a) at ($(scenario1.north)+(-3,0.7)$){\textbf{A: Data simulations}};
-\node[] (b) at ($(test.north)+(1.5,0.7)$) {\textbf{B: Tests for fixed heterogeneity}};
-
-%\draw[rectangle]
 \end{tikzpicture}
 \end{figure}
 \end{frame}
 %%%%%%%%%%%
 
-\begin{frame}
+\begin{frame}{Results}
 \only<1>{
 \begin{figure}
 	\includegraphics[width=\textwidth]{Figures/figure/resultsdynhet-2.pdf}
@@ -439,12 +422,21 @@
 \end{figure}}
 	
 \end{frame}
+%%%%%%%%%%%
+\begin{frame}{Conclusion}
+	\begin{block}{Implications}
+		\begin{itemize}
+			\item 
+		\end{itemize}
+	\end{block}
+\end{frame}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%% Chap 2 %%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\section{What drives phenotypic change?}
 
 
 
@@ -571,6 +563,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%% Chap 3 %%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Are snow vole evolving? Why?}
 
 %Open some dice! -> DNA and grass in it, leading to most common number...
 
@@ -578,6 +571,12 @@
 %%%%%%%%%%%%%%%%%%%%%%% Chap 4 %%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\section{Do selection and evolution fluctuate?}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%% Conclu %%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{What is left?}
 
 \end{document}
