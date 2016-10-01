@@ -228,11 +228,26 @@
 		\includegraphics[width=0.4\textwidth,height=0.3\textwidth]{Figures/BlueTits8}
 	\end{figure}
 \end{frame}
+%%%%%%%%%%%
 
+\begin{frame}{Fitness variation}
+	\begin{figure}
+		\includegraphics[width=0.2\textwidth,height=0.15\textwidth]{Figures/babyTurtle} \hspace{1pt}
+		\includegraphics[width=0.2\textwidth,height=0.15\textwidth]{Figures/adultTurtle}
+		\vspace{1pt}
+		\includegraphics[width=0.2\textwidth,height=0.15\textwidth]{Figures/BlueTits2}\hspace{1pt}
+		\includegraphics[width=0.2\textwidth,height=0.15\textwidth]{Figures/BlueTits8}
+	\end{figure}
+	
+	\begin{alertblock}{What is fitness?}
+		The expected relative contribution of an individual to the next generation
+	\end{alertblock}
+\end{frame}
+%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%% Chap 1 %%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Chance or fate? Why does fitness vary?}
+\section{Chance or fate? Why do survival and fertility vary?}
 %Dice!
 %random graph
 %reality graph + examples
@@ -359,6 +374,41 @@
 \end{frame}
 %%%%%%%%%%%
 \begin{frame}{Conflicting results}
+\begin{columns}
+	\begin{column}[c]{0.5\textwidth}
+	\textbf{\color{OwlRed}{Neutral matrix method}}
+	\begin{itemize}
+		\uncover<2->{\item No significant differences between individuals}
+		\uncover<4->{\item \dots because of stage structure}
+		\uncover<6->{\item \dots very little and due to chance only}
+	\end{itemize}
+	
+	\end{column}
+	\begin{column}[c]{0.5\textwidth}
+	\textbf{\color{OwlBlue}{Mixed model method \& Quantitative genetics}}
+
+	\begin{itemize}
+		\uncover<3->{\item Individual performances are repeatable}
+		\uncover<5->{\item \dots fitness traits are heritable} 
+		\uncover<7->{\item \dots eh?}
+	\end{itemize}
+	
+	\end{column}
+\end{columns}
+
+\begin{figure}
+	\only<1>{\includegraphics[width=0.4\textwidth]{Figures/Kittiwake}}
+	\only<2>{\includegraphics[width=0.8\textwidth]{Figures/Steinerkittiwake}}
+	\only<3>{\vspace{-2cm} \includegraphics[width=0.8\textwidth]{Figures/CamKittiwake}}
+	\only<4>{\vspace{-1.5cm}\includegraphics[width=0.8\textwidth]{Figures/figure/dice2-4.pdf}\vspace{-1.5cm}}
+\end{figure}
+
+\only<8>{\begin{block}{Why?}
+	\begin{itemize}
+		\item \textbf{\color{OwlRed}{Neutral matrix method}} =\textbf{false negative}?
+		\item \textbf{\color{OwlBlue}{Mixed model method}} =\textbf{false positive}?
+	\end{itemize}
+\end{block}}
 
 \end{frame}
 %%%%%%%%%%%
@@ -451,20 +501,64 @@
 \end{frame}
 %%%%%%%%%%%
 \begin{frame}{Conclusion}
-	\begin{block}{Implications}
-		\begin{itemize}
-			\item 
-		\end{itemize}
-	\end{block}
-\end{frame}
 
+\begin{block}{Why conflicting methods?}
+	\uncover<2->{\begin{itemize}
+		\item \textbf{\color{OwlRed}{Neutral matrix method}} =\textbf{false negative}? \textbf{\color{red}{YES}}
+		\item \textbf{\color{OwlBlue}{Mixed model method}} =\textbf{false positive}? \textbf{\color{red}{NO}}
+	\end{itemize}}
+	\uncover<3->{$\rightarrow$ Individual differences in fitness components are common}
+\end{block}
+
+	\uncover<4->{\begin{block}{Implications}
+		\begin{itemize}
+			\uncover<5->{\item Phenotypic variation in fitness $\rightarrow$ opportunity for selection}
+			\uncover<6->{\item Heritability of fitness $=$ \textbf{evolution}}
+		\end{itemize}
+	\end{block}}
+	
+	\uncover<6->{
+	\begin{figure}
+		\begin{tikzpicture}
+			\node (f) at (-1,0) {\includegraphics[width = 0.2\textwidth]{Figures/Fisher}};
+			\node (fn) at ($(f.south)+(0,-0.2)$) {\textbf{R.A. Fisher}};
+			\node (p) at (1,0) {\includegraphics[width = 0.2\textwidth]{Figures/Price}};
+			\node (fn) at ($(p.south)+(0,-0.2)$) {\textbf{G. Price}};
+		\end{tikzpicture}
+	\end{figure}}
+\end{frame}
+%%%%%%%%%%%
+
+\begin{frame}{Evolution in a changing world}
+
+	\only<1>{\begin{figure}
+		\includegraphics[width = 0.6\textwidth]{Figures/ipcc}
+		
+		Intergovernmental panel on climate change 5th Report (2014)
+	\end{figure}}
+	
+	\only<2>{\begin{figure}
+		\includegraphics[width = 0.8\textwidth]{Figures/biodiv}
+		
+		Newbold \& al. (2016). Has land use pushed terrestrial biodiversity beyond the planetary boundary? A global assessment. Science, 353
+	\end{figure}}
+	
+	\only<3>{\begin{figure}
+		\includegraphics[width = 0.8\textwidth]{Figures/parmesan}
+		\end{figure}}
+		
+
+\end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%% Chap 2 %%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{What drives phenotypic change?}
+\section{Evolution or plasticity? What drives phenotypic change?}
 
+\begin{frame}
+
+\end{frame}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
