@@ -560,9 +560,9 @@
 
 	\begin{figure}
 		\begin{tikzpicture}
-			\uncover<1-2>{\node [shading = axis,rectangle, bottom color=green!50!gray, top color=gray, minimum height=5.5cm, minimum width=5.5cm] (hab1) at (0,0) {};}
+			\uncover<1-2>{\node [shading = axis,rectangle, bottom color=green!50!gray, top color=gray, minimum height=2.5cm, minimum width=5.5cm] (hab1) at (0,0) {};}
 			
-			\uncover<3->{\node [shading = axis,rectangle, bottom color=green, top color=green!50!gray, minimum height=5.5cm, minimum width=5.5cm] (hab1) at (0,0) {};}
+			\uncover<3->{\node [shading = axis,rectangle, bottom color=green, top color=green!50!gray, minimum height=2.5cm, minimum width=5.5cm] (hab1) at (0,0) {};}
 			
 			\uncover<1>{\node (sun) at ($(hab1.150)+(-1,1)$) {\includegraphics[width = 0.10\textwidth]{Figures/sun.png}};}
 			\uncover<2->{\node (sun) at ($(hab1.150)+(-1,1)$) {\includegraphics[width = 0.15\textwidth]{Figures/sun.png}};}
@@ -573,8 +573,10 @@
 			\node (vole4) at (-1.5,-0.3) {\includegraphics[width = 0.06\textwidth]{Figures/snowwwvole2}};
 			\node (vole5) at (1.7,-0.15) {\includegraphics[width = 0.04\textwidth]{Figures/snowwwvole2}};}
 			
-			\uncover<4>{\node (vole1b) at (0,2) {\includegraphics[width = 0.05\textwidth]{Figures/snowwwvole2}};
-			\node (vole2b) at (1,0.3) {\includegraphics[width = 0.06\textwidth]{Figures/snowwwvole2}};
+			\uncover<4>{
+			\node [shading = axis,rectangle, bottom color=green, top color=green!50!gray, minimum height=2.5cm, minimum width=5.5cm] (hab2) at ($(hab1)+(0,0)$) {};
+			\node (vole1b) at (0,2) {\includegraphics[width = 0.05\textwidth]{Figures/snowwwvole2}};
+			\node (vole2b) at (1,2.3) {\includegraphics[width = 0.06\textwidth]{Figures/snowwwvole2}};
 			\node (vole3b) at (-0.7,2.3) {\includegraphics[width = 0.03\textwidth]{Figures/snowwwvole2}};
 			\node (vole4b) at (-1.5,1.7) {\includegraphics[width = 0.06\textwidth]{Figures/snowwwvole2}};
 			\node (vole5b) at (1.7,1.25) {\includegraphics[width = 0.04\textwidth]{Figures/snowwwvole2}};}	
