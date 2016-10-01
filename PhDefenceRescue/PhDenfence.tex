@@ -529,6 +529,13 @@
 \end{frame}
 %%%%%%%%%%%
 \begin{frame}
+\begin{figure}
+	\includegraphics[width=\textwidth]{Figures/Dynhet}
+\end{figure}
+\end{frame}
+%%%%%%%%%%%
+
+\begin{frame}
 \end{frame}
 %%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -627,10 +634,136 @@
 
 \section{Evolution or plasticity? What drives phenotypic change?}
 
+\begin{frame}{Evolution or plasticity?}
+
+	\begin{enumerate}[<+->]
+		\item \textbf{Age-structured Price's equation} \footnotesize - Coulson \& Tuljapurkar (2008). The dynamics of a quantitative trait in an age-structured population living in a variable environment. The American Naturalist, 172(5)
+		\item \textbf{Integral Projection Models} \footnotesize - Easterling, Ellner \& Dixon (2000). Size-specific sensitivity: applying a new structured population model. Ecology, 81(3)\\
+		Coulson, Tuljapurkar \& Childs (2010). Using evolutionary demography to link life history theory, quantitative genetics and population ecology. The Journal of Animal Ecology, 79(6)
+		\item \textbf{Geber's Method} \footnotesize - Ellner, Geber \& Hairston (2011). Does rapid evolution matter? Measuring the rate of contemporary evolution and its impacts on ecological dynamics. Ecology Letters, 14(6)
+		\item \textbf{Animal model} \footnotesize - Henderson (1950) Estimation of genetic parameters. Annals of Mathematical Statistics, 21
+	\end{enumerate}
+\end{frame}
+%%%%%%%%%%%
+
+\begin{frame}
+	
+	\begin{figure}
+	\includegraphics[width=\textwidth]{Figures/Decpop}
+	\end{figure}
+	
+\end{frame}
+%%%%%%%%%%%
+
 \begin{frame}
 
-\end{frame}
+\begin{center}
+\begin{tabular}{p{2cm}|c c c c}
+\hline
+Question & Animal & Geber's & Age-structured & Integral\\
+				& model		& method	& Price's equation & projection models \\
+\hline
+Evolution? & $\alert<+>{\boldsymbol{++}}$ & $+$ & $--$ & $--$ \\
 
+Selection? & $+$ & $+$ & $++$ & $++$ \\
+
+Heritability? & $++$ & $\pm$ & $-$ & $-$ \\
+
+Changing age structure? & $+$ & $\pm$ & $++$ & $++$ \\
+\end{tabular}
+\end{center}
+
+\end{frame}
+%%%%%%%%%%%
+
+\begin{frame}{The animal model}
+Pedigree $\rightarrow$ similarity between relatives $\rightarrow$ additive genetic variance
+\begin{equation*}
+\text{heritability} = \frac{\text{additive genetic variance}}{\text{phenotypic variance}} 
+\end{equation*}
+
+\begin{columns}
+	\begin{column}[c]{0.5\textwidth}
+	\begin{center}
+	\vspace{-10pt}
+	\uncover<3->{$\mathbf{h^2=0}$}
+	\end{center}
+		\vspace{-10pt}
+		\begin{figure}
+			\begin{tikzpicture}[
+				man/.style={rectangle,draw},
+				woman/.style={rectangle,draw,rounded corners=.8ex},
+				first/.style={level distance=6pt},
+				level 1/.style={sibling distance=15pt}]
+				%level 2/.style={sibling distance=15pt}]
+					% Parents
+					\uncover<3->{
+					\coordinate (family1) at (0,0)
+						child[grow=left,level distance=10pt]{node[man,anchor=east,fill=red!90!blue]{}}
+						child[grow=right,level distance=10pt]{node[woman,anchor=west,fill=red!70!blue]{}}
+						child[grow=down,level distance=0ex]
+					[edge from parent fork down]
+					% Children and grandchildren
+					child{node[man,fill=red!40!blue] {}}
+					child{node[woman,fill=red!5!blue] {}}
+					child {node[man,fill=red!50!blue] {}}
+					child {node[woman,fill=red!10!blue] {}}
+					child {node[woman,fill=red!20!blue] {}};
+				
+				\coordinate (family2) at (2,0)
+						child[grow=left,level distance=10pt]{node[man,anchor=east,fill=red!20!blue]{}}
+						child[grow=right,level distance=10pt]{node[woman,anchor=west,fill=red!5!blue]{}}
+						child[grow=down,level distance=0ex]
+					[edge from parent fork down]
+					% Children and grandchildren
+					child{node[man,fill=red!0!blue] {}}
+					child{node[man,fill=red!100!blue] {}}
+					child {node[woman,fill=red!40!blue] {}};	}
+				\end{tikzpicture}
+			\end{figure}
+		\end{column}
+		\begin{column}[c]{0.5\textwidth}
+			\vspace{-10pt}
+			\begin{center}
+				\uncover<4->{$\mathbf{h^2=1}$}
+			\end{center}
+			\vspace{-10pt}
+			\begin{figure}
+			\begin{tikzpicture}[
+			man/.style={rectangle,draw},
+			woman/.style={rectangle,draw,rounded corners=.8ex},
+			first/.style={level distance=6pt},
+			level 1/.style={sibling distance=15pt}]
+				% Parents
+				\uncover<4->{
+				\coordinate
+					child[grow=left,level distance=10pt]{node[man,anchor=east,fill=red!90!blue]{}}
+					child[grow=right,level distance=10pt]{node[woman,anchor=west,fill=red!70!blue]{}}
+					child[grow=down,level distance=0ex]
+				[edge from parent fork down]
+				% Children and grandchildren
+				child{node[man,fill=red!99!blue] {}}
+				child{node[woman,fill=red!60!blue] {}}
+				child {node[man,fill=red!90!blue] {}}
+				child {node[woman,fill=red!80!blue] {}}
+				child {node[woman,fill=red!70!blue] {}};
+			
+					\coordinate (family2) at (2,0)
+					child[grow=left,level distance=10pt]{node[man,anchor=east,fill=red!20!blue]{}}
+					child[grow=right,level distance=10pt]{node[woman,anchor=west,fill=red!5!blue]{}}
+					child[grow=down,level distance=0ex]
+				[edge from parent fork down]
+				% Children and grandchildren
+				child{node[man,fill=red!10!blue] {}}
+				child{node[man,fill=red!30!blue] {}}
+				child {node[woman,fill=red!0!blue] {}};
+				}
+			\end{tikzpicture}
+		\end{figure}
+	\end{column}
+\end{columns}
+\end{frame}
+%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%% Monitoring %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
