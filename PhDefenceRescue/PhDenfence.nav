@@ -105,13 +105,17 @@
 \headcommand {\beamer@framepages {139}{139}}
 \headcommand {\slideentry {4}{0}{4}{140/140}{}{0}}
 \headcommand {\beamer@framepages {140}{140}}
-\headcommand {\sectionentry {5}{What is left?}{141}{What is left?}{0}}
-\headcommand {\beamer@sectionpages {137}{140}}
-\headcommand {\beamer@subsectionpages {137}{140}}
-\headcommand {\slideentry {5}{0}{1}{141/141}{}{0}}
+\headcommand {\slideentry {4}{0}{5}{141/141}{}{0}}
 \headcommand {\beamer@framepages {141}{141}}
-\headcommand {\beamer@partpages {1}{141}}
-\headcommand {\beamer@subsectionpages {141}{141}}
-\headcommand {\beamer@sectionpages {141}{141}}
-\headcommand {\beamer@documentpages {141}}
-\headcommand {\def \inserttotalframenumber {43}}
+\headcommand {\slideentry {4}{0}{6}{142/142}{}{0}}
+\headcommand {\beamer@framepages {142}{142}}
+\headcommand {\sectionentry {5}{What is left?}{143}{What is left?}{0}}
+\headcommand {\beamer@sectionpages {137}{142}}
+\headcommand {\beamer@subsectionpages {137}{142}}
+\headcommand {\slideentry {5}{0}{1}{143/143}{}{0}}
+\headcommand {\beamer@framepages {143}{143}}
+\headcommand {\beamer@partpages {1}{143}}
+\headcommand {\beamer@subsectionpages {143}{143}}
+\headcommand {\beamer@sectionpages {143}{143}}
+\headcommand {\beamer@documentpages {143}}
+\headcommand {\def \inserttotalframenumber {45}}
