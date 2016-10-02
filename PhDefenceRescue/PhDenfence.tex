@@ -777,6 +777,24 @@ Change with time = evolution
 \end{frame}
 %%%%%%%%%%%
 
+\begin{frame}%break
+\end{frame}
+%%%%%%%%%%%
+
+\begin{frame}{Evolution in the wild}
+% many examples
+
+\end{frame}
+%%%%%%%%%%%
+
+\begin{frame}{Evolution in the wild}
+%but difficult to see it happen live and understand its causes
+	\begin{figure}
+		\includegraphics[width=\textwidth]{Figures/Wild}
+	\end{figure}
+\end{frame} % To do that we need very accurate individual-based monitoring over multiple generations
+%%%%%%%%%%%
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%% Monitoring %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -904,6 +922,175 @@ Change with time = evolution
 
 %Open some dice! -> DNA and grass in it, leading to most common number...
 
+\begin{frame}
+\begin{figure}
+\begin{tikzpicture}[]
+
+%\tikzset{>=stealth}
+
+\def\separr{10pt}
+\def\separrVoles{12pt}
+\def\linew{2pt}
+\def\toSelEv{2cm}
+\def\lengthgrowth{1.25cm}
+\def\betweenGrowth{2cm}
+
+%fitness square
+\coordinate (fitbl) at (0,0);
+\coordinate (fitbr) at (3,0);
+\coordinate (fittl) at (0,3);
+\coordinate (fittr) at (3,3);
+
+\uncover<3>{
+\shade[shading=axis,right color=mypurple!80!white, left color=mypurple!20!white,shading angle=135] (fitbl) -- (fitbr) -- (fittr) -- (fittl);				
+}
+
+\uncover<4->{
+\shade[shading=axis,right color=red, left color=red!5!white,shading angle=71.5] (fitbl) -- (fitbr) -- (fittr) -- (fittl);				
+}
+
+%fitness square attributes
+\uncover<1->{
+\draw[->,line width=\linew,color=mygreen] ($(fitbl)-(0,\separr)$)--($(fitbr)-(0,\separr)$);
+\node[] (plus) at ($(fitbr)+(0,-2*\separr)$) {$\boldsymbol{+}$};
+\node[] (plus) at ($(fitbl)+(0,-2*\separr)$) {$\boldsymbol{-}$};
+\node[] (plus) at ($(fitbl)+(1.5,-2.5*\separr)$) {\includegraphics[width=1cm]{Figures/GrassGreen}};}%ENV
+
+\uncover<2->{
+\draw[->,line width=\linew,color=myorange] ($(fitbl)-(\separr,0)$)--($(fittl)-(\separr,0)$);
+\node[] (plus) at ($(fittl)+(-2*\separr,0)$) {$\boldsymbol{+}$};
+\node[] (plus) at ($(fitbl)+(-2*\separr,0)$) {$\boldsymbol{-}$};
+\node[] (plus) at ($(fitbl)+(-2.5*\separr,1.5)$) {\includegraphics[width=1cm]{Figures/dnaOrange}};}%DNA
+
+\uncover<6->{
+\foreach \x in {1,2,3} {
+	\draw[color=white,line width=1pt] ($(fitbl)+(\x-1,0)$) -- ($(fittl)+(\x,0)$);
+	}
+	}
+
+\uncover<5->{
+\foreach \x in {1,2,3} {
+	\draw[color=mypurple,line width=1pt] ($(fitbl)+(\x,0)$) -- ($(fitbl)+(0,\x)$);
+	}
+\foreach \x in {1,2} {
+	\draw[color=mypurple,line width=1pt] ($(fittr)-(\x,0)$) -- ($(fittr)-(0,\x)$);
+	}
+	\node[rotate=315,color=mypurple] (fitiso) at (0.9,1.3) {mass isolines};
+	}
+	
+	\uncover<6->{\node[rotate=71.5,color=white] (fitiso) at (2.2,1.15) {fitness isolines};
+	}
+
+
+
+\uncover<1->{
+\node[] (svsmall) at ($(fitbl)+(\separrVoles,\separrVoles)$) {\includegraphics[width=0.7cm]{Figures/Snowvoleshadow}};}
+
+\uncover<4->{\node[] (juv) at ($(svsmall)+(-0.05,-0.25)$) {\includegraphics[width=0.25cm]{Figures/JuvVole}};
+\node[] (juv) at ($(svsmall)+(0.25,-0.3)$) {\includegraphics[width=0.25cm]{Figures/JuvVole}};}
+
+\uncover<2->{
+\node[] (svmed1) at ($(fittl)+(\separrVoles,-\separrVoles)$) {\includegraphics[width=1.3cm]{Figures/Snowvoleshadow}};}
+\uncover<4->{\node[] (juv) at ($(svmed1)+(-0.1,-0.3)$) {\includegraphics[width=0.25cm]{Figures/JuvVole}};}
+
+\uncover<1->{
+\node[] (svsmed2) at ($(fitbr)+(-\separrVoles,\separrVoles)$) {\includegraphics[width=1.3cm]{Figures/Snowvoleshadow}};}
+\uncover<4->{\node[] (juv) at ($(svsmed2)+(0,-0.3)$) {\includegraphics[width=0.25cm]{Figures/JuvVole}};
+\node[] (juv) at ($(svsmed2)+(-0.3,-0.3)$) {\includegraphics[width=0.25cm]{Figures/JuvVole}};
+\node[] (juv) at ($(svsmed2)+(0.3,-0.3)$) {\includegraphics[width=0.25cm]{Figures/JuvVole}};
+\node[] (juv) at ($(svsmed2)+(-0.27,0)$) {\includegraphics[width=0.25cm]{Figures/JuvVole}};}
+
+\uncover<3->{
+\node[] (svbig) at ($(fittr)+(-\separrVoles,-\separrVoles)$) {\includegraphics[width=2cm]{Figures/Snowvoleshadow}};}
+\uncover<4->{\node[] (juv) at ($(svbig)+(-0.35,0.2)$) {\includegraphics[width=0.25cm]{Figures/JuvVole}};
+\node[] (juv) at ($(svbig)+(-0.3,-0.3)$) {\includegraphics[width=0.25cm]{Figures/JuvVole}};
+\node[] (juv) at ($(svbig)+(-0.35,-0.05)$) {\includegraphics[width=0.25cm]{Figures/JuvVole}};}
+
+%Selection
+\coordinate (SelOr) at ($(fittr)+(\toSelEv,-0.5)$);
+\coordinate (SelY) at ($(SelOr)+(0,1)$);
+\coordinate (SelX) at ($(SelOr)+(1,0)$);
+
+\uncover<7->{
+\draw[->,color=mypurple,thick] (SelOr)--(SelX);
+\draw[->,thick] (SelOr)--(SelY);
+%\node[anchor=north] (SellabX) at (SelX) {Mass};
+\node[anchor=north] (SelVolL) at ($(SelOr)+(0,0.1)$) {\includegraphics[width=0.7cm]{Figures/Snowvoleshadow}};
+\node[anchor=north] (SelVolH) at ($(SelX)+(0,0.3)$) {\includegraphics[width=2cm]{Figures/Snowvoleshadow}};
+
+\node[anchor=east,rotate=90] (SellabY) at ($(SelY)+(-0.22,0.1)$) {Fitness};
+
+
+\draw[color=red] ($(SelOr)+(0.1,0.2)$)--($(SelOr)+(0.9,0.8)$);
+}
+%\node[anchor=south] (sfhv) at ($(SelY)+(0,0.5)$) {Selection for heavier voles};
+
+%Sel on genes
+\coordinate (SGOr) at ($(fitbr)+(\toSelEv,-0.5)$);
+\coordinate (SGY) at ($(SGOr)+(0,1)$);
+\coordinate (SGX) at ($(SGOr)+(1,0)$);
+
+\uncover<8->{
+\draw[->,thick,color=myorange] (SGOr)--(SGX);
+\draw[->,thick] (SGOr)--(SGY);
+\node[anchor=west] (SGlabX) at ($(SGX)+(-0.2,0)$) {\includegraphics[width=0.5cm]{Figures/dnaOrange}};
+\node[anchor=east,rotate=90] (SGlabY) at ($(SGY)+(-0.22,0.1)$){Fitness};
+
+\draw[color=red] ($(SGOr)+(0.1,0.8)$)--($(SGOr)+(0.9,0.2)$);
+}
+
+%Evolution
+\coordinate (EvOr) at ($(SGOr)+(2.5,0)$);
+\coordinate (EvY) at ($(EvOr)+(0,1)$);
+\coordinate (EvX) at ($(EvOr)+(1,0)$);
+
+\uncover<9->{
+\draw[->,thick] (EvOr)--(EvX);
+\draw[->,thick,color=myorange] (EvOr)--(EvY);
+\node[anchor=north] (EvlabX) at (EvX) {Year};
+\node[anchor=east] (EvlabY) at ($(EvY)+(0.2,0)$) {\includegraphics[width=0.5cm]{Figures/dnaOrange}};
+
+\draw[color=red] ($(EvOr)+(0.1,0.8)$)--($(EvOr)+(0.9,0.2)$);
+}				
+%\node[anchor=north] (eflv) at ($(EvOr)+(0,-0.5)$) {Evolution for lighter voles};
+
+				
+%To Sel and Ev
+\coordinate (cross) at ($(fittr)+(\toSelEv/3,-1.5)$);
+
+\uncover<7->{
+\draw[->,line width=4pt]	($(cross)+(-0.5,0)$)--(cross)--($(SelOr)+(-0.5,0)$);}
+
+\uncover<8->{
+\draw[->,line width=4pt]	(cross)--($(SGOr)+(-0.5,1)$);}
+
+\uncover<9->{
+\draw[->,line width=4pt] ($(SGX)+(0.5,0.5)$) -- ($(EvOr)+(-0.5,0.5)$);}
+%to matrix
+%\draw[->,line width=4pt]	($(G1X)+(0.2,0)$)--($(cross)+(-5.4,0)$);
+
+%%%%%%%%%%%%%%%%%%%%%
+%\node[anchor=south] (snow) at ($(fittl)+(1.25,0.5)$) {\includegraphics[width=5cm]{BDsnow-1}};
+%\node[] (birth) at ($(snow)+(-6,0)$) {\includegraphics[width=5cm]{Climatic_trend-1}};
+%
+%\draw[->,line width=4pt]	($(snow.west)$)--($(birth.east)$);
+%\draw[->,line width=4pt]	($(birth.south)$)--($(birth.south)+(0,-0.5)$);
+				
+
+				
+\end{tikzpicture}
+
+\end{figure}
+\uncover<10->{
+\begin{alertblock}{Results so far}
+	\begin{enumerate}
+		\uncover<10->{\item Apparent stasis\dots}
+		\uncover<11->{\item \dots but genetic change towards lower mass}
+		\uncover<12->{\item \textit{What is the selective pressure? Why don't we see it?}}
+	\end{enumerate}
+\end{alertblock}
+} 
+\end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%% Chap 4 %%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
