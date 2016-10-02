@@ -962,20 +962,149 @@ Change with time = evolution
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Are snow vole evolving? Why?}
 
+\begin{frame}{Variance in fitness?}
 
-\begin{frame}
-	
+\only<2>{\begin{figure}
+		\includegraphics[width=0.5\textwidth]{Figures/figure/dice2-4}
+	\end{figure}\vspace{-0.5cm}
+	\begin{center}
+	\begin{table}
+\begin{tabular}{c c c c}
+\hline 
+& Estimate & 95\% CI & p-value\\
+\hline
+Latent variance in survival & 0 & [0;0.248] & 0.50\\
+Latent variance in reproduction & 0.37 & [0.25, 0.49] & $<10^{-16}$\\
+\hline
+\end{tabular}
+\end{table}
+\end{center}}
+
+\only<3>{
+\begin{columns}
+\begin{column}[c]{0.3\textwidth}
+\begin{figure}
+		\includegraphics[width=0.9\textwidth]{Figures/pedigreeplot}
+	\end{figure}
+\end{column}
+\begin{column}[c]{0.7\textwidth}
+	\begin{center}
+	Relative lifetime reproductive success\\
+	variance $\approx$ 1.7
+	\end{center}
+	\end{column}
+\end{columns}
+	}
+
+\only<4>{
+\begin{figure}
+			\begin{tikzpicture}[
+			man/.style={rectangle,draw},
+			woman/.style={rectangle,draw,rounded corners=.8ex},
+			first/.style={level distance=6pt},
+			level 1/.style={sibling distance=15pt}]
+				% Parents
+				\coordinate
+					child[grow=left,level distance=10pt]{node[man,anchor=east,fill=red!90!blue]{}}
+					child[grow=right,level distance=10pt]{node[woman,anchor=west,fill=red!70!blue]{}}
+					child[grow=down,level distance=0ex]
+				[edge from parent fork down]
+				% Children and grandchildren
+				child{node[man,fill=red!99!blue] {}}
+				child{node[woman,fill=red!60!blue] {}}
+				child {node[man,fill=red!90!blue] {}}
+				child {node[woman,fill=red!80!blue] {}}
+				child {node[woman,fill=red!70!blue] {}};
+			
+					\coordinate (family2) at (2,0)
+					child[grow=left,level distance=10pt]{node[man,anchor=east,fill=red!20!blue]{}}
+					child[grow=right,level distance=10pt]{node[woman,anchor=west,fill=red!5!blue]{}}
+					child[grow=down,level distance=0ex]
+				[edge from parent fork down]
+				% Children and grandchildren
+				child{node[man,fill=red!10!blue] {}}
+				child{node[man,fill=red!30!blue] {}}
+				child {node[woman,fill=red!0!blue] {}};
+			\end{tikzpicture}
+\end{figure}
+	\begin{center}
+	\begin{table}
+		\begin{tabular}{c c c}
+		\hline 
+		& Estimate & 95\% CI \\
+		\hline
+		Additive genetic variation & 0.10 & [0.06;0.19] \\
+		Heritability & 0.06 & [0.04;0.12] \\
+		\hline
+		\end{tabular}
+	\end{table}
+	\end{center}}
+
+\vfill
+\begin{block}{Adaptive evolution in the snow vole?}
+	\begin{itemize}
+		\uncover<2->{\item Non random variation fitness components}
+		\uncover<3->{\item Variation in fitness}
+		\uncover<4->{\item Additive genetic variation in fitness}
+	\end{itemize}
+\end{block}
+
 \end{frame}
 %%%%%%%%%%%
 
+%%% Here introduce selection on mass
+\begin{frame}{Evolution of body mass}
+	\begin{alertblock}{Prediction}
+				\begin{itemize}[<+->]
+					\item Selection = +0.86g (p$< 10^{-3}$)
+					\item Heritability = 20\% (p$ < 10^{-3}$)
+					\item Response = Selection $\times$ heritability = + 0.22g/year
+				\end{itemize}
+			\end{alertblock}
+			
+			\uncover<4->{\begin{alertblock}{Phenotypic observation}	
+	\begin{columns}
+		\begin{column}[c]{0.6\textwidth}
+			\begin{figure}
+				\includegraphics[width=1\textwidth]{Figures/PhenoTrends-1}
+			\end{figure}
+		\end{column}
+		\begin{column}[c]{0.4\textwidth}
+			\begin{itemize}
+				\item Observed = +0.07g/year (p=0.14)
+			\end{itemize}
+		\end{column}
+		\end{columns}
+	\end{alertblock}}
+\end{frame}
+%%%%%%%%%%%
 
 \begin{frame}{Evolution of body mass}
+\alert{\textbf{Estimation of genetic change}}
+
+\vspace{-0.2cm}
+
 	\begin{figure}
-		\includegraphics[width=\textwidth]{Figures/EvolSmooth-1}
+		\includegraphics[width=0.75\textwidth]{Figures/DriftComp-1}
 	\end{figure}
 \end{frame}
 %%%%%%%%%%%
+%
+\begin{frame}{Evolution of body mass}
+\begin{alertblock}{Evolution Paradox}
+	\begin{itemize}
+		\item Apparent selection for higher mass
+		\item Adaptive evolution for lower mass
+	\end{itemize}
+\end{alertblock}
 
+\uncover<2->{
+	\begin{figure}
+		\colorbox{white}{\includegraphics[width=0.75\textwidth]{Figures/SelectionTotal-1}}
+	\end{figure}}
+	
+\end{frame}
+%%%%%%%%%%%
 
 \begin{frame}
 \begin{figure}
@@ -1137,19 +1266,25 @@ Change with time = evolution
 
 \end{figure}
 \uncover<10->{
-\begin{alertblock}{Results so far}
+\begin{alertblock}{Summary}
 	\begin{enumerate}
 		\uncover<10->{\item Apparent stasis\dots}
-		\uncover<11->{\item \dots but genetic change towards lower mass}
-		\uncover<12->{\item \textit{What is the selective pressure? Why don't we see it?}}
+		\uncover<11->{\item \dots but evolution towards lower mass}
+		\uncover<12->{\item \textit{Selective pressure?}}
 	\end{enumerate}
 \end{alertblock}
 } 
 \end{frame}
 %%%%%%%%%%%
-\subsection[Selective mechanism]{Selective mechanism}
 
-\begin{frame}
+\begin{frame}{}
+	\begin{figure}
+		\colorbox{white}{\includegraphics[width=\textwidth]{Figures/SelectionS-1}}
+	\end{figure}
+\end{frame}
+%%%%%%%%%%%
+
+\begin{frame}{}
 \frametitle{Snow falls and ontogeny}
 \vspace{-15pt}
 	\begin{figure}
@@ -1321,7 +1456,15 @@ Change with time = evolution
 \end{frame}
 %%%%%%%%%%%
 
-\begin{frame}
+
+\begin{frame}{Evolution of body mass}
+	\begin{figure}
+		\includegraphics[width=\textwidth]{Figures/EvolSmooth-1}
+	\end{figure}
+\end{frame}
+%%%%%%%%%%%
+
+\begin{frame}{Dynamics of selection VS. evolution}
 	\begin{figure}
 		\includegraphics[width=\textwidth]{Figures/Betas-1}
 	\end{figure}
