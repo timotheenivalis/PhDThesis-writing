@@ -78,20 +78,33 @@
 \headcommand {\beamer@subsectionpages {65}{101}}
 \headcommand {\slideentry {3}{0}{1}{102/102}{}{0}}
 \headcommand {\beamer@framepages {102}{102}}
-\headcommand {\slideentry {3}{0}{2}{103/114}{}{0}}
-\headcommand {\beamer@framepages {103}{114}}
-\headcommand {\sectionentry {4}{Do selection and evolution fluctuate?}{115}{Do selection and evolution fluctuate?}{0}}
-\headcommand {\beamer@sectionpages {102}{114}}
-\headcommand {\beamer@subsectionpages {102}{114}}
-\headcommand {\slideentry {4}{0}{1}{115/115}{}{0}}
-\headcommand {\beamer@framepages {115}{115}}
-\headcommand {\sectionentry {5}{What is left?}{116}{What is left?}{0}}
-\headcommand {\beamer@sectionpages {115}{115}}
-\headcommand {\beamer@subsectionpages {115}{115}}
-\headcommand {\slideentry {5}{0}{1}{116/116}{}{0}}
-\headcommand {\beamer@framepages {116}{116}}
-\headcommand {\beamer@partpages {1}{116}}
-\headcommand {\beamer@subsectionpages {116}{116}}
-\headcommand {\beamer@sectionpages {116}{116}}
-\headcommand {\beamer@documentpages {116}}
-\headcommand {\def \inserttotalframenumber {33}}
+\headcommand {\slideentry {3}{0}{2}{103/103}{}{0}}
+\headcommand {\beamer@framepages {103}{103}}
+\headcommand {\slideentry {3}{0}{3}{104/104}{}{0}}
+\headcommand {\beamer@framepages {104}{104}}
+\headcommand {\slideentry {3}{0}{4}{105/116}{}{0}}
+\headcommand {\beamer@framepages {105}{116}}
+\headcommand {\beamer@subsectionentry {0}{3}{1}{117}{Selective mechanism}}\headcommand {\beamer@subsectionpages {102}{116}}
+\headcommand {\slideentry {3}{1}{1}{117/119}{Selective mechanism}{0}}
+\headcommand {\beamer@framepages {117}{119}}
+\headcommand {\slideentry {3}{1}{2}{120/126}{Selective mechanism}{0}}
+\headcommand {\beamer@framepages {120}{126}}
+\headcommand {\sectionentry {4}{Do selection and evolution fluctuate?}{127}{Do selection and evolution fluctuate?}{0}}
+\headcommand {\beamer@sectionpages {102}{126}}
+\headcommand {\beamer@subsectionpages {117}{126}}
+\headcommand {\slideentry {4}{0}{1}{127/127}{}{0}}
+\headcommand {\beamer@framepages {127}{127}}
+\headcommand {\slideentry {4}{0}{2}{128/128}{}{0}}
+\headcommand {\beamer@framepages {128}{128}}
+\headcommand {\slideentry {4}{0}{3}{129/129}{}{0}}
+\headcommand {\beamer@framepages {129}{129}}
+\headcommand {\sectionentry {5}{What is left?}{130}{What is left?}{0}}
+\headcommand {\beamer@sectionpages {127}{129}}
+\headcommand {\beamer@subsectionpages {127}{129}}
+\headcommand {\slideentry {5}{0}{1}{130/130}{}{0}}
+\headcommand {\beamer@framepages {130}{130}}
+\headcommand {\beamer@partpages {1}{130}}
+\headcommand {\beamer@subsectionpages {130}{130}}
+\headcommand {\beamer@sectionpages {130}{130}}
+\headcommand {\beamer@documentpages {130}}
+\headcommand {\def \inserttotalframenumber {39}}

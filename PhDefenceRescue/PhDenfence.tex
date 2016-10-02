@@ -872,7 +872,7 @@ Change with time = evolution
 \end{frame}
 %%%%%%%%%%%
 
-\begin{frame}[plain]{}
+\begin{frame}
 	\begin{figure}
 	\centering
 		\includegraphics[height= \textheight]{Figures/map-1}
@@ -880,7 +880,7 @@ Change with time = evolution
 \end{frame}
 %%%%%%%%%%%
 
-\begin{frame}[plain]{}
+\begin{frame}
 	\begin{figure}
 	\centering
 		\begin{tikzpicture}
@@ -892,7 +892,7 @@ Change with time = evolution
 \end{frame}
 %%%%%%%%%%%
 
-\begin{frame}[plain]{}
+\begin{frame}
 	\begin{figure}
 	\centering
 		\includegraphics[width= \textwidth]{Figures/fieldposts2}
@@ -900,7 +900,7 @@ Change with time = evolution
 \end{frame}
 %%%%%%%%%%%
 
-\begin{frame}[plain]{}
+\begin{frame}
 	\begin{figure}
 	\centering
 		\includegraphics[width= \textwidth]{Figures/boulder}
@@ -908,7 +908,7 @@ Change with time = evolution
 \end{frame}
 %%%%%%%%%%%
 
-\begin{frame}[plain]{}
+\begin{frame}
 	\begin{figure}
 	\centering
 		\includegraphics[width= \textwidth]{Figures/DSC_2027trap}
@@ -962,7 +962,20 @@ Change with time = evolution
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Are snow vole evolving? Why?}
 
-%Open some dice! -> DNA and grass in it, leading to most common number...
+
+\begin{frame}
+	
+\end{frame}
+%%%%%%%%%%%
+
+
+\begin{frame}{Evolution of body mass}
+	\begin{figure}
+		\includegraphics[width=\textwidth]{Figures/EvolSmooth-1}
+	\end{figure}
+\end{frame}
+%%%%%%%%%%%
+
 
 \begin{frame}
 \begin{figure}
@@ -1133,11 +1146,187 @@ Change with time = evolution
 \end{alertblock}
 } 
 \end{frame}
+%%%%%%%%%%%
+\subsection[Selective mechanism]{Selective mechanism}
+
+\begin{frame}
+\frametitle{Snow falls and ontogeny}
+\vspace{-15pt}
+	\begin{figure}
+		\includegraphics[width=0.5\textwidth]{Figures/BDsnow-1}
+		\uncover<2->{\includegraphics[width=0.5\textwidth]{Figures/Climatic_trend-1}}
+	\end{figure}
+\vspace{-15pt}	
+	\begin{alertblock}{}
+		\begin{itemize}
+			\uncover<1->{\item Snow falls constrain birth dates}
+			\uncover<2->{\item Snow-free season has shortened}
+			\uncover<3->{\item \textit{Less time to grow $\rightarrow$ Selection for smaller voles?}}
+		\end{itemize}
+	\end{alertblock}
+\end{frame}
+%%%%%%%%%%%
+
+\begin{frame}{Selection during ontogeny?}
+\begin{figure}
+\begin{tikzpicture}[]
+
+\def\separr{10pt}
+\def\separrVoles{12pt}
+\def\linew{2pt}
+\def\toSelEv{2cm}
+\def\lengthgrowth{1.25cm}
+\def\betweenGrowth{2.3cm}
+
+%fitness square
+\coordinate (fitbl) at (0,0);
+
+%Growth curves%%%%%%%%%%%%%%%%%%%%%%%
+
+%First growth curves
+\coordinate (G1OR) at ($(fitbl)+(-4,1.5)$);
+\coordinate (G1Y) at ($(G1OR)+(0,1)$);
+\coordinate (G1X) at ($(G1OR)+(\lengthgrowth,0)$);
+\node[] (D) at ($(G1OR)+(-0.25*\lengthgrowth,1.65)$) {\large \textbf{D}};
+
+\uncover<3->{
+%\draw[black,domain=-3:-2] plot (\x,{1.5*(2-exp(-0.2*(\x)))});
+\draw[color=mypurple1,thick] (G1OR) to[out=0,in=235] ($(G1OR)+(0.4,0.2)$);
+\draw[color=mypurple1,thick] ($(G1OR)+(0.4,0.2)$) to[out=55,in=180] ($(G1X)+(-0.6,0.4)$) ;
+\draw[color=mypurple1,thick] ($(G1X)+(-0.61,0.4)$)--($(G1X)+(0,0.4)$) ;
+
+\draw[color=mypurple1,thick] ($(G1OR)+(0.4,0)$) to[out=0,in=235] ($(G1OR)+(0.8,0.2)$);
+\draw[color=mypurple1,thick] ($(G1OR)+(0.8,0.2)$) to[out=55,in=180] ($(G1X)+(-0.2,0.4)$);
+
+\draw[color=mypurple2,thick] (G1OR) to[out=0,in=245] ($(G1OR)+(0.5,0.45)$);
+\draw[color=mypurple2,thick] ($(G1OR)+(0.5,0.45)$) to[out=65,in=190] ($(G1X)+(-0.4,0.9)$) ;
+\draw[color=mypurple2,thick] ($(G1X)+(-0.41,0.9)$)--($(G1X)+(0,0.9)$) ;
+
+\draw[color=mypurple2,thick] ($(G1OR)+(0.4,0)$) to[out=0,in=245] ($(G1OR)+(0.9,0.45)$);
+\draw[color=mypurple2,thick] ($(G1OR)+(0.9,0.45)$) to[out=65,in=240] ($(G1OR)+(0.99,0.65)$);
+\draw[color=mypurple2,thick,densely dotted] ($(G1OR)+(0.9,0.45)$) to[out=65,in=190] ($(G1X)+(0,0.9)$) ;
+
+\draw[->] (G1OR)--(G1Y);
+\draw[->] (G1OR)--(G1X);
+\node[anchor=north] (ttime1) at ($(G1X)+(-0.5,0)$) {time};
+\draw[color=blue] ($(G1OR)+(0.97,0)$)--($(G1OR)+(0.97,1.1)$);
+%\draw[color=blue,->] ($(G1OR)+(1.0,1.12)$)--($(G1OR)+(1.5,1.12)$);
+%\node[color=blue] (wint1) at ($(G1OR)+(1.2,1.2)$) {\tiny winter};
+%\node[anchor=south] (mm1) at (G1Y) {Mass};
+
+\node[] (svl1) at ($(G1X)+(0.2,0.4)$) {\includegraphics[width=0.6cm]{Figures/SnowvoleshadowLight}};
+\node[] (svh1) at ($(G1X)+(0.2,0.9)$) {\includegraphics[width=1cm]{Figures/SnowvoleshadowDark}};
+}
+%Second growth curves
+\coordinate (G2OR) at ($(G1OR)+(-\betweenGrowth,0)$);
+\coordinate (G2Y) at ($(G2OR)+(0,1)$);
+\coordinate (G2X) at ($(G2OR)+(\lengthgrowth,0)$);
+
+\uncover<1->{
+\draw[color=mypurple1,thick] (G2OR) to[out=0,in=235] ($(G2OR)+(0.4,0.2)$);
+\draw[color=mypurple1,thick] ($(G2OR)+(0.4,0.2)$) to[out=55,in=180] ($(G2X)+(-0.6,0.4)$) ;
+\draw[color=mypurple1,thick] ($(G2X)+(-0.61,0.4)$)--($(G2X)+(0,0.4)$) ;
+
+\draw[color=mypurple1,thick] ($(G2OR)+(0.4,0)$) to[out=0,in=235] ($(G2OR)+(0.8,0.2)$);
+\draw[color=mypurple1,thick] ($(G2OR)+(0.8,0.2)$) to[out=55,in=180] ($(G2X)+(-0.2,0.4)$);
+
+\draw[color=mypurple2,thick] (G2OR) to[out=0,in=245] ($(G2OR)+(0.5,0.45)$);
+\draw[color=mypurple2,thick] ($(G2OR)+(0.5,0.45)$) to[out=65,in=190] ($(G2X)+(-0.4,0.9)$) ;
+\draw[color=mypurple2,thick] ($(G2X)+(-0.41,0.9)$)--($(G2X)+(0,0.9)$) ;
+
+\draw[color=mypurple2,thick] ($(G2OR)+(0.4,0)$) to[out=0,in=245] ($(G2OR)+(0.9,0.45)$);
+\draw[color=mypurple2,thick] ($(G2OR)+(0.9,0.45)$) to[out=65,in=190] ($(G2X)+(0,0.9)$) ;
+
+\draw[->] (G2OR)--(G2Y);
+\draw[->] (G2OR)--(G2X);
+
+
+\node[anchor=north] (ttime2) at ($(G2X)+(-0.5,0)$) {time};
+\node[anchor=315,rotate=90] (mm2) at ($(G2Y)+(0,-0.25)$) {mass};
+
+\node[] (svl2) at ($(G2X)+(0.2,0.4)$) {\includegraphics[width=0.6cm]{Figures/SnowvoleshadowLight}};
+\node[] (svh2) at ($(G2X)+(0.2,0.9)$) {\includegraphics[width=1cm]{Figures/SnowvoleshadowDark}};
+
+\draw[color=blue] ($(G2OR)+(1.15,0)$)--($(G2OR)+(1.15,1.1)$);
+}
+%%%Histograms %%%%%%%%%%%%%%%%%
+%First hist
+\coordinate (H1OR) at ($(G1OR)+(0,-2)$);
+\coordinate (H1Y) at ($(H1OR)+(0,1)$);
+\coordinate (H1X) at ($(H1OR)+(\lengthgrowth,0)$);
+
+%\node[anchor=south] (mm2) at (H1Y) {Freq.};
+\uncover<4->{
+\draw[color=mypurple1,fill=mypurple1] ($(H1OR)+(0.3,0)$) -- ($(H1OR)+(0.5,0)$) -- ($(H1OR)+(0.5,0.67)$) -- ($(H1OR)+(0.3,0.67)$) -- ($(H1OR)+(0.3,0)$);
+
+\draw[color=mypurple2,fill=mypurple2] ($(H1OR)+(0.8,0)$) -- ($(H1OR)+(1,0)$) -- ($(H1OR)+(1,0.33)$) -- ($(H1OR)+(0.8,0.33)$) -- ($(H1OR)+(0.8,0)$);
+\draw[->] (H1OR)--(H1Y);
+\draw[] (H1OR)--(H1X);
+\node[anchor=45] (gl1) at ($(H1OR)+(0.6,0.1)$) {\includegraphics[width=0.6cm]{Figures/SnowvoleshadowLight}};
+\node[anchor=45] (gh1) at ($(H1OR)+(1.3,0.2)$) {\includegraphics[width=1cm]{Figures/SnowvoleshadowDark}};
+
+\draw[color=red,thick] ($(H1OR)+(0,0.7)$) -- ($(H1X)+(0,0.35)$);
+\node[color=red,anchor=south,rotate=345] (yos) at ($(H1OR)+(\lengthgrowth/2,0.55)$) {\tiny selection};
+}
+%Second hist
+\coordinate (H2OR) at ($(G2OR)+(0,-2)$);
+\coordinate (H2Y) at ($(H2OR)+(0,1)$);
+\coordinate (H2X) at ($(H2OR)+(\lengthgrowth,0)$);
+
+\uncover<2->{
+\node[anchor=315,rotate=90] (mm2) at ($(H2Y)+(0,-0.25)$) {fitness};
+\draw[color=darkred,thick] ($(H2OR)+(0,0.55)$) -- ($(H2X)+(0,0.55)$);
+\node[color=darkred,anchor=south] (nos) at ($(H2OR)+(\lengthgrowth/2,0.55)$) {\tiny no selection};
+
+\draw[color=mypurple1,fill=mypurple1] ($(H2OR)+(0.3,0)$) -- ($(H2OR)+(0.5,0)$) -- ($(H2OR)+(0.5,0.5)$) -- ($(H2OR)+(0.3,0.5)$) -- ($(H2OR)+(0.3,0)$);
+
+\draw[color=mypurple2,fill=mypurple2] ($(H2OR)+(0.8,0)$) -- ($(H2OR)+(1,0)$) -- ($(H2OR)+(1,0.5)$) -- ($(H2OR)+(0.8,0.5)$) -- ($(H2OR)+(0.8,0)$);
+
+\draw[->] (H2OR)--(H2Y);
+\draw[] (H2OR)--(H2X);
+
+\node[anchor=45] (gl2) at ($(H2OR)+(0.6,0.1)$) {\includegraphics[width=0.6cm]{Figures/SnowvoleshadowLight}};
+\node[anchor=45] (gh2) at ($(H2OR)+(1.3,0.2)$) {\includegraphics[width=1cm]{Figures/SnowvoleshadowDark}};
+}
+%Boxes
+\draw[rounded corners] ($(G1X)+(0.8,1.3)$) rectangle ($(H1OR)+(-0.2,-1.5)$);
+\draw[rounded corners] ($(G1X)+(-1.7,1.3)$) rectangle ($(H2OR)+(-0.5,-1.5)$);
+\node[anchor=south] (p1) at ($(H1OR)+(0.9,-1.5)$) {2008-2014};
+\node[anchor=south] (p1) at ($(H2OR)+(0.7,-1.5)$) {2006-2007};
+
+\uncover<5>{
+\node[anchor=west] (phiam) at ($(H1OR)+(2.5,1)$) {\colorbox{white}{\includegraphics[width=6cm]{Figures/PhiAM-4}}};
+}
+\uncover<6>{
+\node[anchor=west] (phiam) at ($(H1OR)+(2.5,1)$) {\colorbox{white}{\includegraphics[width=6cm]{Figures/PhiAM-9}}};
+}
+\uncover<7>{
+\node[anchor=west] (phiam) at ($(H1OR)+(2.5,1)$) {\colorbox{white}{\includegraphics[width=6cm]{Figures/PhiAM-13}}};
+}
+\end{tikzpicture}
+
+\end{figure}
+\end{frame}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%% Chap 4 %%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Do selection and evolution fluctuate?}
+
+\begin{frame}
+	\begin{figure}
+		\includegraphics[width=\textwidth]{Figures/concetpualplot-1}
+	\end{figure}
+\end{frame}
+%%%%%%%%%%%
+
+\begin{frame}
+	\begin{figure}
+		\includegraphics[width=\textwidth]{Figures/Betas-1}
+	\end{figure}
+\end{frame} 
+%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%% Conclu %%%%%%%%%%%%%%%%%%%%%%%
