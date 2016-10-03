@@ -679,114 +679,209 @@ Changing age structure? & $+$ & $\pm$ & $++$ & $++$ \\
 \begin{frame}{The animal model}
 	\begin{figure}
 		\begin{tikzpicture}
-			\node[anchor=south] (vole1) at (0,0) {\includegraphics[width = 0.08\textwidth]{Figures/snowwwvole2.pdf}};
-			\node[anchor=south] (vole2) at (1,0) {\includegraphics[width = 0.06\textwidth]{Figures/snowwwvole2.pdf}};
-			\node[anchor=south] (vole3) at (2,0) {\includegraphics[width = 0.04\textwidth]{Figures/snowwwvole2.pdf}};
+		\coordinate (sDNA) at (-0.5,-0.5);
+		\coordinate (sENV) at (0.5,-0.5);
+			\node[anchor=south] (vole1) at (0,0) {\includegraphics[width = 0.075\textwidth]{Figures/snowwwvole2.pdf}};
+			\node[anchor=south] (vole2) at (2.5,0) {\includegraphics[width = 0.06\textwidth]{Figures/snowwwvole2.pdf}};
+			\node[anchor=south] (vole3) at (5,0) {\includegraphics[width = 0.045\textwidth]{Figures/snowwwvole2.pdf}};
+			\node[anchor=south] (vole4) at (7.5,0) {\includegraphics[width = 0.03\textwidth]{Figures/snowwwvole2.pdf}};
+			
+			\uncover<2-4>{\node[anchor=north] (dna1) at ($(vole1.south)+(sDNA)$) {\includegraphics[width = 0.08\textwidth]{Figures/dnaOrange.png}};}
+			\uncover<3-4>{\node[anchor=north] (env1) at ($(vole1.south)+(sENV)$) {\includegraphics[width = 0.1\textwidth]{Figures/GrassGreen.png}};}
+			
+			\uncover<4>{\node[anchor=north] (dna2) at ($(vole2.south)+(sDNA)$) {\includegraphics[width = 0.08\textwidth]{Figures/dnaOrange.png}};
+			\node[anchor=north] (env2) at ($(vole2.south)+(sENV)$) {\includegraphics[width = 0.08\textwidth]{Figures/GrassGreen.png}};
+		
+			\node[anchor=north] (dna3) at ($(vole3.south)+(sDNA)$) {\includegraphics[width = 0.08\textwidth]{Figures/dnaOrange.png}};
+			\node[anchor=north] (env3) at ($(vole3.south)+(sENV)$) {\includegraphics[width = 0.06\textwidth]{Figures/GrassGreen.png}};
+			
+			\node[anchor=north] (dna4) at ($(vole4.south)+(sDNA)$) {\includegraphics[width = 0.08\textwidth]{Figures/dnaOrange.png}};
+			\node[anchor=north] (env4) at ($(vole4.south)+(sENV)$) {\includegraphics[width = 0.04\textwidth]{Figures/GrassGreen.png}};}
+		
+		\uncover<4->{
+		\foreach \x in {1,...,4}
+			{
+				\draw[->, color=OwlYellow, thick] (dna\x) -- (vole\x);
+				\draw[->, color=OwlGreen, thick] (env\x) -- (vole\x);
+			} }
+	\uncover<5>{
+			\node[anchor=north] (dna12) at ($(vole1.south)+(sDNA)$) {\includegraphics[width = 0.1\textwidth]{Figures/dnaOrange.png}};
+			\node[anchor=north] (env12) at ($(vole1.south)+(sENV)$) {\includegraphics[width = 0.07\textwidth]{Figures/GrassGreen.png}};
+			\node[anchor=north] (dna22) at ($(vole2.south)+(sDNA)$) {\includegraphics[width = 0.08\textwidth]{Figures/dnaOrange.png}};
+			\node[anchor=north] (env22) at ($(vole2.south)+(sENV)$) {\includegraphics[width = 0.07\textwidth]{Figures/GrassGreen.png}};
+		
+			\node[anchor=north] (dna32) at ($(vole3.south)+(sDNA)$) {\includegraphics[width = 0.06\textwidth]{Figures/dnaOrange.png}};
+			\node[anchor=north] (env32) at ($(vole3.south)+(sENV)$) {\includegraphics[width = 0.07\textwidth]{Figures/GrassGreen.png}};
+			
+			\node[anchor=north] (dna42) at ($(vole4.south)+(sDNA)$) {\includegraphics[width = 0.04\textwidth]{Figures/dnaOrange.png}};
+			\node[anchor=north] (env42) at ($(vole4.south)+(sENV)$) {\includegraphics[width = 0.07\textwidth]{Figures/GrassGreen.png}};}
+			
+				\uncover<6>{
+			\node[anchor=north] (dna13) at ($(vole1.south)+(sDNA)$) {\includegraphics[width = 0.1\textwidth]{Figures/dnaOrange.png}};
+			\node[anchor=north] (env13) at ($(vole1.south)+(sENV)$) {\includegraphics[width = 0.1\textwidth]{Figures/GrassGreen.png}};
+			\node[anchor=north] (dna23) at ($(vole2.south)+(sDNA)$) {\includegraphics[width = 0.08\textwidth]{Figures/dnaOrange.png}};
+			\node[anchor=north] (env23) at ($(vole2.south)+(sENV)$) {\includegraphics[width = 0.08\textwidth]{Figures/GrassGreen.png}};
+		
+			\node[anchor=north] (dna33) at ($(vole3.south)+(sDNA)$) {\includegraphics[width = 0.06\textwidth]{Figures/dnaOrange.png}};
+			\node[anchor=north] (env33) at ($(vole3.south)+(sENV)$) {\includegraphics[width = 0.06\textwidth]{Figures/GrassGreen.png}};
+			
+			\node[anchor=north] (dna43) at ($(vole4.south)+(sDNA)$) {\includegraphics[width = 0.04\textwidth]{Figures/dnaOrange.png}};
+			\node[anchor=north] (env43) at ($(vole4.south)+(sENV)$) {\includegraphics[width = 0.04\textwidth]{Figures/GrassGreen.png}};}
 		\end{tikzpicture}
 	\end{figure}
 \end{frame}
 %%%%%%%%%%%
 
 \begin{frame}{The animal model}
-\uncover<1->{
-Pedigree $\rightarrow$ similarity between relatives $\rightarrow$ \textbf{additive genetic variance}}
-\uncover<2->{
-\begin{equation*}
-\text{\textbf{heritability}} = \frac{\text{additive genetic variance}}{\text{phenotypic variance}} 
-\end{equation*}}
-
-\begin{columns}
-	\begin{column}[c]{0.5\textwidth}
-	\begin{center}
-	\vspace{-10pt}
-	\uncover<3->{heritability$\approx$0}
-	\end{center}
-		\vspace{-10pt}
-		\begin{figure}
+\begin{figure}
 			\begin{tikzpicture}[
 				man/.style={rectangle,draw},
 				woman/.style={rectangle,draw,rounded corners=.8ex},
-				first/.style={level distance=6pt},
-				level 1/.style={sibling distance=15pt}]
+				first/.style={level distance=20pt},
+				level 1/.style={sibling distance=30pt}]
 				%level 2/.style={sibling distance=15pt}]
 					% Parents
-					\uncover<3->{
+
 					\coordinate (family1) at (0,0)
-						child[grow=left,level distance=10pt]{node[man,anchor=east,fill=red!90!blue]{}}
-						child[grow=right,level distance=10pt]{node[woman,anchor=west,fill=red!70!blue]{}}
-						child[grow=down,level distance=0ex]
+						child[grow=left,level distance=10pt]{node[man,anchor=east]{\includegraphics[width = 0.1\textwidth]{Figures/snowwwvole2.pdf}}}
+						child[grow=right,level distance=10pt]{node[woman,anchor=west]{\includegraphics[width = 0.08\textwidth]{Figures/snowwwvole2.pdf}}}
+						child[grow=down,level distance=2.5ex]
 					[edge from parent fork down]
 					% Children and grandchildren
-					child{node[man,fill=red!40!blue] {}}
-					child{node[woman,fill=red!5!blue] {}}
-					child {node[man,fill=red!50!blue] {}}
-					child {node[woman,fill=red!10!blue] {}}
-					child {node[woman,fill=red!20!blue] {}};
+					child{node[man] {\includegraphics[width = 0.055\textwidth]{Figures/snowwwvole2.pdf}}}
+					child{node[woman] {\includegraphics[width = 0.06\textwidth]{Figures/snowwwvole2.pdf}}}
+					child {node[man] {\includegraphics[width = 0.045\textwidth]{Figures/snowwwvole2.pdf}}}
+					child {node[woman] {\includegraphics[width = 0.058\textwidth]{Figures/snowwwvole2.pdf}}}
+					child {node[woman] {\includegraphics[width = 0.049\textwidth]{Figures/snowwwvole2.pdf}}};
 				
-				\coordinate (family2) at (2,0)
-						child[grow=left,level distance=10pt]{node[man,anchor=east,fill=red!20!blue]{}}
-						child[grow=right,level distance=10pt]{node[woman,anchor=west,fill=red!5!blue]{}}
-						child[grow=down,level distance=0ex]
+					\coordinate (family2) at (5,0)
+						child[grow=left,level distance=10pt]{node[man,anchor=east]{\includegraphics[width = 0.06\textwidth]{Figures/snowwwvole2.pdf}}}
+						child[grow=right,level distance=10pt]{node[woman,anchor=west]{\includegraphics[width = 0.04\textwidth]{Figures/snowwwvole2.pdf}}}
+						child[grow=down,level distance=2.5ex]
 					[edge from parent fork down]
 					% Children and grandchildren
-					child{node[man,fill=red!0!blue] {}}
-					child{node[man,fill=red!100!blue] {}}
-					child {node[woman,fill=red!40!blue] {}};	}
+					child{node[man] {\includegraphics[width = 0.021\textwidth]{Figures/snowwwvole2.pdf}}}
+					child{node[man] {\includegraphics[width = 0.031\textwidth]{Figures/snowwwvole2.pdf}}}
+					child {node[woman] {\includegraphics[width = 0.026\textwidth]{Figures/snowwwvole2.pdf}}};
+
+			\uncover<2->{
+					\node[anchor=south] (dna1) at ($(family1.north) + (0,1)$) {\includegraphics[width = 0.1\textwidth]{Figures/dnaOrange.png}};
+					\node[anchor=south] (dna2) at ($(family2.north) + (0,1)$) {\includegraphics[width = 0.04\textwidth]{Figures/dnaOrange.png}};}
 				\end{tikzpicture}
-			\end{figure}
-		\end{column}
-		\begin{column}[c]{0.5\textwidth}
-			\vspace{-10pt}
-			\begin{center}
-				\uncover<4->{heritability$\approx$1}
-			\end{center}
-			\vspace{-10pt}
-			\begin{figure}
-			\begin{tikzpicture}[
-			man/.style={rectangle,draw},
-			woman/.style={rectangle,draw,rounded corners=.8ex},
-			first/.style={level distance=6pt},
-			level 1/.style={sibling distance=15pt}]
-				% Parents
-				\uncover<4->{
-				\coordinate
-					child[grow=left,level distance=10pt]{node[man,anchor=east,fill=red!90!blue]{}}
-					child[grow=right,level distance=10pt]{node[woman,anchor=west,fill=red!70!blue]{}}
-					child[grow=down,level distance=0ex]
-				[edge from parent fork down]
-				% Children and grandchildren
-				child{node[man,fill=red!99!blue] {}}
-				child{node[woman,fill=red!60!blue] {}}
-				child {node[man,fill=red!90!blue] {}}
-				child {node[woman,fill=red!80!blue] {}}
-				child {node[woman,fill=red!70!blue] {}};
+		\end{figure}
+
+\begin{figure}	
+	\begin{tikzpicture}
+					\uncover<3->{
+			\node[] (env0) at (0,0) {\includegraphics[width = 0.1\textwidth]{Figures/GrassGreen.png}};
+			\node (eq) at ($(env0) + (1,0)$) {\LARGE =};
+			\node[] (sv0) at ($(env0) + (2,0)$) {\includegraphics[width = 0.07\textwidth]{Figures/snowwwvole2.pdf}};
+			\node (eq) at ($(sv0) + (1,0)$) {\LARGE -};
+			\node[] (dna0) at ($(sv0) + (2,0)$){\includegraphics[width = 0.07\textwidth]{Figures/dnaOrange.png}};
+			}
+		\end{tikzpicture}
+	\end{figure}
+\end{frame}
+%%%%%%%%%%%
+
+\begin{frame}{The animal model}
+	\begin{figure}
+		\begin{tikzpicture}
+		\coordinate (sDNA) at (-0.5,-0.5);
+		\coordinate (sENV) at (0.5,-0.5);
+			\node[anchor=south] (vole1) at (0,0) {\includegraphics[width = 0.075\textwidth]{Figures/snowwwvole2.pdf}};
+			\node[anchor=south] (vole2) at (2.5,0) {\includegraphics[width = 0.06\textwidth]{Figures/snowwwvole2.pdf}};
+			\node[anchor=south] (vole3) at (5,0) {\includegraphics[width = 0.045\textwidth]{Figures/snowwwvole2.pdf}};
+			\node[anchor=south] (vole4) at (7.5,0) {\includegraphics[width = 0.03\textwidth]{Figures/snowwwvole2.pdf}};
 			
-					\coordinate (family2) at (2,0)
-					child[grow=left,level distance=10pt]{node[man,anchor=east,fill=red!20!blue]{}}
-					child[grow=right,level distance=10pt]{node[woman,anchor=west,fill=red!5!blue]{}}
-					child[grow=down,level distance=0ex]
-				[edge from parent fork down]
-				% Children and grandchildren
-				child{node[man,fill=red!10!blue] {}}
-				child{node[man,fill=red!30!blue] {}}
-				child {node[woman,fill=red!0!blue] {}};
-				}
+
+			\node[anchor=north] (dna1) at ($(vole1.south)+(sDNA)$) {\includegraphics[width = 0.1\textwidth]{Figures/dnaOrange.png}};
+			\node[anchor=north] (env1) at ($(vole1.south)+(sENV)$) {\includegraphics[width = 0.1\textwidth]{Figures/GrassGreen.png}};
+			\node[anchor=north] (dna2) at ($(vole2.south)+(sDNA)$) {\includegraphics[width = 0.08\textwidth]{Figures/dnaOrange.png}};
+			\node[anchor=north] (env2) at ($(vole2.south)+(sENV)$) {\includegraphics[width = 0.08\textwidth]{Figures/GrassGreen.png}};
+		
+			\node[anchor=north] (dna3) at ($(vole3.south)+(sDNA)$) {\includegraphics[width = 0.06\textwidth]{Figures/dnaOrange.png}};
+			\node[anchor=north] (env3) at ($(vole3.south)+(sENV)$) {\includegraphics[width = 0.06\textwidth]{Figures/GrassGreen.png}};
+			
+			\node[anchor=north] (dna4) at ($(vole4.south)+(sDNA)$) {\includegraphics[width = 0.04\textwidth]{Figures/dnaOrange.png}};
+			\node[anchor=north] (env4) at ($(vole4.south)+(sENV)$) {\includegraphics[width = 0.04\textwidth]{Figures/GrassGreen.png}};
+			
+					\foreach \x in {1,...,4}
+			{
+				\draw[->, color=OwlYellow, thick] (dna\x) -- (vole\x);
+				\draw[->, color=OwlGreen, thick] (env\x) -- (vole\x);
+			}
+
+		\end{tikzpicture}
+	\end{figure}
+\end{frame}
+%%%%%%%%%%%
+
+\begin{frame}{The animal model}
+	\begin{columns}
+	\begin{column}[c]{0.2\textwidth}
+	\textbf{Additive Genetic Variance}
+	\end{column}
+	\begin{column}[c]{0.8\textwidth}
+		\begin{tikzpicture}
+			\node (t) at (0,0) {\large= variance};
+			
+			\node (d1) at ($(t.east)+(0.5,0)$) {\includegraphics[width = 0.1\textwidth]{Figures/dnaOrange.png}};
+			\node (d2) at ($(d1.east)+(0.5,0)$) {\includegraphics[width = 0.08\textwidth]{Figures/dnaOrange.png}};
+			\node (d3) at ($(d2.east)+(0.5,0)$) {\includegraphics[width = 0.06\textwidth]{Figures/dnaOrange.png}};
+			\node (d4) at ($(d3.east)+(0.5,0)$) {\includegraphics[width = 0.04\textwidth]{Figures/dnaOrange.png}};
+		\end{tikzpicture}
+	\end{column}
+	\end{columns}
+	
+		\begin{columns}
+	\begin{column}[c]{0.2\textwidth}
+	\textbf{Heritability} 
+		\end{column}
+	\begin{column}[c]{0.8\textwidth}		\begin{tikzpicture}
+			\node (e) at (0,0) {\LARGE=};
+			\node (t) at (0,1) {\large variance};
+			
+			\node (d1) at ($(t.east)+(0.5,0)$) {\includegraphics[width = 0.1\textwidth]{Figures/dnaOrange.png}};
+			\node (d2) at ($(d1.east)+(0.5,0)$) {\includegraphics[width = 0.08\textwidth]{Figures/dnaOrange.png}};
+			\node (d3) at ($(d2.east)+(0.5,0)$) {\includegraphics[width = 0.06\textwidth]{Figures/dnaOrange.png}};
+			\node (d4) at ($(d3.east)+(0.5,0)$) {\includegraphics[width = 0.04\textwidth]{Figures/dnaOrange.png}};
+			
+			\draw ($(e.east)+(0.2,0)$) -- ($(e.east)+(5,0)$);
+			
+			\node (t2) at (0,-1) {\large variance};
+			\node (v1) at ($(t2.east)+(0.5,0)$) {\includegraphics[width = 0.1\textwidth]{Figures/snowwwvole2.pdf}};
+			\node (v2) at ($(v1.east)+(0.5,0)$) {\includegraphics[width = 0.08\textwidth]{Figures/snowwwvole2.pdf}};
+			\node (v3) at ($(v2.east)+(0.5,0)$) {\includegraphics[width = 0.06\textwidth]{Figures/snowwwvole2.pdf}};
+			\node (v4) at ($(v3.east)+(0.5,0)$) {\includegraphics[width = 0.04\textwidth]{Figures/snowwwvole2.pdf}};
+			
+		\end{tikzpicture}
+		\end{column}
+	\end{columns}
+	
+	\begin{columns}
+	\begin{column}[c]{0.2\textwidth}
+	\textbf{Evolution} 
+	\end{column}
+	\begin{column}[c]{0.8\textwidth}
+		\begin{figure}
+			\begin{tikzpicture}
+				\coordinate (EvOr) at (0,0);
+				\coordinate (EvX) at (2,0);
+				\coordinate (EvY) at (0,1.5);
+				\draw[->,thick] (EvOr)--(EvX);
+			\draw[->,thick,color=OwlYellow] (EvOr)--(EvY);
+			\node[anchor=north] (EvlabX) at (EvX) {Time};
+			\node[anchor=east] (EvlabY) at ($(EvY)+(0.2,0)$) {\includegraphics[width=0.5cm]{Figures/dnaOrange}};
+
+			\draw[color=red] ($(EvY)+(0.1,-0.2)$)--($(EvX)+(-0.1,0.2)$);
 			\end{tikzpicture}
 		\end{figure}
 	\end{column}
 \end{columns}
-
-\uncover<5->{
-
-\begin{center}
-\textbf{Breeding value}\\
-= Individual additive genetic value\\
-Change with time = evolution
-\end{center}
-}
-
 \end{frame}
 %%%%%%%%%%%
+
 
 \begin{frame}%break
 \end{frame}
