@@ -238,7 +238,7 @@
 	\end{figure}}
 	
 		\only<3>{ \begin{figure} 
-		\includegraphics[width = \textwidth]{Figures/camouflage}
+		\includegraphics[width = \textwidth]{Figures/pepper}
 	\end{figure}}
 	
 		\only<4>{ \begin{figure} 
@@ -265,19 +265,29 @@
 	
 \end{frame}
 %%%%%%%%%%%
+% variation in fitness can come from survival or repro
 
-\begin{frame}{Variation in fitness}
+%%
+\begin{frame}{Variation in fitness \alert{matters}}
+\begin{block}{Why variation?}
+
+\end{block}
+
+
+\begin{block}{Adaptation}
+Additive genetic variation in fitness \alert{\large =} evolution
 	\begin{figure}
-		\includegraphics[width=0.2\textwidth,height=0.15\textwidth]{Figures/babyTurtle} \hspace{1pt}
-		\includegraphics[width=0.2\textwidth,height=0.15\textwidth]{Figures/adultTurtle}
-		\vspace{1pt}
-		\includegraphics[width=0.2\textwidth,height=0.15\textwidth]{Figures/BlueTits2}\hspace{1pt}
-		\includegraphics[width=0.2\textwidth,height=0.15\textwidth]{Figures/BlueTits8}
+		\begin{tikzpicture}
+			\node (f) at (-1,0) {\includegraphics[width = 0.2\textwidth]{Figures/Fisher}};
+			\node (fn) at ($(f.south)+(0,-0.2)$) {\textbf{R.A. Fisher}};
+			\node (p) at (1,0) {\includegraphics[width = 0.2\textwidth]{Figures/Price}};
+			\node (fn) at ($(p.south)+(0,-0.2)$) {\textbf{G. Price}};
+		\end{tikzpicture}
 	\end{figure}
+\end{block}
 	
-
+	
 \end{frame}
-%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%% Chap 1 %%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -463,13 +473,14 @@
 	]
 \footnotesize	
 \node[backblock,minimum width=5.25cm,minimum height=5.2cm] (Abb) at (-4,-1) {};
-\node[backblock,fill=gray!75,minimum width=5.25cm,minimum height=5.2cm] (Bbb) at ($(Abb.east) +(0.25,0)$) {};
-\node[] (a) at ($(Abb.north)+(-1,-0.25)$){\textbf{Simulate data}};
-\node[] (b) at ($(Bbb.north)+(-0.5,-0.25)$) {\textbf{Test fixed heterogeneity}};
+\uncover<5->{\node[backblock,fill=gray!75,minimum width=5.25cm,minimum height=5.2cm] (Bbb) at ($(Abb.east) +(0.25,0)$) {};}
+\uncover<1->{\node[] (a) at ($(Abb.north)+(-1,-0.25)$){\textbf{\large Simulate data}};}
 
-\node[roundblock,text width=2cm, anchor=west] (Parameters) at ($(Abb.west)+(0.25,0)$) {\textbf{Parameters}\\ Fertility, Viability, Persistence, \textbf{\color{OwlYellow}{Individual differences}}};
+\uncover<5->{\node[] (b) at ($(Bbb.north)+(-0.25,-0.25)$) {\textbf{\large Test fixed heterogeneity}};}
 
-{\scriptsize 
+\uncover<2->{\node[roundblock,text width=2cm, anchor=west] (Parameters) at ($(Abb.west)+(0.25,0)$) {\textbf{Parameters}\\ Fertility, Viability, Persistence, \textbf{\color{OwlYellow}{Individual differences}}};}
+
+\uncover<3->{{\scriptsize 
 \node[block,text width=1.5cm] (scenario1) at ($(Parameters.north)+(2.2,0)$) {Scenario 1};
 \node[text width=2cm, align=center] (par) at ($(scenario1)+(0,0.8)$) {Parameter};
 \node[text width=2cm, align=center] (comb) at ($(par)+(0,-0.3)$) {combinations};
@@ -480,10 +491,10 @@
 
 \draw[->,shorten >= 2pt] (Parameters.east) to (scenario1.west);
 \draw[->,shorten >= 2pt] (Parameters.east) to (scenario2.west);
-\draw[->,shorten >= 2pt] (Parameters.east) to (scenario240.west);
+\draw[->,shorten >= 2pt] (Parameters.east) to (scenario240.west);}
 
 
-{\scriptsize 
+\uncover<4->{{\scriptsize 
 \coordinate (stos) at (1.8,0);
 \node[backblock,text width=1.8cm, anchor=west, fill=black!80] (simdata1) at ($(scenario1.west) + (stos)$) {1000 data sets};
 \node[backblock,text width=1.8cm, anchor=west, fill=black!80] (simdata2) at ($(scenario2.west) + (stos)$) {1000 data sets};
@@ -493,9 +504,9 @@
 
 \draw[->] (scenario1.east) to (simdata1.west);
 \draw[->] (scenario2.east) to (simdata2.west);
-\draw[->] (scenario240.east) to (simdata240.west);
+\draw[->] (scenario240.east) to (simdata240.west);}
 
-{\scriptsize 
+\uncover<5->{{\scriptsize 
 \gettikzxy{(simdata1.east)}{\ax}{\ay}
 \gettikzxy{(Parameters.north)}{\px}{\py}
 \coordinate (cordtest) at ($(\ax,\py)+(2.5,0)$);
@@ -507,11 +518,11 @@
 
 \draw[->,shorten >= 2pt] (simdata1.east) to (test.170);
 \draw[->,shorten >= 2pt] (simdata2.east) to (test.180);
-\draw[->,shorten >= 2pt] (simdata240.east) to (test.190);
+\draw[->,shorten >= 2pt] (simdata240.east) to (test.190);}
 
+\uncover<6->{
 \node[block, anchor=south] (error) at ($(Bbb.south)+(0,0.25)$) {False positive and false negative rates};
-
-\draw[->, shorten >= 2pt] (test.270) to (error.90);
+\draw[->, shorten >= 2pt] (test.270) to (error.70);}
 
 \end{tikzpicture}
 \end{figure}
@@ -546,20 +557,14 @@
 
 	\uncover<4->{\begin{block}{Implications}
 		\begin{itemize}
-			\uncover<5->{\item Phenotypic variation in fitness $\rightarrow$ opportunity for selection}
-			\uncover<6->{\item Heritability of fitness $=$ \textbf{evolution}}
+			\uncover<5->{\item Phenotypic variation in latent fitness
+				\begin{itemize}
+					\item Opportunity for selection
+					\item Adaptive potential
+					\end{itemize}}
 		\end{itemize}
 	\end{block}}
-	
-	\uncover<6->{
-	\begin{figure}
-		\begin{tikzpicture}
-			\node (f) at (-1,0) {\includegraphics[width = 0.2\textwidth]{Figures/Fisher}};
-			\node (fn) at ($(f.south)+(0,-0.2)$) {\textbf{R.A. Fisher}};
-			\node (p) at (1,0) {\includegraphics[width = 0.2\textwidth]{Figures/Price}};
-			\node (fn) at ($(p.south)+(0,-0.2)$) {\textbf{G. Price}};
-		\end{tikzpicture}
-	\end{figure}}
+
 \end{frame}
 %%%%%%%%%%%
 \begin{frame}
